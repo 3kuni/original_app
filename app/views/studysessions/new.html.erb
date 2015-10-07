@@ -1,2 +1,30 @@
-<h1>Studysessions#new</h1>
-<p>Find me in app/views/studysessions/new.html.erb</p>
+<h1>部屋</h1>
+
+<p>
+使用テキスト
+<br>
+<img src="
+http://images-jp.amazon.com/images/P/<%= params[:textbook] %>.09.TZZZZZZZ.jpg">
+<p>
+
+<p>部屋</p>
+
+  <div class="span6 offset3">
+    <%= form_for(@studysession) do |f| %>
+      <%= f.hidden_field :active, :value => true %>
+      <%= f.hidden_field :textbook, :value => params[:textbook] %>
+      
+      <%= f.label :user %>
+      <%= f.text_field :user %>
+
+      <%= f.label :room %>
+      <%= f.text_field :room %>
+
+
+
+      <%= f.submit "STAR + STUDY", class: "btn btn-large btn-primary" %>
+    <% end %>
+  </div>
+
+<%= link_to "開始" ,new_studysession_path %>
+<%= link_to "Home" ,root_path %>
