@@ -1,0 +1,16 @@
+
+<% @posts.each do |post| %>
+
+<%= post.title %>
+<br>
+<%= post.article %>
+<br>
+<%= post.author %>
+<% if post.nomean? %>
+<font color="red">#ACTIVE</font>
+<% end %>
+<hr>
+
+<% end %>
+
+<%= link_to "Home" ,root_path %>

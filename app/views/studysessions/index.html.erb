@@ -1,0 +1,35 @@
+
+<br>
+<li>puts:
+<%= user_session.each do |key,value| %>
+<% end %>
+</li>
+<li>current_user:
+<%= current_user.email %>
+</li>
+<li>last signed in at:
+<%= current_user.last_sign_in_at %>
+</li>
+<% @ss2.each do |now| %>
+<li>ユーザ:<%= now.user %></li>
+
+<li>教材・アクティビティ
+<br>
+
+<a href="http://amazon.co.jp/dp/<%= now.textbook %>" target="_blank">
+<img src="
+http://images-jp.amazon.com/images/P/<%= now.textbook %>.09.TZZZZZZZ.jpg">
+</a>
+</li>
+<br>
+room:
+<%= now.room %>
+<% if now.active? %>
+<font color="red">#ACTIVE</font>
+<% end %>
+<hr>
+<% end %>
+
+
+
+<%= link_to "Home" ,root_path %>
