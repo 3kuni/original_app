@@ -5,11 +5,12 @@
 <% text_ex=["4010339179","4777201554","4796110895","404600035X"] %>
 <% text_ex.each do |isbn| %>
   <li>
-  <a href="http://amazon.co.jp/dp/<%= isbn %>" target="_blank">
+  <a href="select_room/<%= isbn %>" >
 <img src="
 http://images-jp.amazon.com/images/P/<%= isbn %>.09.TZZZZZZZ.jpg">
 選択</a>
 
   </li>
 <% end %>
+
 <%= link_to "Home" ,root_path %>

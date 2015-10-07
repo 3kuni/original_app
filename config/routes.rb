@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources:studysessions
   resources:posts
   match '/ssession' , to:'studysessions#first_step', via: [:get]
+  match '/select_room/:textbook' , to:'studysessions#last_step', via: [:get]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
