@@ -1,5 +1,7 @@
 class StudysessionsController < ApplicationController
   before_action :authenticate_user!  ,only: [:index, :first_step,:new]
+  before_action :correct_user, only:[:new]
+  before_action :have_room, only:[:new,:index]
   def new
   end
 
@@ -8,18 +10,17 @@ class StudysessionsController < ApplicationController
   end
 
   def first_step
+    session[:user_id]=current_user.id
   end
-  def last_step
-    @textbook=user_session[:textbook]
-  end
+
   def new
-    @textbook=user_session[:textbook]
-    @studysession=Studysession.new
+     @studysession=Studysession.new
+     session[:room]=params[:room]
   end
   def create
     @studysession=Studysession.new(studysession_params)
     if @studysession.save
-      redirect_to studysessions_path
+      redirect_to "/studysessions/studying/#{current_user.id}/#{session[:room]}"
     else
       render 'new'
     end
@@ -29,4 +30,14 @@ class StudysessionsController < ApplicationController
     def studysession_params
       params.require(:studysession).permit(:user,:textbook,:room,:active)
     end
+    
+    def correct_user
+      @user=User.find(params[:id])
+      redirect_to(root_path) unless current_user?(@user)
+    end
+    
+    def have_room
+      redirect_to(root_path) unless params[:room]
+    end
+
 end

@@ -1,17 +1,19 @@
 
 <br>
-<li>puts:
-<%= user_session.each do |key,value| %>
-<% end %>
-</li>
+
 <li>current_user:
 <%= current_user.email %>
 </li>
 <li>last signed in at:
 <%= current_user.last_sign_in_at %>
 </li>
+<li>current user id
+<%= current_user.id %>
+</li>
+
+
 <% @ss2.each do |now| %>
-<li>ユーザ:<%= now.user %></li>
+<li>ユーザ:<%= params[:id] %></li>
 
 <li>教材・アクティビティ
 <br>

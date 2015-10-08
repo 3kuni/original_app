@@ -8,8 +8,10 @@ Rails.application.routes.draw do
   }
   resources:studysessions
   resources:posts
+  match 'studysessions/studying/:id/:room' ,to:'studysessions#index',via: [:get]
   match '/ssession' , to:'studysessions#first_step', via: [:get]
-  match '/studysessions/new/:textbook' , to:'studysessions#new', via: [:get]
+  match '/studysessions/new/:id/:room' , to:'studysessions#new', via: [:get]
+  get  "/studysessions/new/:id" => redirect("/ssession")
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

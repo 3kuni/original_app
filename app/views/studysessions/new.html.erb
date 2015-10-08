@@ -1,30 +1,29 @@
-<h1>部屋</h1>
-
-<p>
-使用テキスト
-<br>
-<img src="
-http://images-jp.amazon.com/images/P/<%= params[:textbook] %>.09.TZZZZZZZ.jpg">
-<p>
+<h1>教材・アクティビティ</h1>
 
 <p>部屋</p>
+<p><%= session[:room] %>
+<br>
+</p>
 
-  <div class="span6 offset3">
+<p>教材・アクティビティ</p>
+<% text_ex=["4010339179","4777201554","4796110895","404600035X"] %>
+
+<% text_ex.each do |isbn| %>
+<p>
+<img src="
+http://images-jp.amazon.com/images/P/<%= isbn %>.09.TZZZZZZZ.jpg">
+
     <%= form_for(@studysession) do |f| %>
       <%= f.hidden_field :active, :value => true %>
-      <%= f.hidden_field :textbook, :value => params[:textbook] %>
+      <%= f.hidden_field :textbook, :value => isbn %>
+      <%= f.hidden_field :user, :value => params[:id] %>
+      <%= f.hidden_field :room, :value => session[:room] %>
       
-      <%= f.label :user %>
-      <%= f.text_field :user %>
-
-      <%= f.label :room %>
-      <%= f.text_field :room %>
-
-
-
-      <%= f.submit "STAR + STUDY", class: "btn btn-large btn-primary" %>
+      <%= f.submit "#{isbn}", class: "btn btn-large btn-primary" %>
     <% end %>
-  </div>
+</p>
+
+<% end %>
 
 <%= link_to "開始" ,new_studysession_path %>
 <%= link_to "Home" ,root_path %>
