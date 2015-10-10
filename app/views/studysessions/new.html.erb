@@ -1,10 +1,11 @@
 <h1>教材・アクティビティ</h1>
 
+
+
 <p>部屋</p>
 <p><%= session[:room] %>
 <br>
 </p>
-
 <p>教材・アクティビティ</p>
 <% text_ex=["4010339179","4777201554","4796110895","404600035X"] %>
 
@@ -19,8 +20,8 @@ http://images-jp.amazon.com/images/P/<%= isbn %>.09.TZZZZZZZ.jpg">
       <%= f.hidden_field :user, :value => params[:id] %>
       <%= f.hidden_field :room, :value => session[:room] %>
       
-      <%= f.submit "#{isbn}", class: "btn btn-large btn-primary" %>
-    <% end %>
+    <%= f.submit "#{isbn}", class: "btn btn-large btn-primary" %>
+<% end %>
 </p>
 
 <% end %>

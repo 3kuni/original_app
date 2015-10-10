@@ -10,11 +10,13 @@
 <li>current user id
 <%= current_user.id %>
 </li>
+<p><font color="red">## セッション中 ##</font>　終了</p>
+<%= link_to '終了' ,  "/studysessions/stop/#{@active_now.id}", :method=>:patch%>
+
 
 
 <% @ss2.each do |now| %>
-<li>ユーザ:<%= params[:id] %></li>
-
+<li>ユーザ:<%= now.user %></li>
 <li>教材・アクティビティ
 <br>
 

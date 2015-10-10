@@ -1,6 +1,15 @@
 
 <h1>部屋</h1>
 
+
+<% if @active_now %>
+<font color="red">## active ##  id:<%= @active_now.id %>
+<a href="/studysessions/studying/<%= @active_now.id %>/<@active_now.room>">
+セッションに戻る</a>
+</font>
+<% end %>
+<br>
+
 <% room_ex=["ロビー","高１生","高２生","高３生","既卒生"] %>
 <% [*(0..room_ex.length-1)].each do |room| %>
   <li>

@@ -1,7 +1,8 @@
 class Studysession < ActiveRecord::Base
   validates :user     , presence:true
   validates :textbook , presence:true
-#  attr_accessor :user, :room, :textbook,:active
+  
+#  attr_accessor :user, :room, :textbook, :active
 
 #  def initialize(attributes = {})
 #    @user  = attributes[:user]
@@ -12,10 +13,8 @@ class Studysession < ActiveRecord::Base
   
   
   
-  def self.realtime_feed
-    where("room = ? and active=?",1,true)
+  def self.realtime_feed(room)
+    where("room = ? and active=?", room, true)
   end
-
-  
 
 end
