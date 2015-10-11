@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   }
   resources:studysessions
   resources:posts
+  match 'users/:id/' ,to:'users#show',via: [:get]
   match 'studysessions/stop/:id' , to: 'studysessions#update' ,via: [:patch]
   match 'studysessions/studying/:id/:room' ,to:'studysessions#index',via: [:get]
   match '/ssession' , to:'studysessions#first_step', via: [:get]

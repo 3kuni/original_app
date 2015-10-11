@@ -2,7 +2,7 @@ class StudysessionsController < ApplicationController
   before_action :authenticate_user!  ,only: [:index, :first_step,:new]
   before_action :correct_user, only:[:new]
   before_action :have_room, only:[:new,:index]
-  before_action :not_active, only:[:first_step]
+  #before_action :not_active, only:[:first_step]
 
   def index
     @ss2=Studysession.realtime_feed(session[:room])
