@@ -1,0 +1,22 @@
+<h1>Users#show</h1>
+<p><%= @user.nickname %></p>
+
+<section>
+  <%= render 'shared/stats' %>
+</section>
+
+<div id="follow_form">
+  <% if current_user.following?(@user) %>
+    <%= render 'unfollow' %>
+  <% else %>
+    <%= render 'follow' %>
+  <% end %>
+</div>
+
+<% if @user.total_time.present? %>
+  <p>セッション:<%= @study_lst.count %>回</p>
+  <p>総学習時間:<%= (@user.total_time/60).to_i %>時間</p>
+<% end %>
+
+<p>Find me in app/views/users/show.html.erb</p>
+<%= link_to "Home" ,root_path %>

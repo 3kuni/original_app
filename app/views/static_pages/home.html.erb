@@ -1,14 +1,39 @@
 <h1>STARDY</h1>
 <h3>地球上すべてが勉強場所だ</h3>
 
+
+
 <!--
 <%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook) %>
 -->
 <br>
-<%= link_to "Sign in with Twitter",  user_omniauth_authorize_path(:twitter) %>
+<% unless signed_in? %>
+  <%= link_to "Sign in with Twitter",  user_omniauth_authorize_path(:twitter) %>
+  <br>
+<% else  %>
+  <%= @user.nickname %>
+  <section>
+  <%= render 'shared/stats' %>
+  </section>  
+<% end %>
 
+<% unless @active_now.present? %>
+  <%= link_to "今すぐ開始" , ssession_path  %>
+<% else %>
+  <%= link_to "セッションに戻る", "/studysessions/studying/#{@active_now.id}/#{@active_now.room}" %>
+<% end %>
 
 <br>
+<%= link_to "ユーザ一覧" , users_path  %>
 
-
-<%= link_to "今すぐ開始" , ssession_path  %>
+<% @feed_items.each do |studysession|%>
+  <p>
+    <%= studysession.user %>
+    <img src="http://images-jp.amazon.com/images/P/<%= studysession.textbook %>.09.TZZZZZZZ.jpg">
+    <% if studysession.active %>
+      セッションを開始しました！
+    <% else %>
+      <%= studysession.time %>分のセッションを終了しました。
+    <% end %>
+  </p>
+<% end  %>

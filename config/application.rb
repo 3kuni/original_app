@@ -7,7 +7,8 @@ require "action_controller/railtie"
 require "action_mailer/railtie"
 require "action_view/railtie"
 require "sprockets/railtie"
-# require "rails/test_unit/railtie"
+# require "rails/test_unit/railtie
+require 'amazon/ecs' # 追記
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -27,7 +28,11 @@ module OriginalApp
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
     config.time_zone = 'Tokyo'
-    
+    Amazon::Ecs.options = { 
+      :associate_tag => 'stardy-22',
+      :AWS_access_key_id => 'AKIAIL47C47MTYLX7HKA',
+      :AWS_secret_key => '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', 
+    }
 
   end
 end

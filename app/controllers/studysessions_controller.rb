@@ -12,17 +12,30 @@ class StudysessionsController < ApplicationController
   def first_step
     session[:user_id]=current_user.id
     @active_now=Studysession.find_by(user:current_user.id,active:true)
+    if @active_now.present?
+      redirect_to root_path
+    end
   end
 
   def new
      @studysession=Studysession.new
      session[:room]=params[:room]
-     #@active_now=Studysession.active_now(current_user.id)
+     @active_now=Studysession.find_by(user:current_user.id,active:true)
+     @keyword = params[:keyword]
+     if @keyword.present?
+       Amazon::Ecs.debug = true
+       @res = Amazon::Ecs.item_search(params[:keyword], 
+          :search_index => 'All', :response_group => 'Medium' ,:country => 'jp')
+       #redirect_to "/studysessions/new/#{current_user.id}/#{session[:room]}"
+      else
+        #redirect_to root_path
+        return
+      end
   end
+  
   def create
     @studysession=Studysession.new(studysession_params)
     @active_now=Studysession.find_by(user:current_user.id,active:true)
-    session[:id]=
     if @studysession.save
       redirect_to "/studysessions/studying/#{current_user.id}/#{session[:room]}"
     else
@@ -31,8 +44,26 @@ class StudysessionsController < ApplicationController
   end
 
   def update
-    Studysession.find(params[:id]).update_attributes(active:false)
+    @update=Studysession.find(params[:id])
+    @total=User.find(params[:user])
+    t=@total.total_time.to_i + params[:time].to_i
+    @total.update_attributes(total_time:t)
+    @update.update_attributes(active:false,time:params[:time].to_i)
+    
     redirect_to root_path
+  end
+
+  def amazon_index
+     @keyword = params[:keyword]
+    if @keyword.present?
+      Amazon::Ecs.debug = true
+      @res = Amazon::Ecs.item_search(params[:keyword], 
+          :search_index => 'All', :response_group => 'Medium')
+      redirect_to "/studysessions/new/#{current_user.id}/#{session[:room]}"
+    else
+      # root_path
+      return
+    end
   end
 
   private

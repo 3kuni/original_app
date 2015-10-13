@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'textbooks/new'
+  get 'users/show'
+
   root 'static_pages#home'
   devise_for :users, :controllers => {
     :sessions      => "users/sessions",
@@ -8,12 +11,20 @@ Rails.application.routes.draw do
   }
   resources:studysessions
   resources:posts
-  match 'users/:id/' ,to:'users#show',via: [:get]
-  match 'studysessions/stop/:id' , to: 'studysessions#update' ,via: [:patch]
+  #match 'users/:id/' ,to:'users#show',via: [:get]
+  #match 'users/' ,to:'users#index',via: [:get]
+  resources :users do
+    member do
+      get :following, :followers
+    end
+  end  
+  match '/studysessions/amazon' ,to:'studysessions#amazon_index',via: [:post]
+  match 'studysessions/stop/:id/:user/:time' , to: 'studysessions#update' ,via: [:patch]
   match 'studysessions/studying/:id/:room' ,to:'studysessions#index',via: [:get]
   match '/ssession' , to:'studysessions#first_step', via: [:get]
-  match '/studysessions/new/:id/:room' , to:'studysessions#new', via: [:get]
+  match '/studysessions/new/:id/:room' , to:'studysessions#new', via: [:get,:post]
   get  "/studysessions/new/:id" => redirect("/ssession")
+  resources :relationships, only: [:create, :destroy]
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

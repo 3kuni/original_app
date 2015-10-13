@@ -13,6 +13,11 @@ gem 'omniauth'
 gem 'omniauth-twitter'
 gem 'omniauth-facebook'
 #gem 'test-unit'
+#gem 'rmagick'
+#gem 'carrierwave'
+gem 'rails-timeago', '~> 2.0'
+gem 'amazon-ecs'
+gem 'font-awesome-rails'
 
 group :development, :test do
   gem 'sqlite3', '1.3.9'

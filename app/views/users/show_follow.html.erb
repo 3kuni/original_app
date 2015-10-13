@@ -1,0 +1,24 @@
+<% provide(:title, @title) %>
+<div class="row">
+  <aside class="span4">
+    <section>
+      
+      <h1><%= @user.nickname %></h1>
+
+      <span><%= link_to "view my profile", @user %></span>
+      
+    </section>
+    <section>
+      <%= render 'shared/stats' %>
+            <% if @users.any? %>
+        <div class="user_avatars">
+          <% @users.each do |user| %>
+            <%= link_to user.nickname, user %>
+            <br>
+          <% end %>
+        </div>
+      <% end %>
+    </section>
+    
+  </aside>
+</div>

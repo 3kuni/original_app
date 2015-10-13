@@ -2,7 +2,7 @@
 <h1>部屋</h1>
 
 
-<% if @active_now %>
+<% if @active_now.present? %>
 <font color="red">## active ##  id:<%= @active_now.id %>
 <a href="/studysessions/studying/<%= @active_now.id %>/<@active_now.room>">
 セッションに戻る</a>

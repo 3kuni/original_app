@@ -1,4 +1,3 @@
-
 <br>
 
 <li>current_user:
@@ -11,12 +10,20 @@
 <%= current_user.id %>
 </li>
 <p><font color="red">## セッション中 ##</font>　終了</p>
-<%= link_to '終了' ,  "/studysessions/stop/#{@active_now.id}", :method=>:patch%>
+<%= link_to '終了' ,  "/studysessions/stop/#{@active_now.id}/#{@active_now.user}/#{((Time.now-@active_now.created_at)/60).to_i}", :method=>:patch%>
 
 
 
 <% @ss2.each do |now| %>
-<li>ユーザ:<%= now.user %></li>
+<li>ユーザ:
+  <a href="/users/<%= now.user %>">
+    
+    <% @user=User.find(now.user) %>
+    <%= @user.nickname %>
+     
+  </a>
+  <%= fa_icon 'star-o' %>STAR
+</li>
 <li>教材・アクティビティ
 <br>
 
@@ -30,7 +37,14 @@ room:
 <%= now.room %>
 <% if now.active? %>
 <font color="red">#ACTIVE</font>
+
 <% end %>
+
+
+<li>
+  <%= ((Time.now-now.created_at)/60).to_i %>分
+</li>
+
 <hr>
 <% end %>
 

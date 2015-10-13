@@ -1,5 +1,10 @@
 <h1>教材・アクティビティ</h1>
-
+<% if @active_now.present? %>
+<font color="red">## active ##  id:<%= @active_now.id %>
+<a href="/studysessions/studying/<%= @active_now.id %>/<@active_now.room>">
+セッションに戻る</a>
+</font>
+<% end %>
 
 
 <p>部屋</p>
@@ -7,8 +12,56 @@
 <br>
 </p>
 <p>教材・アクティビティ</p>
-<% text_ex=["4010339179","4777201554","4796110895","404600035X"] %>
 
+<div>
+  <%= form_tag "/studysessions/new/#{current_user.id}/#{session[:room]}" do %>
+    <%= text_field_tag 'keyword', @keyword %>
+    <%= submit_tag '検索' %>
+  <% end %>
+</div>
+
+<!--自分で作成した教材  -->
+<div>
+    <%= form_for(@studysession) do |f| %>
+        <%= f.hidden_field :active, :value => true %>
+        <%= f.hidden_field :user, :value => params[:id] %>
+        <%= f.hidden_field :room, :value => session[:room] %>
+        <%= f.label :textbook %>
+        <%= f.text_field :textbook %>
+        <%= f.submit "オリジナル教材で開始", class: "btn btn-large btn-primary" %>
+    <% end %>
+</div>
+
+<div>
+  <% if @res.present? %>
+    <ul style="list-style: none;">
+      <% @res.items.each do |i| %>
+        <li style="clear: both;">
+          <div style="width: 150px;float: left;text-align:center;">
+            <%= link_to i.get('DetailPageURL') do %>
+              <%= image_tag i.get('SmallImage/URL'), {:style => 'border: none;'} %>
+            <% end %>
+          </div>
+          <div style="width: 150px; float: left;"><%= i.get('ASIN') %></div>
+          <div style="width: 150px; float: left;"><%= i.get('ItemAttributes/Title') %></div>
+            <%= form_for(@studysession) do |f| %>
+              <%= f.hidden_field :active, :value => true %>
+              <%= f.hidden_field :textbook, :value => i.get('ASIN') %>
+              <%= f.hidden_field :user, :value => params[:id] %>
+              <%= f.hidden_field :room, :value => session[:room] %>
+      
+              <%= f.submit i.get('ASIN'), class: "btn btn-large btn-primary" %>
+            <% end %>
+
+        </li>
+      <% end %> 
+    </ul>
+  <% else %>
+    @res not found.
+  <% end %>
+</div>
+
+<% text_ex=["4010339179","4777201554","4796110895","404600035X"] %>
 <% text_ex.each do |isbn| %>
 <p>
 <img src="
@@ -20,8 +73,8 @@ http://images-jp.amazon.com/images/P/<%= isbn %>.09.TZZZZZZZ.jpg">
       <%= f.hidden_field :user, :value => params[:id] %>
       <%= f.hidden_field :room, :value => session[:room] %>
       
-    <%= f.submit "#{isbn}", class: "btn btn-large btn-primary" %>
-<% end %>
+      <%= f.submit "#{isbn}", class: "btn btn-large btn-primary" %>
+    <% end %>
 </p>
 
 <% end %>
