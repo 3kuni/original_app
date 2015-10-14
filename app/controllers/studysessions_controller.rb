@@ -16,6 +16,7 @@ class StudysessionsController < ApplicationController
     if @active_now.present?
       redirect_to root_path
     end
+    @room=Room.all
   end
 
   def new
@@ -47,10 +48,12 @@ class StudysessionsController < ApplicationController
   def update
     @update=Studysession.find(params[:id])
     @total=User.find(params[:user])
-    t=@total.total_time.to_i + params[:time].to_i
-    @total.update_attributes(total_time:t)
+    t_user=@total.total_time.to_i + params[:time].to_i
+    @total.update_attributes(total_time:t_user)
     @update.update_attributes(active:false,time:params[:time].to_i)
-    
+    @room=Room.find(params[:room])
+    t_room=@room.minutes_total.to_i + params[:time].to_i
+    @room.update_attributes(minutes_total:t_room)
     redirect_to root_path
   end
 

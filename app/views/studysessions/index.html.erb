@@ -9,8 +9,12 @@
 <li>current user id
 <%= current_user.id %>
 </li>
-<p><font color="red">## セッション中 ##</font>　終了</p>
-<%= link_to '終了' ,  "/studysessions/stop/#{@active_now.id}/#{@active_now.user}/#{((Time.now-@active_now.created_at)/60).to_i}", :method=>:patch%>
+
+<p>
+  <%= Room.find(@active_now.room).name %>
+  <font color="red">## セッション中 ##</font>
+</p>
+<%= link_to '終了' ,  "/studysessions/stop/#{@active_now.id}/#{@active_now.user}/#{((Time.now-@active_now.created_at)/60).to_i}/#{@active_now.room}", :method=>:patch%>
 
 
 
@@ -21,7 +25,7 @@
     <%= @user.nickname %>
   </a>
   
-  <%= fa_icon 'star-o' %>STAR
+
 </li>
 <li>教材・アクティビティ
 <br>
@@ -32,12 +36,6 @@ http://images-jp.amazon.com/images/P/<%= now.textbook %>.09.TZZZZZZZ.jpg">
 </a>
 </li>
 <br>
-room:
-<%= now.room %>
-<% if now.active? %>
-<font color="red">#ACTIVE</font>
-
-<% end %>
 
 <li>
   <%= ((Time.now-now.created_at)/60).to_i %>分

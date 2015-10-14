@@ -7,8 +7,7 @@
 <% end %>
 
 
-<p>部屋</p>
-<p><%= session[:room] %>
+<p>部屋:<%= Room.find(session[:room]).name %>
 <br>
 </p>
 <p>教材・アクティビティ</p>

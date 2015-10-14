@@ -19,7 +19,7 @@ Rails.application.routes.draw do
     end
   end  
   match '/studysessions/amazon' ,to:'studysessions#amazon_index',via: [:post]
-  match 'studysessions/stop/:id/:user/:time' , to: 'studysessions#update' ,via: [:patch]
+  match 'studysessions/stop/:id/:user/:time/:room' , to: 'studysessions#update' ,via: [:patch]
   match 'studysessions/studying/:id/:room' ,to:'studysessions#index',via: [:get]
   match '/ssession' , to:'studysessions#first_step', via: [:get]
   match '/studysessions/new/:id/:room' , to:'studysessions#new', via: [:get,:post]

@@ -26,26 +26,28 @@
 <br>
 <%= link_to "ユーザ一覧" , users_path  %>
 
-<% @feed_items.each do |studysession|%>
-  <p>
-    <%= studysession.user %>
-    <img src="http://images-jp.amazon.com/images/P/<%= studysession.textbook %>.09.TZZZZZZZ.jpg">
-    <% if studysession.active %>
-      セッションを開始しました！
-    <% else %>
-      <%= studysession.time %>分のセッションを終了しました。
-    <% end %>
-    <% if studysession.evaluators_for(:stars).include?(@current_user) %>
-      <span style="color:gold;" >
-      <%= fa_icon 'star' %>
+<% if signed_in? %>
+  <% @feed_items.each do |studysession|%>
+    <p>
+      <%= studysession.user %>
+      <img src="http://images-jp.amazon.com/images/P/<%= studysession.textbook %>.09.TZZZZZZZ.jpg">
+      <% if studysession.active %>
+        セッションを開始しました！
+      <% else %>
+        <%= studysession.time %>分のセッションを終了しました。
+      <% end %>
+      <% if studysession.evaluators_for(:stars).include?(@current_user) %>
+        <span style="color:gold;" >
+        <%= fa_icon 'star' %>
+        </span>
+      <% else %>
+        <span style="color:lightgray" id="star-icon<%= studysession.id  %>">
+        <%= link_to (fa_icon 'star-o'), "/studysessions/like/#{studysession.id}" ,remote:true %>
+        </span>
+      <% end %>
+      <span id="star-sum<%= studysession.id  %>">
+        <%= studysession.reputation_for(:stars).to_i %>
       </span>
-    <% else %>
-      <span style="color:lightgray" id="star-icon<%= studysession.id  %>">
-      <%= link_to (fa_icon 'star-o'), "/studysessions/like/#{studysession.id}" ,remote:true %>
-      </span>
-    <% end %>
-    <span id="star-sum<%= studysession.id  %>">
-      <%= studysession.reputation_for(:stars).to_i %>
-    </span>
-  </p>
-<% end  %>
+    </p>
+  <% end  %>
+<% end %>

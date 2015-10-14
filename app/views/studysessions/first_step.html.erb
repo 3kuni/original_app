@@ -11,10 +11,10 @@
 <br>
 
 <% room_ex=["ロビー","高１生","高２生","高３生","既卒生"] %>
-<% [*(0..room_ex.length-1)].each do |room| %>
+<% @room.each do |room| %>
   <li>
-  <a href="studysessions/new/<%= session[:user_id] %>/<%= room %>" >
-<%= room_ex[room] %></a>
+  <a href="studysessions/new/<%= session[:user_id] %>/<%= room.id %>" >
+<%= room.name %></a>
 </li>
 <% end %>
 
