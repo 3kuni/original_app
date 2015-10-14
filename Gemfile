@@ -18,6 +18,7 @@ gem 'omniauth-facebook'
 gem 'rails-timeago', '~> 2.0'
 gem 'amazon-ecs'
 gem 'font-awesome-rails'
+gem 'activerecord-reputation-system', github: 'NARKOZ/activerecord-reputation-system', branch: 'rails4'
 
 group :development, :test do
   gem 'sqlite3', '1.3.9'

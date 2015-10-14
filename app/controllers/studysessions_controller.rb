@@ -7,6 +7,7 @@ class StudysessionsController < ApplicationController
   def index
     @ss2=Studysession.realtime_feed(session[:room])
     @active_now=Studysession.find_by(user:current_user.id,active:true)
+    @current_user=current_user
   end
 
   def first_step
@@ -66,6 +67,17 @@ class StudysessionsController < ApplicationController
     end
   end
 
+  def like
+      @studysession=Studysession.find(params[:studysession_id])
+      @like_from=User.find(current_user.id)
+      @studysession.add_evaluation(:stars, 1,@like_from )
+      respond_to do |format|
+        format.js {@id=params[:studysession_id]}
+      end
+      #p.reputation_for(:likes).to_i
+      #redirect_to (:back)
+  end
+
   private
     def studysession_params
       params.require(:studysession).permit(:user,:textbook,:room,:active)
@@ -78,9 +90,6 @@ class StudysessionsController < ApplicationController
     
     def have_room
       redirect_to(root_path) unless params[:room]
-    end
-    def not_active
-      redirect_to(root_path) if @active_now
     end
     
 end

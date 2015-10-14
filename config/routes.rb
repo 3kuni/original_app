@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   match '/studysessions/new/:id/:room' , to:'studysessions#new', via: [:get,:post]
   get  "/studysessions/new/:id" => redirect("/ssession")
   resources :relationships, only: [:create, :destroy]
+  match '/studysessions/like/:studysession_id/' , to:'studysessions#like', via: [:get]
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

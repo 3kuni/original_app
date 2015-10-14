@@ -17,11 +17,10 @@
 <% @ss2.each do |now| %>
 <li>ユーザ:
   <a href="/users/<%= now.user %>">
-    
     <% @user=User.find(now.user) %>
     <%= @user.nickname %>
-     
   </a>
+  
   <%= fa_icon 'star-o' %>STAR
 </li>
 <li>教材・アクティビティ
@@ -40,10 +39,23 @@ room:
 
 <% end %>
 
-
 <li>
   <%= ((Time.now-now.created_at)/60).to_i %>分
 </li>
+
+
+<% if now.evaluators_for(:stars).include?(@current_user) %>
+  <span style="color:gold;">
+  <%= fa_icon 'star' %>
+  </span>
+<% else %>
+  <span style="color:lightgray" id="star-icon<%= now.id  %>">
+  <%= link_to (fa_icon 'star-o'), "/studysessions/like/#{now.id}" , remote:true%>
+  </span>
+<% end %>
+    <span id="star-sum<%= now.id  %>">
+      <%= now.reputation_for(:stars).to_i %>
+    </span>
 
 <hr>
 <% end %>

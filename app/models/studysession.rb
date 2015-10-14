@@ -2,6 +2,7 @@ class Studysession < ActiveRecord::Base
   validates :user     , presence:true
   validates :textbook , presence:true
   default_scope -> { order('updated_at DESC') }
+  has_reputation :stars, source: :user, aggregated_by: :sum
 #  attr_accessor :user, :room, :textbook, :active
 
 #  def initialize(attributes = {})
