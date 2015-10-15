@@ -80,11 +80,6 @@ GEM
     erubis (2.7.0)
     execjs (1.4.1)
       multi_json (~> 1.0)
-    factory_girl (4.2.0)
-      activesupport (>= 3.0.0)
-    factory_girl_rails (4.2.1)
-      factory_girl (~> 4.2.0)
-      railties (>= 3.0.0)
     faker (1.1.2)
       i18n (~> 0.5)
     faraday (0.9.2)
@@ -247,7 +242,6 @@ DEPENDENCIES
   coffee-script-source (~> 1.8.0)
   devise
   execjs (~> 1.4.0)
-  factory_girl_rails (= 4.2.1)
   faker (= 1.1.2)
   font-awesome-rails
   jbuilder (= 1.0.2)
