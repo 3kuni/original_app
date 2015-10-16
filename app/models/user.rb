@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
                                    dependent:   :destroy
   has_many :followers, through: :reverse_relationships, source: :follower
   
-  validates :word, length: { maximum: 10 }
+  validates :word, length: { maximum: 20 }
 
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
     user = User.where(:provider => auth.provider, :uid => auth.uid).first
