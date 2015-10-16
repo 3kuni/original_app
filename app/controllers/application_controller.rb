@@ -12,6 +12,8 @@ class ApplicationController < ActionController::Base
       devise_parameter_sanitizer.for(:sign_up) << :nickname
       devise_parameter_sanitizer.for(:account_update) << :nickname
       devise_parameter_sanitizer.for(:account_update) << :word
+      devise_parameter_sanitizer.for(:account_update) << :grade
+      devise_parameter_sanitizer.for(:account_update) << :area
     end
 
   
