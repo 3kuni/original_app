@@ -24,9 +24,11 @@
 <% end %>
 
 <br>
-<%= link_to "ユーザ一覧" , users_path  %>
+
 
 <% if signed_in? %>
+<%= link_to "ユーザ一覧" , users_path  %>
+
   <% @feed_items.each do |studysession|%>
     <p>
       <%= studysession.user %>
