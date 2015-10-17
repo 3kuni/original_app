@@ -14,8 +14,7 @@
   <strong><%= current_user.nickname %></strong>
   
   <% if @active_now.present? %>
-    <font color="red">(勉強中)
-    </font>
+    <span class="label label-warning">勉強中</span>
   <% end %>
   
   <%= link_to 'プロフィール編集', edit_user_registration_path, :class => 'navbar-link' %> |
