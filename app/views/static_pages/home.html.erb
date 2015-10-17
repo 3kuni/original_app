@@ -18,7 +18,7 @@
 <% end %>
 
 <% unless @active_now.present? %>
-  <%= link_to "今すぐ開始" , ssession_path  %>
+  <%= link_to "今すぐ開始" , ssession_path ,class: "btn btn-large btn-primary" %>
 <% else %>
   <%= link_to "セッションに戻る", "/studysessions/studying/#{@active_now.id}/#{@active_now.room}" %>
 <% end %>
