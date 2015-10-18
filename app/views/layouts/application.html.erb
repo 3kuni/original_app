@@ -8,7 +8,23 @@
   <!-- <meta http-equiv="Refresh" content="60"> -->
 
 </head>
-<body>
+<body style="padding-top:40px;">
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <a class="brand" href="/">STARDY</a>
+    <ul class="nav pull-right">
+      <% if user_signed_in? %>
+        <li class="navbar-text"><strong><%= current_user.nickname %></strong></li>
+        <li>
+          <%= link_to (fa_icon 'cog'), edit_user_registration_path, :class => 'navbar-link' %> 
+          </li>
+        <li><%= link_to (fa_icon 'user') , users_path  %></li>
+        <li><%= link_to (fa_icon 'bell'), "#" %></li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
 <p class="navbar-text pull-right">
 <% if user_signed_in? %>
   <strong><%= current_user.nickname %></strong>
