@@ -5288,7 +5288,8 @@ nav {
     display: inline-block;
     font-size: 2.1rem;
     padding: 0 15px;
-    white-space: nowrap; }
+    white-space: nowrap; 
+    transform:translate(0,50%);}
     nav .brand-logo.center {
       left: 0%;
       /*-webkit-transform: translateX(-50%);
@@ -5329,6 +5330,8 @@ nav {
       transition: background-color .3s;
       float: left;
       padding: 0; }
+      nav ul li.nickname {
+        transform: translate(0,50%);}
       nav ul li:hover, nav ul li.active {
         background-color: rgba(0, 0, 0, 0.1); }
     nav ul a {

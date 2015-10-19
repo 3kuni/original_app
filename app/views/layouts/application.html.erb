@@ -17,7 +17,7 @@
         <a href="/" class="brand-logo">STARDY</a>
         <ul id="nav-mobile" class="right">
           <% if user_signed_in? %>
-            <li><%= current_user.nickname %></strong>
+            <li class="nickname"><%= current_user.nickname %></strong>
             <% if @active_now.present? %>
                 <div class="chip deep-orange lighten-3">勉強中</div>
             <% end %></li>
