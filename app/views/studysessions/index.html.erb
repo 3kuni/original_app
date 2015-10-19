@@ -25,7 +25,7 @@
             </span>
           <% else %>
             <span style="color:lightgray" id="star-icon<%= now.id  %>">
-            <%= link_to (fa_icon 'star-o'), "/studysessions/like/#{now.id}" , remote:true%>
+            <%= link_to (fa_icon 'star'), "/studysessions/like/#{now.id}" , remote:true,:class=>"unstarred"%>
             </span>
           <% end %>
           <span id="star-sum<%= now.id  %>">

@@ -8,28 +8,34 @@
   <!-- <meta http-equiv="Refresh" content="60"> -->
 
 </head>
-<body style="padding-top:40px;">
-<div class="container">
-<div class="navbar navbar-fixed-top">
-  <div class="navbar-inner">
-    <a class="brand" href="/">STARDY</a>
-    <ul class="nav pull-right">
-      <% if user_signed_in? %>
-        <li class="navbar-text"><strong><%= current_user.nickname %></strong>
-          <% if @active_now.present? %>
-            <span class="badge badge-important">勉強中</span>
+<body>
+
+
+  <div class="navbar-fixed ">
+    <nav>
+      <div class="nav-wrapper blue-grey darken-4">
+        <a href="/" class="brand-logo">STARDY</a>
+        <ul id="nav-mobile" class="right">
+          <% if user_signed_in? %>
+            <li><%= current_user.nickname %></strong>
+            <% if @active_now.present? %>
+                <div class="chip deep-orange lighten-3">勉強中</div>
+            <% end %></li>
+            <li><%= link_to (fa_icon 'bell'),"#" %></li>
+            <li><%= link_to (fa_icon 'user') , users_path  %></li>
+            <li><%= link_to (fa_icon 'cog'), edit_user_registration_path, :class => 'navbar-link' %></li>
+          <% else %>
+            <li><%= link_to "登録", new_user_registration_path, :class => 'navbar-link'  %></li> 
+            <li><%= link_to "ログイン", new_user_session_path, :class => 'navbar-link'  %></li>
           <% end %>
-        </li>
-        <li ><%= link_to (fa_icon 'bell'),"#" %></li>
-        <li><%= link_to (fa_icon 'user') , users_path  %></li>
-        <li><%= link_to (fa_icon 'cog'), edit_user_registration_path, :class => 'navbar-link' %></li>
-      <% else %>
-          <li><%= link_to "登録", new_user_registration_path, :class => 'navbar-link'  %></li> 
-          <li><%= link_to "ログイン", new_user_session_path, :class => 'navbar-link'  %></li>
-      <% end %>
-    </ul>
+        </ul>
+      </div>
+    </nav>
   </div>
-</div>
+
+<div class="container">
+
+
 
 <% if notice %>
   <p class="alert alert-notice"><%= notice %></p>
@@ -38,7 +44,7 @@
   <p class="alert alert-error"><%= alert %></p>
 <% end %>
 <%= yield %>
-<div>
+</div>
       <%= debug(params) if Rails.env.development? %>
 </body>
 </html>
