@@ -1,8 +1,0 @@
-# pack-refs with: peeled fully-peeled 
-0bbb594f7efb8e94e27bb8d1ee440359a33c68c3 refs/heads/auto-require
-008b899793c19d1996270ea58c56e0b909be0bce refs/heads/cleanup
-e8bfe61e6824d2037b325773b2e811f403e8d3e6 refs/heads/cleanup-2
-c93bc81c7a51813411c81a4957a9a2e0043589ad refs/heads/master
-01197ad78cac3136317b2884b61ed3da34c607d0 refs/heads/rails4
-5c2270ac16534da4943ec2de3083b803ede6fc97 refs/heads/tests-cleanup
-f9f904da77844945ce289a1856c9769fb7bbf1de refs/tags/v1.0.0

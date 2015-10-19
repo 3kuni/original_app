@@ -12,11 +12,8 @@
 
 <% room_ex=["ロビー","高１生","高２生","高３生","既卒生"] %>
 <% @room.each do |room| %>
-  <li>
-  <a href="studysessions/new/<%= session[:user_id] %>/<%= room.id %>" >
-<%= room.name %></a>
-</li>
+   <a href="studysessions/new/<%= session[:user_id] %>/<%= room.id %>" class="label label-info" >
+<h4><%= room.name %></h4></a>
+
 <% end %>
 
-
-<%= link_to "Home" ,root_path %>

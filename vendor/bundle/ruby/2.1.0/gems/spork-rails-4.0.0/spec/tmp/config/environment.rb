@@ -1,1 +1,0 @@
-RAILS_GEM_VERSION = '2.1.0'

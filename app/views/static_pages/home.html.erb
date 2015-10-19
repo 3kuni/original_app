@@ -10,11 +10,6 @@
 <% unless signed_in? %>
   <%= link_to "Sign in with Twitter",  user_omniauth_authorize_path(:twitter) %>
   <br>
-<% else  %>
-  <%= @user.nickname %>
-  <section>
-  <%= render 'shared/stats' %>
-  </section>  
 <% end %>
 
 <% unless @active_now.present? %>
@@ -27,8 +22,7 @@
 
 
 <% if signed_in? %>
-  <%= link_to "ユーザ一覧" , users_path  %>
-  
+
   <div  class="container">
     <table class="table">
       <% @feed_items.each do |studysession|%>

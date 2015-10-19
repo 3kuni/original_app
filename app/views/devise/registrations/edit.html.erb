@@ -1,4 +1,4 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<h2>Edit <%= resource_name.to_s.humanize %></h2><%= link_to "ログアウト", destroy_user_session_path, method: :delete, :class => 'btn'  %>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= devise_error_messages! %>
@@ -9,7 +9,7 @@
   </div>
 
   <div>
-    <%= f.label :word %><br />
+    <%= f.label "ひとこと" %><br />
     <%= f.text_field :word %>
   </div>
   
@@ -54,6 +54,8 @@
     <%= f.submit "Update" %>
   </div>
 <% end %>
+
+<%= link_to "ログアウト", destroy_user_session_path, method: :delete, :class => 'btn'  %>
 
 <h3>Cancel my account</h3>
 

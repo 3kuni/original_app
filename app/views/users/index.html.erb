@@ -1,14 +1,20 @@
-<% @user.each do |user| %>
-<p>
-<%= user.id %>
-<a href="users/<%= user.id %>">
-    <%= user.nickname %>
-</a>
-    <% if Studysession.find_by(user:user.id,active:true) %>
-      <span class="label label-warning">勉強中</span>
+<table class="table">
+  <tbody>
+    <% @user.each do |user| %>
+      <tr>
+        <td>
+          <a href="users/<%= user.id %>">
+              <%= user.nickname %>
+          </a>
+              <% if Studysession.find_by(user:user.id,active:true) %>
+                <span class="badge badge-important">勉強中</span>
+              <% end %>
+            <%= user.word %>:
+            <%= user.grade %>:
+            <%= user.area %>
+          </p>
+        </td>
+      </tr>
     <% end %>
-  <%= user.word %>:
-  <%= user.grade %>:
-  <%= user.area %>
-</p>
-<% end %>
+  </tbody>
+</table>

@@ -6,17 +6,16 @@
 </font>
 <% end %>
 
-
-<p>部屋:<%= Room.find(session[:room]).name %>
+<span class="label label-info"><h4><%= Room.find(session[:room]).name %></h4></span>
 <br>
-</p>
-<p>教材・アクティビティ</p>
 
 <div>
-  <%= form_tag "/studysessions/new/#{current_user.id}/#{session[:room]}" do %>
+  <p>
+  <%= form_tag "/studysessions/new/#{current_user.id}/#{session[:room]}"  do %>
     <%= text_field_tag 'keyword', @keyword %>
-    <%= submit_tag '検索' %>
+    <%= submit_tag 'Amazon検索' %>
   <% end %>
+  </p>
 </div>
 
 <!--自分で作成した教材  -->
