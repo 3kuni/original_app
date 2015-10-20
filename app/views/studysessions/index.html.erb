@@ -1,41 +1,48 @@
-
-<span class="label label-info"><h4><%= Room.find(@active_now.room).name %></h4></span>
+<div class="container">
+  
+<!-- カード  -->
+<h4><%= Room.find(@active_now.room).name %></h4>
 <%= link_to '終了' ,  "/studysessions/stop/#{@active_now.id}/#{@active_now.user}/#{((Time.now-@active_now.created_at)/60).to_i}/#{@active_now.room}", :method=>:patch, :class=>"label" %>
 
-<br>
-
-<div class="container">
-<table class="table">
-  <tbody>
-    <% @ss2.each do |now| %>
-      <tr>
-        <td>
-          <a href="/users/<%= now.user %>">
-          <% @user=User.find(now.user) %>
+<ul class="collection">
+  <% @ss2.each do |studysession| %>
+    <li class="collection-item avatar">
+      <a href="http://amazon.co.jp/dp/<%= studysession.textbook %>" target="_blank">
+          <img src="http://images-jp.amazon.com/images/P/<%= studysession.textbook %>.09.TZZZZZZZ.jpg" alt="" class="circle">
+      </a>
+      
+      <span class="title">          
+        <a href="/users/<%= studysession.user %>">
+          <% @user=User.find(studysession.user) %>
           <%= @user.nickname %>
-          </a>
-
-          <a href="http://amazon.co.jp/dp/<%= now.textbook %>" target="_blank">
-          <img src="http://images-jp.amazon.com/images/P/<%= now.textbook %>.09.TZZZZZZZ.jpg"></a>
-          <%= ((Time.now-now.created_at)/60).to_i %>分
-
-          <% if now.evaluators_for(:stars).include?(@current_user) %>
-            <span style="color:gold;">
+        </a>
+      </span>
+      <p>
+        <%= @user.area %>
+        <br>
+        <%= @user.grade %>
+      </p>
+      
+      <span class="secondary-content">
+        <%= fa_icon 'clock-o' %>
+        <%= ((Time.now-studysession.created_at)/60).to_i %>分<br>
+        <% if studysession.evaluators_for(:stars).include?(@current_user) %>
+          <span style="color:gold;">
             <%= fa_icon 'star' %>
-            </span>
-          <% else %>
-            <span style="color:lightgray" id="star-icon<%= now.id  %>">
-            <%= link_to (fa_icon 'star'), "/studysessions/like/#{now.id}" , remote:true,:class=>"unstarred"%>
-            </span>
-          <% end %>
-          <span id="star-sum<%= now.id  %>">
-            <%= now.reputation_for(:stars).to_i %>
           </span>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+        <% else %>
+          <span style="color:lightgray" id="star-icon<%= studysession.id  %>">
+            <%= link_to (fa_icon 'star'), "/studysessions/like/#{studysession.id}" , remote:true,:class=>"unstarred"%>
+          </span>
+        <% end %>
+        <span id="star-sum<%= studysession.id  %>">
+          <%= studysession.reputation_for(:stars).to_i %>
+        </span>
+      </span>
+    </li>
+  <% end %>
+</ul>
+<!-- ここまで -->  
 
 
 </div>

@@ -12,11 +12,12 @@
 <div>
   <p>
   <%= form_tag "/studysessions/new/#{current_user.id}/#{session[:room]}"  do %>
-    <%= text_field_tag 'keyword', @keyword %>
-    <%= submit_tag 'Amazon検索' %>
+    <%= text_field_tag 'keyword', @keyword ,:placeholder=>"Amazonから検索"%>
+    <%= submit_tag '検索' %>
   <% end %>
   </p>
 </div>
+
 
 <!--自分で作成した教材  -->
 <div>
@@ -24,11 +25,12 @@
         <%= f.hidden_field :active, :value => true %>
         <%= f.hidden_field :user, :value => params[:id] %>
         <%= f.hidden_field :room, :value => session[:room] %>
-        <%= f.label :textbook %>
-        <%= f.text_field :textbook %>
-        <%= f.submit "オリジナル教材で開始", class: "btn btn-large btn-primary" %>
+        <%= f.text_field :textbook , :placeholder=>"オリジナルで登録" %>
+        <%= f.submit "開始" %>
     <% end %>
 </div>
+
+
 
 <div>
   <% if @res.present? %>
@@ -54,11 +56,12 @@
         </li>
       <% end %> 
     </ul>
-  <% else %>
-    @res not found.
+
   <% end %>
 </div>
 
+
+<h5>履歴</h5>
 <% text_ex=["4010339179","4777201554","4796110895","404600035X"] %>
 <% text_ex.each do |isbn| %>
 <p>
@@ -77,5 +80,3 @@ http://images-jp.amazon.com/images/P/<%= isbn %>.09.TZZZZZZZ.jpg">
 
 <% end %>
 
-<%= link_to "開始" ,new_studysession_path %>
-<%= link_to "Home" ,root_path %>

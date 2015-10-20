@@ -2338,7 +2338,7 @@ td, th {
 
 .secondary-content {
   float: right;
-  color: #26a69a; }
+  color: ##607d8b; }
 
 .collapsible .collection {
   margin: 0;
@@ -6272,7 +6272,7 @@ input[type=text], input[type=password], input[type=email], input[type=url], inpu
   border-radius: 0;
   outline: none;
   height: 3rem;
-  width: 100%;
+  width: 80%;
   font-size: 1rem;
   margin: 0 0 15px 0;
   padding: 0;
@@ -8203,3 +8203,5 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
 a:link.unstarred{
   color:#eceff1; 
 }
+
+ 
