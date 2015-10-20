@@ -5804,7 +5804,6 @@ small {
   line-height: 1.5rem;
   outline: 0;
   padding: 0 1rem;
-  text-transform: uppercase;
   vertical-align: middle;
   -webkit-tap-highlight-color: transparent; }
 
@@ -8210,4 +8209,16 @@ a:link.unstarred{
   border-style: solid; 
   border-color: #000;
   border-width: 2px;  
+  margin:1rem auto;
+}
+
+.authtwi{
+  color:#fff;
+  background-color:#2196f3;
+  border-style: solid; 
+  border-color: #0d47a1;
+  border-width: 2px; 
+  height:3rem;
+  line-height:3rem;
+  margin:1rem auto;
 }
