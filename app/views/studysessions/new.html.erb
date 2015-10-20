@@ -32,51 +32,73 @@
 
 
 
-<div>
-  <% if @res.present? %>
-    <ul style="list-style: none;">
-      <% @res.items.each do |i| %>
-        <li style="clear: both;">
-          <div style="width: 150px;float: left;text-align:center;">
-            <%= link_to i.get('DetailPageURL') do %>
-              <%= image_tag i.get('SmallImage/URL'), {:style => 'border: none;'} %>
-            <% end %>
-          </div>
-          <div style="width: 150px; float: left;"><%= i.get('ASIN') %></div>
-          <div style="width: 150px; float: left;"><%= i.get('ItemAttributes/Title') %></div>
-            <%= form_for(@studysession) do |f| %>
-              <%= f.hidden_field :active, :value => true %>
-              <%= f.hidden_field :textbook, :value => i.get('ASIN') %>
-              <%= f.hidden_field :user, :value => params[:id] %>
-              <%= f.hidden_field :room, :value => session[:room] %>
-      
-              <%= f.submit i.get('ASIN'), class: "btn btn-large btn-primary" %>
-            <% end %>
 
-        </li>
-      <% end %> 
-    </ul>
+<!-- カード  -->
+<% if @res.present? %>
+  <ul class="collection">
+    <% @res.items.each do |studysession| %>
+      <li class="collection-item avatar">
+        <%= link_to studysession.get('DetailPageURL') do %>
+          <%= image_tag studysession.get('SmallImage/URL'), {:style => 'border: none;'} %>
+        <% end %>
+        
+        <span class="title">          
+          <%= studysession.get('ItemAttributes/Title') %>
+        </span>
+        <p>
+          
+        </p>
+        
+        <span class="secondary-content">
+          
+          <%= form_for(@studysession) do |f| %>
+            <%= f.hidden_field :active, :value => true %>
+            <%= f.hidden_field :textbook, :value => studysession.get('ASIN') %>
+            <%= f.hidden_field :user, :value => params[:id] %>
+            <%= f.hidden_field :room, :value => session[:room] %>
+            
+            <%= f.submit "開始", class: "btn  custombutton"  %>
+          <% end %>
+          
+        </span>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+<!-- ここまで -->  
 
-  <% end %>
-</div>
 
 
 <h5>履歴</h5>
-<% text_ex=["4010339179","4777201554","4796110895","404600035X"] %>
-<% text_ex.each do |isbn| %>
-<p>
-<img src="
-http://images-jp.amazon.com/images/P/<%= isbn %>.09.TZZZZZZZ.jpg">
 
-    <%= form_for(@studysession) do |f| %>
-      <%= f.hidden_field :active, :value => true %>
-      <%= f.hidden_field :textbook, :value => isbn %>
-      <%= f.hidden_field :user, :value => params[:id] %>
-      <%= f.hidden_field :room, :value => session[:room] %>
+<!-- カード  -->
+<ul class="collection">
+  <% @history.each do |studysession| %>
+    <li class="collection-item avatar">
+      <a href="http://amazon.co.jp/dp/<%= studysession.textbook %>" target="_blank">
+          <img src="http://images-jp.amazon.com/images/P/<%= studysession.textbook %>.09.TZZZZZZZ.jpg" alt="" class="circle">
+      </a>
       
-      <%= f.submit "#{isbn}", class: "btn btn-large btn-primary" %>
-    <% end %>
-</p>
-
-<% end %>
-
+      <span class="title">          
+        Title
+      </span>
+      <p>
+        <%= studysession.textbook%>
+      </p>
+      
+      <span class="secondary-content">
+        
+        <%= form_for(@studysession) do |f| %>
+          <%= f.hidden_field :active, :value => true %>
+          <%= f.hidden_field :textbook, :value => studysession.textbook %>
+          <%= f.hidden_field :user, :value => params[:id] %>
+          <%= f.hidden_field :room, :value => session[:room] %>
+          
+          <%= f.submit "開始", class: "btn  custombutton"  %>
+        <% end %>
+        
+      </span>
+    </li>
+  <% end %>
+</ul>
+<!-- ここまで -->  

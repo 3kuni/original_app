@@ -24,6 +24,7 @@ class StudysessionsController < ApplicationController
      session[:room]=params[:room]
      @active_now=Studysession.find_by(user:current_user.id,active:true)
      @keyword = params[:keyword]
+     @history = Studysession.where(user:current_user.id)
      if @keyword.present?
        Amazon::Ecs.debug = true
        @res = Amazon::Ecs.item_search(params[:keyword], 
@@ -33,6 +34,7 @@ class StudysessionsController < ApplicationController
         #redirect_to root_path
         return
       end
+      
   end
   
   def create
