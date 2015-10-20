@@ -5272,7 +5272,7 @@ nav {
       font-size: 2rem; }
   @media only screen and (min-width : 993px) {
     nav a.button-collapse {
-      display: none; } }
+      display: none; } } 
   nav .button-collapse {
     float: left;
     position: relative;
@@ -5328,7 +5328,7 @@ nav {
       -ms-transition: background-color .3s;
       transition: background-color .3s;
       float: left;
-      padding: 0; }
+      padding: 0 0.15rem; }
       nav ul li.nickname {
         	display: table-cell;
 	        vertical-align: middle;}
