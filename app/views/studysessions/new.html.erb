@@ -13,7 +13,7 @@
   <p>
   <%= form_tag "/studysessions/new/#{current_user.id}/#{session[:room]}"  do %>
     <%= text_field_tag 'keyword', @keyword ,:placeholder=>"Amazonから検索"%>
-    <%= submit_tag '検索' %>
+    <%= submit_tag '検索',class:"btn custombutton" %>
   <% end %>
   </p>
 </div>
@@ -26,14 +26,14 @@
         <%= f.hidden_field :user, :value => params[:id] %>
         <%= f.hidden_field :room, :value => session[:room] %>
         <%= f.text_field :textbook , :placeholder=>"オリジナルで登録" %>
-        <%= f.submit "開始" %>
+        <%= f.submit "開始",class:"btn custombutton" %>
     <% end %>
 </div>
 
 
 
 
-<!-- カード  -->
+<!-- 検索結果カード  -->
 <% if @res.present? %>
   <ul class="collection">
     <% @res.items.each do |studysession| %>
@@ -68,37 +68,33 @@
 <!-- ここまで -->  
 
 
-
+<% unless @res.present? %>
 <h5>履歴</h5>
-
-<!-- カード  -->
+<!-- 履歴カード  -->
 <ul class="collection">
   <% @history.each do |studysession| %>
     <li class="collection-item avatar">
       <a href="http://amazon.co.jp/dp/<%= studysession.textbook %>" target="_blank">
           <img src="http://images-jp.amazon.com/images/P/<%= studysession.textbook %>.09.TZZZZZZZ.jpg" alt="" class="circle">
       </a>
-      
       <span class="title">          
-        Title
+        <% res = Amazon::Ecs.item_lookup(studysession.textbook,:response_group => 'Small, ItemAttributes, Images',:country => 'jp') %>
+        <%= res.items.first.get('ItemAttributes/Title') %>    
       </span>
       <p>
         <%= studysession.textbook%>
       </p>
-      
       <span class="secondary-content">
-        
         <%= form_for(@studysession) do |f| %>
           <%= f.hidden_field :active, :value => true %>
           <%= f.hidden_field :textbook, :value => studysession.textbook %>
           <%= f.hidden_field :user, :value => params[:id] %>
           <%= f.hidden_field :room, :value => session[:room] %>
-          
           <%= f.submit "開始", class: "btn  custombutton"  %>
         <% end %>
-        
       </span>
     </li>
   <% end %>
 </ul>
+<% end %>
 <!-- ここまで -->  

@@ -5836,7 +5836,7 @@ small {
   transition: .2s ease-out;
   cursor: pointer; }
   .btn:hover, .btn-large:hover {
-    background-color: #2bbbad; }
+    background-color: #90a4ae; }
 
 .btn-floating {
   display: inline-block;
@@ -6176,7 +6176,7 @@ a.waves-effect .waves-ripple {
 .chip {
   display: inline-block;
   height: 32px;
-  font-size: 13px;
+  font-size: 0.8rem;
   font-weight: 500;
   color: rgba(0, 0, 0, 0.6);
   line-height: 32px;
@@ -8209,5 +8209,5 @@ a:link.unstarred{
   background-color:#eceff1;
   border-style: solid; 
   border-color: #000;
-  border-width: 1px;   
+  border-width: 2px;  
 }

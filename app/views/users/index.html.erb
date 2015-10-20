@@ -7,12 +7,21 @@
               <%= fa_icon 'user' %>
               <%= user.nickname %>
           </a>
-              <% if Studysession.find_by(user:user.id,active:true) %>
-                <div class="chip deep-orange lighten-3">勉強中</div>
-              <% end %>
-            <%= user.word %>:
-            <%= user.grade %>:
-            <%= user.area %>
+          <% if Studysession.find_by(user:user.id,active:true) %>
+            <div class="chip deep-orange lighten-3">勉強中</div>
+          <% end %>
+            
+          <% if user.grade.present? %>
+            <div class="chip blue lighten-5">
+              <%= user.area %>
+            </div>
+          <% end %>
+          <% if user.area.present? %>
+            <div class="chip light-green lighten-5">
+              <%= user.grade %>
+            </div>
+          <% end %>
+            <%= user.word %>
           </p>
         </td>
       </tr>

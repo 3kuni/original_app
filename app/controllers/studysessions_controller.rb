@@ -24,7 +24,7 @@ class StudysessionsController < ApplicationController
      session[:room]=params[:room]
      @active_now=Studysession.find_by(user:current_user.id,active:true)
      @keyword = params[:keyword]
-     @history = Studysession.where(user:current_user.id)
+     @history = Studysession.where(user:current_user.id).limit(5)
      if @keyword.present?
        Amazon::Ecs.debug = true
        @res = Amazon::Ecs.item_search(params[:keyword], 
