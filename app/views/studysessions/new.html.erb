@@ -26,7 +26,7 @@
         <%= f.hidden_field :user, :value => params[:id] %>
         <%= f.hidden_field :room, :value => session[:room] %>
         <%= f.text_field :textbook , :placeholder=>"オリジナルで登録" %>
-        <%= f.submit "開始",class:"btn waves-effect waves-light custombutton" %>
+        <%= f.submit "開始",class:"btn custombutton" %>
     <% end %>
 </div>
 
@@ -94,7 +94,7 @@
           <%= f.hidden_field :textbook, :value => studysession %>
           <%= f.hidden_field :user, :value => params[:id] %>
           <%= f.hidden_field :room, :value => session[:room] %>
-          <%= f.submit "開始", class: "btn  custombutton waves-effect waves-light"  %>
+          <%= f.submit "開始", class: "btn  custombutton"  %>
         <% end %>
       </span>
     </li>
