@@ -13,7 +13,7 @@
   <p>
   <%= form_tag "/studysessions/new/#{current_user.id}/#{session[:room]}"  do %>
     <%= text_field_tag 'keyword', @keyword ,:placeholder=>"Amazonから検索"%>
-    <%= submit_tag "検索",class:"btn custombutton waves-effect waves-light" %>
+    <%= submit_tag "検索",class:"btn custombutton" %>
   <% end %>
   </p>
 </div>
@@ -57,7 +57,7 @@
             <%= f.hidden_field :user, :value => params[:id] %>
             <%= f.hidden_field :room, :value => session[:room] %>
             
-            <%= f.submit "開始", class: "btn  custombutton waves-effect waves-light"  %>
+            <%= f.submit "開始", class: "btn custombutton waves-effect waves-light"  %>
           <% end %>
           
         </span>
