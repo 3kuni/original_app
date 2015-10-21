@@ -1,22 +1,73 @@
-<h1>Users#show</h1>
-<p><%= @user.nickname %></p>
+
+<h5><%= @user.nickname %></h5>
 
 <section>
   <%= render 'shared/stats' %>
 </section>
-
-<div id="follow_form">
-  <% if current_user.following?(@user) %>
-    <%= render 'unfollow' %>
-  <% else %>
-    <%= render 'follow' %>
-  <% end %>
-</div>
+<% unless current_user.id==@user.id %>
+  <div id="follow_form">
+    <% if current_user.following?(@user) %>
+      <%= render 'unfollow' %>
+    <% else %>
+      <%= render 'follow' %>
+    <% end %>
+  </div>
+<% end %>
 
 <% if @user.total_time.present? %>
   <p>セッション:<%= @study_lst.count %>回</p>
   <p>総学習時間:<%= (@user.total_time/60).to_i %>時間</p>
 <% end %>
 
-<p>Find me in app/views/users/show.html.erb</p>
-<%= link_to "Home" ,root_path %>
+<!-- カード -->  
+<% if signed_in? %>
+    <h4>フィード</h4>
+    <ul class="collection">
+      <% @study_lst.each do |studysession| %>
+        <li class="collection-item avatar 
+          <% if studysession.active %>
+            yellow lighten-5
+          <% end %>
+        ">
+          <a href="http://amazon.co.jp/dp/<%= studysession.textbook %>" target="_blank">
+              <img src="http://images-jp.amazon.com/images/P/<%= studysession.textbook %>.09.TZZZZZZZ.jpg" alt="" class="circle">
+          </a>
+          
+          <span class="title">          
+            <a href="/users/<%= studysession.user %>">
+              <% @user=User.find(studysession.user) %>
+              <%= @user.nickname %>
+            </a>
+          </span>
+          <p>
+            <% if studysession.active %>
+              セッションを開始しました！
+            <% else %>
+              <%= studysession.time %>分のセッションを終了しました。
+            <% end %>
+            <br>
+              <%= Room.find(studysession.room).name %>
+          </p>
+          
+          <span class="secondary-content">
+            
+            
+            <% if studysession.evaluators_for(:stars).include?(@current_user) %>
+              <span style="color:gold;">
+                <%= fa_icon 'star' %>
+              </span>
+            <% else %>
+              <span style="color:lightgray" id="star-icon<%= studysession.id  %>">
+                <%= link_to (fa_icon 'star'), "/studysessions/like/#{studysession.id}" , remote:true,:class=>"unstarred"%>
+              </span>
+            <% end %>
+            <span id="star-sum<%= studysession.id  %>">
+              <%= studysession.reputation_for(:stars).to_i %>
+            </span>
+          </span>
+        </li>
+      <% end %>
+    </ul>
+
+<% end %>
+<!--ここまで -->  
