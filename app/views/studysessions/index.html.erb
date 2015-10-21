@@ -34,11 +34,11 @@
         <%= fa_icon 'clock-o' %>
         <%= ((Time.now-studysession.created_at)/60).to_i %>分<br>
         <% if studysession.evaluators_for(:stars).include?(@current_user) %>
-          <span style="color:gold;">
+          <span style="color:gold;" class="star">
             <%= fa_icon 'star' %>
           </span>
         <% else %>
-          <span style="color:lightgray" id="star-icon<%= studysession.id  %>">
+          <span style="color:lightgray" id="star-icon<%= studysession.id  %>" class="star">
             <%= link_to (fa_icon 'star'), "/studysessions/like/#{studysession.id}" , remote:true,:class=>"unstarred"%>
           </span>
         <% end %>

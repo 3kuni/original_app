@@ -8227,3 +8227,7 @@ a:link.unstarred{
   line-height:3rem;
   margin:1rem auto;
 }
+
+.star{
+  font-size:2rem;
+}
