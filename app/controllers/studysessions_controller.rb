@@ -45,6 +45,7 @@ class StudysessionsController < ApplicationController
       res = Amazon::Ecs.item_lookup(params[:studysession][:textbook], :response_group => 'Small, ItemAttributes, Images', :country => 'jp')
       Textbook.create(title:res.items.first.get('ItemAttributes/Title'),asin:params[:studysession][:textbook])
     end
+    #Room.find(params[:studysession][:room]).increment(:minutes_total,1)
     if @studysession.save
       redirect_to "/studysessions/studying/#{current_user.id}/#{session[:room]}"
     else

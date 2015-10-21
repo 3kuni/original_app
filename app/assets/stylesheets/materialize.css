@@ -2286,14 +2286,14 @@ td, th {
     border-bottom: 1px solid #e0e0e0; }
     .collection .collection-item.avatar {
       min-height: 84px;
-      padding-left: 72px;
+      padding-left: 5rem;
       position: relative; }
       .collection .collection-item.avatar .circle {
         position: absolute;
-        width: 42px;
-        height: 42px;
+        width: 4rem;
+        height: 4rem;
         overflow: hidden;
-        left: 15px;
+        left: 0.5rem;
         display: inline-block;
         vertical-align: middle; }
       .collection .collection-item.avatar i.circle {
@@ -2548,7 +2548,8 @@ nav ul a span.badge {
   user-select: none; }
 
 .circle {
-  border-radius: 50%; }
+  /*border-radius: 50%;*/
+  border-radius: 0%;}
 
 .center-block {
   display: block;
