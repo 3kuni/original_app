@@ -1,10 +1,12 @@
 class UsersController < ApplicationController
   def show
+    @active_now=Studysession.find_by(user:current_user.id,active:true)
     @user=User.find(params[:id])
     @study_lst=Studysession.where(user:params[:id])
   end
   
   def index
+    @active_now=Studysession.find_by(user:current_user.id,active:true)
     @user=User.all
   end
   
@@ -25,4 +27,6 @@ class UsersController < ApplicationController
     
     render 'show_follow'
   end  
+  
+
 end

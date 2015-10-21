@@ -1,6 +1,6 @@
 <!-- カード  -->
 <h4><%= Room.find(@active_now.room).name %></h4>
-<%= link_to '終了' ,  "/studysessions/stop/#{@active_now.id}/#{@active_now.user}/#{((Time.now-@active_now.created_at)/60).to_i}/#{@active_now.room}", :method=>:patch, :class=>"label" %>
+<%= link_to '終了' ,  "/studysessions/stop/#{@active_now.id}/#{@active_now.user}/#{((Time.now-@active_now.created_at)/60).to_i}/#{@active_now.room}", :method=>:patch, :class=>"btn-large custombutton waves-effect waves-light" %>
 
 <ul class="collection">
   <% @ss2.each do |studysession| %>

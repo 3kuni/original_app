@@ -5383,7 +5383,7 @@ nav {
     height: 100px;
     /*line-height: 64px;*/ }
   .navbar-fixed {
-    height: 64px; } }
+    height: 100px; } }
 
 /*@font-face {
   font-family: "Roboto";
@@ -8222,7 +8222,7 @@ a:link.unstarred{
   background-color:#2196f3;
   border-style: solid; 
   border-color: #0d47a1;
-  border-width: 2px; 
+  border-width: 0px; 
   height:3rem;
   line-height:3rem;
   margin:1rem auto;
