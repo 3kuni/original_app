@@ -39,7 +39,7 @@
     <% @res.items.each do |studysession| %>
       <li class="collection-item avatar">
         <%= link_to studysession.get('DetailPageURL') do %>
-          <%= image_tag studysession.get('SmallImage/URL'), {:style => 'border: none;'} %>
+          <%= image_tag studysession.get('SmallImage/URL'), {:style => 'border: none;'}  %>
         <% end %>
         
         <span class="title">          
