@@ -1,5 +1,3 @@
-<div class="container">
-  
 <!-- カード  -->
 <h4><%= Room.find(@active_now.room).name %></h4>
 <%= link_to '終了' ,  "/studysessions/stop/#{@active_now.id}/#{@active_now.user}/#{((Time.now-@active_now.created_at)/60).to_i}/#{@active_now.room}", :method=>:patch, :class=>"label" %>
@@ -52,7 +50,4 @@
   <% end %>
 </ul>
 <!-- ここまで -->  
-
-
-</div>
 
