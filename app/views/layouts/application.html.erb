@@ -19,7 +19,7 @@
           <% if user_signed_in? %>
             <li class="nickname"><%= current_user.nickname %></strong>
             <% if @active_now.present? %>
-                <div class="chip deep-orange lighten-3">勉強中</div>
+                <div class="chip studying">勉強中</div>
             <% end %></li>
             <li><%= link_to (fa_icon 'bell'),"#" %></li>
             <li><%= link_to (fa_icon 'user-plus') , users_path  %></li>

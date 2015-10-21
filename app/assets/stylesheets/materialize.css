@@ -6198,6 +6198,10 @@ a.waves-effect .waves-ripple {
     font-size: 16px;
     line-height: 32px;
     padding-left: 8px; }
+  .chip.studying{
+    color:#fff;
+    background-color:#e65100;
+  }
 
 .materialboxed {
   display: block;
