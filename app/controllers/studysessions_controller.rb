@@ -59,11 +59,12 @@ class StudysessionsController < ApplicationController
   def update
     @update=Studysession.find(params[:id])
     @total=User.find(params[:user])
-    t_user=@total.total_time.to_i + params[:time].to_i
+    time_minutes=(Time.now.to_i-params[:time].to_i)/60
+    t_user=@total.total_time.to_i + time_minutes
     @total.update_attributes(total_time:t_user)
-    @update.update_attributes(active:false,time:params[:time].to_i)
+    @update.update_attributes(active:false,time:time_minutes)
     @room=Room.find(params[:room])
-    t_room=@room.minutes_total.to_i + params[:time].to_i
+    t_room=@room.minutes_total.to_i + time_minutes
     @room.update_attributes(minutes_total:t_room)
     redirect_to root_path
   end
