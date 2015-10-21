@@ -18,10 +18,15 @@
         </a>
       </span>
       <p>
+        <% if Textbook.find_by(asin:studysession.textbook).present? %>
+          <%= cut_off(Textbook.find_by(asin:studysession.textbook).title,15)%>
+        <% else %>
+          Textbook
+        <% end %>
+        <br>
         <div class="chip blue lighten-5">
           <%= @user.area %>
         </div>
-        <br>
         <div class="chip light-green lighten-5">
           <%= @user.grade %>
         </div>

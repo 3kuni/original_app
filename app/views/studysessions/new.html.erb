@@ -1,4 +1,4 @@
-<h1>教材・アクティビティ</h1>
+<h4>教材・アクティビティ</h4>
 <% if @active_now.present? %>
 <font color="red">## active ##  id:<%= @active_now.id %>
 <a href="/studysessions/studying/<%= @active_now.id %>/<@active_now.room>">
@@ -6,14 +6,14 @@
 </font>
 <% end %>
 
-<span class="label label-info"><h4><%= Room.find(session[:room]).name %></h4></span>
+<div class="chip blue lighten-5"><%= Room.find(session[:room]).name %></div>
 <br>
 
 <div>
   <p>
   <%= form_tag "/studysessions/new/#{current_user.id}/#{session[:room]}"  do %>
     <%= text_field_tag 'keyword', @keyword ,:placeholder=>"Amazonから検索"%>
-    <%= submit_tag '検索',class:"btn custombutton" %>
+    <%= submit_tag "検索",class:"btn custombutton" %>
   <% end %>
   </p>
 </div>
@@ -43,7 +43,7 @@
         <% end %>
         
         <span class="title">          
-          <%= studysession.get('ItemAttributes/Title') %>
+          <%= cut_off(studysession.get('ItemAttributes/Title'),15) %>
         </span>
         <p>
           
@@ -74,20 +74,24 @@
 <ul class="collection">
   <% @history.each do |studysession| %>
     <li class="collection-item avatar">
-      <a href="http://amazon.co.jp/dp/<%= studysession.textbook %>" target="_blank">
-          <img src="http://images-jp.amazon.com/images/P/<%= studysession.textbook %>.09.TZZZZZZZ.jpg" alt="" class="circle">
+      <a href="http://amazon.co.jp/dp/<%= studysession %>" target="_blank">
+          <img src="http://images-jp.amazon.com/images/P/<%= studysession %>.09.TZZZZZZZ.jpg" alt="" class="circle">
       </a>
       <span class="title">          
-        <% res = Amazon::Ecs.item_lookup(studysession.textbook,:response_group => 'Small, ItemAttributes, Images',:country => 'jp') %>
-        <%= res.items.first.get('ItemAttributes/Title') %>    
+        <% if Textbook.find_by(asin:studysession).present? %>
+          <%= cut_off(Textbook.find_by(asin:studysession).title,15)%>
+        <% else %>
+          Title
+        <% end %>
       </span>
       <p>
-        <%= studysession.textbook%>
+        
+        <%= studysession %>
       </p>
       <span class="secondary-content">
         <%= form_for(@studysession) do |f| %>
           <%= f.hidden_field :active, :value => true %>
-          <%= f.hidden_field :textbook, :value => studysession.textbook %>
+          <%= f.hidden_field :textbook, :value => studysession %>
           <%= f.hidden_field :user, :value => params[:id] %>
           <%= f.hidden_field :room, :value => session[:room] %>
           <%= f.submit "開始", class: "btn  custombutton"  %>

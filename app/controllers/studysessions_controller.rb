@@ -24,7 +24,8 @@ class StudysessionsController < ApplicationController
      session[:room]=params[:room]
      @active_now=Studysession.find_by(user:current_user.id,active:true)
      @keyword = params[:keyword]
-     @history = Studysession.where(user:current_user.id).limit(5)
+     #@history = Studysession.where(user:current_user.id).limit(5)
+     @history = Studysession.where(user:current_user.id).uniq.limit(10).pluck(:textbook)
      if @keyword.present?
        Amazon::Ecs.debug = true
        @res = Amazon::Ecs.item_search(params[:keyword], 
@@ -40,6 +41,10 @@ class StudysessionsController < ApplicationController
   def create
     @studysession=Studysession.new(studysession_params)
     @active_now=Studysession.find_by(user:current_user.id,active:true)
+    unless Textbook.find_by(asin:params[:studysession][:textbook])
+      res = Amazon::Ecs.item_lookup(params[:studysession][:textbook], :response_group => 'Small, ItemAttributes, Images', :country => 'jp')
+      Textbook.create(title:res.items.first.get('ItemAttributes/Title'),asin:params[:studysession][:textbook])
+    end
     if @studysession.save
       redirect_to "/studysessions/studying/#{current_user.id}/#{session[:room]}"
     else
