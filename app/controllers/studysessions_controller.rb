@@ -51,7 +51,7 @@ class StudysessionsController < ApplicationController
     end
     @room=Room.find(params[:studysession][:room])
     #update_current_user=@room.current_user
-    @room.update_attributes(current_students:@room.current_students+1)
+    @room.update_attributes(current_students:@room.current_students.to_i+1)
     #Room.find(params[:studysession][:room]).increment(:minutes_total,1)
     if @studysession.save
       redirect_to "/studysessions/studying/#{current_user.id}/#{session[:room]}"
