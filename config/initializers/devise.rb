@@ -262,10 +262,11 @@ Devise.setup do |config|
   
   # API key
   if Rails.env.production?     
-    config.omniauth :facebook, "928402207243868", "1108a428b50c7aaf8e66e9e45782e1be"
+    config.omniauth :facebook, "928402207243868", "1108a428b50c7aaf8e66e9e45782e1be", scope: 'email', info_fields: 'email'
     config.omniauth :twitter,  "BHKOe5jHRFsqZSRH0btvSxR2u", "cyOspkYIIoL1ULuBZgbV8gZzYfk31qY1wBvxCTNP8TVbKwnBeJ"
   else
-    config.omniauth :facebook, "928402207243868", "1108a428b50c7aaf8e66e9e45782e1be",  :client_options => {:ssl => {:ca_path => 'cacert.pem'}}
+    #config.omniauth :facebook, "928402207243868", "1108a428b50c7aaf8e66e9e45782e1be",  :client_options => {:ssl => {:ca_path => 'cacert.pem'}}
+    config.omniauth :facebook, "928402207243868", "1108a428b50c7aaf8e66e9e45782e1be",  :client_options => {:ssl => {:ca_path => 'cacert.pem'}}, scope: 'email', info_fields: 'email'
     config.omniauth :twitter,  "BHKOe5jHRFsqZSRH0btvSxR2u", "cyOspkYIIoL1ULuBZgbV8gZzYfk31qY1wBvxCTNP8TVbKwnBeJ"
   end
   config.scoped_views = true
