@@ -49,8 +49,6 @@ GEM
     arel (6.0.3)
     bcrypt (3.1.10)
     bcrypt-ruby (3.1.2)
-    bootstrap-generators (3.3.4)
-      railties (>= 3.1.0)
     bootstrap-sass (2.3.2.0)
       sass (~> 3.2)
     bootstrap-will_paginate (0.0.9)
@@ -236,7 +234,6 @@ DEPENDENCIES
   activerecord-reputation-system!
   amazon-ecs
   bcrypt-ruby (= 3.1.2)
-  bootstrap-generators (~> 3.3.4)
   bootstrap-sass (= 2.3.2.0)
   bootstrap-will_paginate (= 0.0.9)
   capybara (= 2.1.0)

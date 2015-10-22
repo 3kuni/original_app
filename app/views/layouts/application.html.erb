@@ -22,7 +22,12 @@
             <% if @active_now.present? %>
                 <div class="chip studying">勉強中</div>
             <% end %></li>
-            <li><%= link_to (fa_icon 'bell'),"#" %></li>
+            <li data-container="body" data-toggle="popover" data-placement="bottom" data-content="ここにお知らせが表示されます"><%= link_to (fa_icon 'bell'),"#" %></li>
+<script>
+$(function () {
+  $('[data-toggle="popover"]').popover()
+})
+</script>
             <li><%= link_to (fa_icon 'user-plus') , users_path  %></li>
             <li><%= link_to (fa_icon 'cog'), edit_user_registration_path, :class => 'navbar-link' %></li>
           <% else %>
