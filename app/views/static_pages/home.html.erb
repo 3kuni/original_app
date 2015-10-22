@@ -15,8 +15,25 @@
 <% end %>
 
 <% unless @active_now.present? %>
-  1.部屋を選ぶ 2.教材を選ぶ<br>
-    の２ステップで<br>
+    <div class="row">
+      <div class="col  m12 l6">
+        <div class="card-panel grey lighten-5">
+          <span>
+            <h5>1.部屋を選択</h5>
+            目標や学年別に部屋がありますので、好きな部屋に入って勉強することができます :)
+            
+          </span>
+        </div>
+      </div>
+      <div class="col m12 l6">
+        <div class="card-panel grey lighten-5">
+          <span>
+            <h5>2.教材・活動を選択</h5>
+            Amazonで検索するか、教材を自分で登録すると勉強セッションが開始します！
+          </span>
+        </div>
+      </div>
+    </div>
   <%= link_to "今すぐ開始" , ssession_path ,class: "waves-effect waves-light btn-large start" %>
 <% else %>
   <%= link_to "セッションに戻る", "/studysessions/studying/#{@active_now.id}/#{@active_now.room}" ,class: "waves-effect waves-light btn-large custombutton" %>

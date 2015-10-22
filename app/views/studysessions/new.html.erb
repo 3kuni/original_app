@@ -1,13 +1,6 @@
-<h4>教材・アクティビティ</h4>
-<% if @active_now.present? %>
-<font color="red">## active ##  id:<%= @active_now.id %>
-<a href="/studysessions/studying/<%= @active_now.id %>/<@active_now.room>">
-セッションに戻る</a>
-</font>
-<% end %>
+<div class="chip blue lighten-5"><%= Room.find(session[:room]).name %></div><br>
 
-<div class="chip blue lighten-5"><%= Room.find(session[:room]).name %></div>
-<br>
+使用する教材・アクティビティを選んで「開始」をクリック！<br>
 
 <div>
   <p>
