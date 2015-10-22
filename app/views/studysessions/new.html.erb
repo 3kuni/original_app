@@ -81,7 +81,7 @@
         <% if Textbook.find_by(asin:studysession).present? %>
           <%= cut_off(Textbook.find_by(asin:studysession).title,15)%>
         <% else %>
-          Title
+          <%= studysession %>
         <% end %>
       </span>
       <p>

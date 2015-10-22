@@ -19,7 +19,7 @@
         <% if Textbook.find_by(asin:studysession.textbook).present? %>
           <%= cut_off(Textbook.find_by(asin:studysession.textbook).title,15)%>
         <% else %>
-          Textbook
+          <%= studysession.textbook %>
         <% end %>
         <br>
         <div class="chip blue lighten-5">

@@ -45,6 +45,8 @@ class StudysessionsController < ApplicationController
       res = Amazon::Ecs.item_lookup(params[:studysession][:textbook], :response_group => 'Small, ItemAttributes, Images', :country => 'jp')
       if res.items.first.present?
         Textbook.create(title:res.items.first.get('ItemAttributes/Title'),asin:params[:studysession][:textbook])
+      else
+        Textbook.create(title:params[:studysession][:textbook])
       end
     end
     
