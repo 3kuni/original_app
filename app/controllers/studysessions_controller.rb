@@ -49,7 +49,9 @@ class StudysessionsController < ApplicationController
         Textbook.create(title:params[:studysession][:textbook])
       end
     end
-    
+    @room=Room.find(params[:studysession][:room])
+    #update_current_user=@room.current_user
+    @room.update_attributes(current_students:@room.current_students+1)
     #Room.find(params[:studysession][:room]).increment(:minutes_total,1)
     if @studysession.save
       redirect_to "/studysessions/studying/#{current_user.id}/#{session[:room]}"
@@ -68,6 +70,7 @@ class StudysessionsController < ApplicationController
     @room=Room.find(params[:room])
     t_room=@room.minutes_total.to_i + time_minutes
     @room.update_attributes(minutes_total:t_room)
+    @room.update_attributes(current_students:@room.current_students-1)
     redirect_to root_path
   end
 

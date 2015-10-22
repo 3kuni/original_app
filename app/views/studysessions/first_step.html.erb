@@ -13,7 +13,11 @@
 <% room_ex=["ロビー","高１生","高２生","高３生","既卒生"] %>
 <% @room.each do |room| %>
    <a href="studysessions/new/<%= session[:user_id] %>/<%= room.id %>" class="waves-effect waves-light btn-large custombutton" >
-<%= room.name %></a>
+<%= room.name %>
+<% if room.current_students.to_i > 0 %>
+    (<%= room.current_students %>)
+<% end %>
+</a>
 
 <% end %>
 

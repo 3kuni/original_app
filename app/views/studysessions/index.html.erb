@@ -1,5 +1,5 @@
 <!-- カード  -->
-<h4><%= Room.find(@active_now.room).name %></h4>
+<h4><%= Room.find(@active_now.room).name %>(<%= Room.find(@active_now.room).current_students %>人)</h4>
 <%= link_to '終了' ,  "/studysessions/stop/#{@active_now.id}/#{@active_now.user}/#{@active_now.created_at.to_i}/#{@active_now.room}", :method=>:patch, :class=>"btn-large custombutton waves-effect waves-light" %>
 
 <ul class="collection">
