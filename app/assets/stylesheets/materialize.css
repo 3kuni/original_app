@@ -8232,6 +8232,17 @@ a:link.unstarred{
   margin:1rem auto;
 }
 
+.authfb{
+  color:#fff;
+  background-color:#0d47a1;
+  border-style: solid; 
+  border-color: #0d47a1;
+  border-width: 0px; 
+  height:3rem;
+  line-height:3rem;
+  margin:1rem auto;
+}
+
 .star{
   font-size:2rem;
 }
