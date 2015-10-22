@@ -5838,7 +5838,8 @@ small {
   transition: .2s ease-out;
   cursor: pointer; }
   .btn:hover, .btn-large:hover {
-    background-color: #90caf9;
+    background-color: #ffb300;
+    border-color:#ffb300;
     color: #fff;}
 
 .btn-floating {
@@ -8221,6 +8222,16 @@ a:link.unstarred{
   border-radius:1rem;
 }
 
+.start{
+  color:#fff;
+  background-color:#f9a825;
+  border-style: solid; 
+  border-color: #f9a825;
+  border-width: 1px;  
+  margin:1rem auto;
+  border-radius:1rem;
+}
+
 .authtwi{
   color:#fff;
   background-color:#2196f3;
@@ -8242,6 +8253,16 @@ a:link.unstarred{
   line-height:3rem;
   margin:1rem auto;
 }
+
+.register{
+  color:#fff;
+  background-color:#ffb300;
+  border-style: solid; 
+  border-color: #0d47a1;
+  border-width: 0px; 
+  height:3rem;
+  line-height:3rem;
+  margin:1rem auto;}
 
 .star{
   font-size:2rem;

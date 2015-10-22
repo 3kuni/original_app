@@ -9,14 +9,15 @@
 <div>
 <% unless signed_in? %>
   <%= link_to (fa_icon 'twitter')+ "  Sign in with Twitter",  user_omniauth_authorize_path(:twitter),class:"btn authtwi" %><br>
-  <%= link_to (fa_icon 'facebook-square')+ "  Sign in with Facebook",  user_omniauth_authorize_path(:facebook),class:"btn authfb" %>
+  <%= link_to (fa_icon 'facebook-square')+ "  Sign in with Facebook",  user_omniauth_authorize_path(:facebook),class:"btn authfb" %><br>
+  <%= link_to (fa_icon 'envelope')+ "  新規登録",  new_user_registration_path,class:"btn register" %>
   <br>
 <% end %>
 
 <% unless @active_now.present? %>
   1.部屋を選ぶ 2.教材を選ぶ<br>
     の２ステップで<br>
-  <%= link_to "今すぐ開始" , ssession_path ,class: "waves-effect waves-light btn-large custombutton" %>
+  <%= link_to "今すぐ開始" , ssession_path ,class: "waves-effect waves-light btn-large start" %>
 <% else %>
   <%= link_to "セッションに戻る", "/studysessions/studying/#{@active_now.id}/#{@active_now.room}" ,class: "waves-effect waves-light btn-large custombutton" %>
 <% end %>
