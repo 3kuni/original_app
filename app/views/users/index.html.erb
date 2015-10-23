@@ -1,17 +1,20 @@
-<table class="table">
-  <tbody>
-    <% @user.each do |user| %>
-      <tr>
-        <td>
-          <a href="users/<%= user.id %>">
-              <%= fa_icon 'user' %>
-              <%= user.nickname %>
-          </a>
-          <% if Studysession.find_by(user:user.id,active:true) %>
+
+
+<!-- ユーザカード  -->
+<ul class="collection">
+  <% @user.each do |user| %>
+    <li class="collection-item avatar">
+      <a href="" target="_blank">
+          <img src="" alt="" class="circle">
+      </a>
+      <span class="title">          
+        <a href="users/<%= user.id %>">
+           <%= user.nickname %>
+        </a>
+        <% if Studysession.find_by(user:user.id,active:true) %>
             <div class="chip studying">勉強中</div>
-          <% end %>
-            
-          <% if user.grade.present? %>
+        <% end %>
+        <% if user.grade.present? %>
             <div class="chip blue lighten-5">
               <%= user.area %>
             </div>
@@ -21,10 +24,25 @@
               <%= user.grade %>
             </div>
           <% end %>
-            <%= user.word %>
-          </p>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+      </span>
+      <p>
+        
+        <%= user.word %>
+      </p>
+      <span class="secondary-content">
+        <% @user=user %>
+        <% unless current_user.id==@user.id %>
+          <div id="follow_form">
+            <% if current_user.following?(@user) %>
+              <%= render 'unfollow' %>
+            <% else %>
+              <%= render 'follow' %>
+            <% end %>
+          </div>
+        <% end %>
+      </span>
+    </li>
+  <% end %>
+</ul>
+
+<!-- ここまで -->  
