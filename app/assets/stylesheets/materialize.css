@@ -5290,7 +5290,7 @@ nav {
     color: #fff;
     display: inline-block;
     font-size: 2.1rem;
-    padding: 0 15px;
+    padding: 0;
     white-space: nowrap; }
     nav .brand-logo.center {
       left: 0%;
@@ -8285,7 +8285,7 @@ a:hover.unstarred{
 }
 
 .globalnav{
-  background-color:#1c205f !important;  
+  background-color:#21266e !important;  
 }
 
 
