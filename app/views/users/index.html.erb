@@ -9,7 +9,11 @@
       </a>
       <span class="title">          
         <a href="users/<%= user.id %>">
-           <%= user.nickname %>
+          <% if user.nickname.present? %>
+            <%= user.nickname %>
+          <% else %>
+            <%= "ユーザ#{user.id}" %>
+          <% end %>
         </a>
         <% if Studysession.find_by(user:user.id,active:true) %>
             <div class="chip studying">勉強中</div>
