@@ -1,7 +1,12 @@
+<% if signed_in? %>
+  <% unless current_user.nickname.present? %>
+    <div class="alert alert-danger" role="alert">
+      <%= link_to "こちらから",edit_user_registration_path%>ニックネーム、学年、地域、ひとことを設定してください</div>
+  <% end %>
+<% end %>
+
 <h1>STARDY</h1>
-<h5>地球上すべてが勉強場所だ</h5>
-
-
+<h5>いま、誰が勉強してる？</h5>
 
 <br>
 <div>
@@ -13,12 +18,12 @@
 <% end %>
 
 <% unless @active_now.present? %>
-    <div class="row">
+    <div class="row" style="margin-top:3rem;">
       <div class="col  m12 l6">
         <div class="card-panel grey lighten-5">
           <span>
             <h5>1.部屋を選択</h5>
-            目標や学年別に部屋がありますので、好きな部屋に入って勉強することができます :)
+            目標や学年別に部屋があるので、好きな部屋に入って勉強することができます :)
             
           </span>
         </div>
