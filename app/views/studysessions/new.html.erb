@@ -6,7 +6,9 @@
   <p>
   <%= form_tag "/studysessions/new/#{current_user.id}/#{session[:room]}"  do %>
     <%= text_field_tag 'keyword', @keyword ,:placeholder=>"Amazonから検索"%>
-    <%= submit_tag "検索",class:"btn custombutton" %>
+    <!-- <%= submit_tag "検索",class:"btn custombutton" %> -->
+    <%= button_tag sanitize('<i class="fa fa-search"></i>検索'), :type => "submit",
+    :class =>"btn custombutton" %>
   <% end %>
   </p>
 </div>
@@ -32,7 +34,7 @@
     <% @res.items.each do |studysession| %>
       <li class="collection-item avatar">
         <%= link_to studysession.get('DetailPageURL') do %>
-          <%= image_tag studysession.get('SmallImage/URL'), {:style => 'border: none;'}  %>
+          <%= image_tag studysession.get('SmallImage/URL'), {:style => 'border: none;',class:"circle"}  %>
         <% end %>
         
         <span class="title">          
