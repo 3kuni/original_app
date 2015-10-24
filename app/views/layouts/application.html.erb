@@ -22,10 +22,10 @@
             <% if @active_now.present? %>
                 <div class="chip studying">勉強中</div>
             <% end %></li>
-            <!--<li data-container="body" data-toggle="popover" data-placement="bottom" data-content="ここにお知らせが表示されます" title="通知"><%= link_to (fa_icon 'bell'),"#" %></li>-->
-            <li ><%= link_to (fa_icon 'bell'),"" ,'data-container'=>"body",title:"通知", 'data-toggle'=>"popover", 'data-placement'=>"bottom", 
+            <!--<li data-container="body" data-toggle="popover" data-placement="bottom" data-content="ここにお知らせが表示されます" title="通知"><%= link_to (fa_icon 'bell'),"#" %></li>　-->
+            <li ><%= link_to (fa_icon 'bell'),"#" ,'data-container'=>"body",title:"通知", 'data-toggle'=>"popover", 'data-placement'=>"bottom", 
               'data-html'=>"true",'data-content'=>"<a href=\"line://msg/text/http://stardy-3kuni.sqale.jp/\"><i class=\"fa fa-comment\"></i>LINE</a>で友達を招待しよう！" %>
-            </li>
+            </li> 
             <script>
             $(function () {
               $('[data-toggle="popover"]').popover()
