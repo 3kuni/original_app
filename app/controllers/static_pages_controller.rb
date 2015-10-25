@@ -1,6 +1,6 @@
 class StaticPagesController < ApplicationController
   def home
-    if request.url == "http://stardy-3kuni.sqale.jp"
+    if request.url == "http://stardy-3kuni.sqale.jp/"
       redirect_to "http://www.stardy.co/"
     end
     if signed_in?
