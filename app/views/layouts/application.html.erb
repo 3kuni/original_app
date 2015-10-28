@@ -10,7 +10,7 @@
 </head>
 <body>
 
-
+<!--
   <div class="navbar-fixed ">
     <nav>
       <div class="nav-wrapper globalnav">
@@ -43,34 +43,47 @@
       </div>
     </nav>
   </div>
+-->
 
-<!-- セッション中の表示。細く加工する。
-  <div class="navbar-fixed ">
-    <nav>
-      <div class="nav-wrapper red accent-3">
-        <a href="/" class="brand-logo">NOW</a>
+
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+
+        <a href="/" class="brand"><%= image_tag 'logo.png' %></a>
+        
         <ul id="nav-mobile" class="right">
           <% if user_signed_in? %>
             <li class="nickname"><%= current_user.nickname %></strong>
             <% if @active_now.present? %>
-                <div class="chip deep-orange lighten-3">勉強中</div>
+                <div class="chip studying">勉強中</div>
             <% end %></li>
-            <li><%= link_to (fa_icon 'bell'),"#" %></li>
+            <li ><%= link_to (fa_icon 'bell'),"#" ,'data-container'=>"body",title:"通知", 'data-toggle'=>"popover", 'data-placement'=>"bottom", 
+              'data-html'=>"true",'data-content'=>"<a href=\"line://msg/text/http://www.stardy.co/\"><i class=\"fa fa-comment\"></i>LINE</a>で友達を招待しよう！<hr>
+              ホーム画面に追加しよう<br>
+              <a href=\"http://www.ipodwave.com/iphone/howto/website_home.html\" target=\"_blank\">iPhone/iPad</a><br>
+              <a href=\"http://www.ex-okayama.jp/blog/detail.php?id_blog=90\" target=\"_blank\">Android</a>" %>
+            </li> 
+            <script>
+            $(function () {
+              $('[data-toggle="popover"]').popover()
+            })
+            </script>
             <li><%= link_to (fa_icon 'user-plus') , users_path  %></li>
-            <li><%= link_to (fa_icon 'cog'), edit_user_registration_path, :class => 'navbar-link' %></li>
+            <li><%= link_to (fa_icon 'cog'), edit_user_registration_path %></li>
           <% else %>
-            <li><%= link_to "登録", new_user_registration_path, :class => 'navbar-link'  %></li> 
-            <li><%= link_to "ログイン", new_user_session_path, :class => 'navbar-link'  %></li>
+            <li><%= link_to "登録", new_user_registration_path  %></li> 
+            <li><%= link_to "ログイン", new_user_session_path  %></li>
           <% end %>
         </ul>
-      </div>
-    </nav>
+
+    </div>
   </div>
--->
+</nav>
+
+
 
 <div class="container">
-
-
 
 <% if notice %>
   <p class="alert alert-notice"><%= notice %></p>
