@@ -90,11 +90,9 @@
               </span>
             <% end %>
             <span id="star-sum<%= studysession.id  %>">
-              
-              
               <% starred_by_lst=Array.new %>
               <% studysession.evaluators_for(:stars).each do |starred_by| %>
-                <% starred_by_lst.push(starred_by.nickname) %>
+                <% starred_by_lst.push("#{starred_by.nickname}<br>") %>
               <% end %>
               <%= link_to studysession.reputation_for(:stars).to_i ,"javascript:void(0);" ,'data-container'=>"body", 'data-toggle'=>"popover", 'data-placement'=>"bottom", 
                 'data-html'=>"true",'data-content'=>starred_by_lst %>
@@ -103,8 +101,6 @@
                 $('[data-toggle="popover"]').popover()
               })
               </script>
-              
-              
             </span>
           </span>
         </li>
