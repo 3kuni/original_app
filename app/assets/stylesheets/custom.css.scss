@@ -118,7 +118,7 @@
 .navbar-brand {
   float: left;
   height: 50px;
-  padding: 15px 15px;
+  padding: 0 0.5rem;
   font-size: 18px;
   line-height: 20px;
 }
@@ -537,4 +537,21 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
 
 .nav-icon{
   font-size:1.4rem;
+}
+.nav-icon-notifi{
+  font-size:1.4rem;
+  color:#fbc02d ;
+  a{
+    &:visited { color:#fbc02d; text-decoration:none }
+    &:hover { color:#fbc02d; text-decoration:none }
+    &:active { color:#fbc02d; text-decoration:none }
+  }
+}
+
+.navbar-right{
+  a{
+  &:visited { color:#fff; text-decoration:none }
+  &:hover { color:#fff; text-decoration:none }
+  &:active { color:#fff; text-decoration:none }
+  }
 }

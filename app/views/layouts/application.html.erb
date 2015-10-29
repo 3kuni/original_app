@@ -50,7 +50,7 @@
   <div class="container-fluid">
     <div class="navbar-header">
 
-        <a href="/" class="brand"><%= image_tag 'logo.png' %></a>
+        <a href="/" class="navbar-brand"><%= image_tag 'logo.png' %></a>
     </div>
         <ul class="navbar-right">
           <% if user_signed_in? %>
@@ -58,7 +58,7 @@
             <% if @active_now.present? %>
                 <div class="chip studying">勉強中</div>
             <% end %></li>
-            <li ><%= link_to (fa_icon 'bell'),"javascript:void(0);" ,class:"nav-icon",'data-container'=>"body",title:"通知", 'data-toggle'=>"popover", 'data-placement'=>"bottom", 
+            <li ><%= link_to (fa_icon 'bell'),"javascript:void(0);" ,class:"nav-icon-notifi",'data-container'=>"body",title:"通知", 'data-toggle'=>"popover", 'data-placement'=>"bottom", 
               'data-html'=>"true",'data-content'=>"<a href=\"line://msg/text/http://www.stardy.co/\"><i class=\"fa fa-comment\"></i>LINE</a>で友達を招待しよう！<hr>
               ホーム画面に追加しよう<br>
               <a href=\"http://www.ipodwave.com/iphone/howto/website_home.html\" target=\"_blank\">iPhone/iPad</a><br>
@@ -72,11 +72,10 @@
             <li ><span ><%= link_to (fa_icon 'user-plus') , users_path ,class:"nav-icon" %></span></li>
             <li><%= link_to (fa_icon 'cog'), edit_user_registration_path,class:"nav-icon" %></li>
           <% else %>
-            <li><%= link_to "登録", new_user_registration_path  %></li> 
+            <li><%= link_to "登録", new_user_registration_path %></li> 
             <li><%= link_to "ログイン", new_user_session_path  %></li>
           <% end %>
         </ul>
-
 
   </div>
 </nav>

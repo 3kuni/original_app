@@ -1660,7 +1660,7 @@ html {
  * Remove default margin.
  */
 body {
-  margin: 0; }
+  margin-top: 100px; }
 
 /* HTML5 display definitions
    ========================================================================== */
