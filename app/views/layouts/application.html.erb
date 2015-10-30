@@ -60,7 +60,9 @@
             <% end %></li>
             <li >
             <% notifi_message=String.new %>
-            <% @activities.first(5).each do |i| notifi_message <<"#{i.owner.nickname}さんがセッションを開始しました！"+"<hr>" end %>
+            <% if @activities.present? %>
+              <% @activities.first(5).each do |i| notifi_message <<"#{i.owner.nickname}さんがセッションを開始しました！"+"<hr>" end %>
+            <% end %>
             <%= link_to (fa_icon 'bell'),"javascript:void(0);" ,class:"nav-icon-notifi",'data-container'=>"body",title:"通知", 'data-toggle'=>"popover", 'data-placement'=>"bottom", 
               'data-html'=>"true",'data-content'=>"#{notifi_message}<a href=\"line://msg/text/http://www.stardy.co/\"><i class=\"fa fa-comment\"></i>LINE</a>で友達を招待しよう！<hr>
               ホーム画面に追加しよう<br>
