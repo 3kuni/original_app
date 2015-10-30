@@ -2290,7 +2290,7 @@ td, th {
       position: relative; }
       .collection .collection-item.avatar .circle {
         position: absolute;
-        width: 4rem;
+        width: auto;
         height: 4rem;
         overflow: hidden;
         left: 0.5rem;
