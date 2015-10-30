@@ -7,7 +7,7 @@ class StaticPagesController < ApplicationController
       @active_now=Studysession.find_by(user:current_user.id,active:true)
       @user=User.find(current_user.id)
       @feed_items=current_user.feed
-      @activities = PublicActivity::Activity.all
+      @activities = PublicActivity::Activity.order(created_at: :desc).all
     end
   end
 end
