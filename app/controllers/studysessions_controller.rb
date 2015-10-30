@@ -8,6 +8,7 @@ class StudysessionsController < ApplicationController
     @ss2=Studysession.realtime_feed(session[:room])
     @active_now=Studysession.find_by(user:current_user.id,active:true)
     @current_user=current_user
+    @activities = PublicActivity::Activity.all
   end
 
   def first_step
@@ -17,6 +18,7 @@ class StudysessionsController < ApplicationController
       redirect_to root_path
     end
     @room=Room.all
+    @activities = PublicActivity::Activity.all
   end
 
   def new
@@ -26,6 +28,7 @@ class StudysessionsController < ApplicationController
      @keyword = params[:keyword]
      #@history = Studysession.where(user:current_user.id).limit(5)
      @history = Studysession.where(user:current_user.id).uniq.limit(10).pluck(:textbook)
+     @activities = PublicActivity::Activity.all
      if @keyword.present?
        Amazon::Ecs.debug = true
        @res = Amazon::Ecs.item_search(params[:keyword], 
@@ -53,7 +56,9 @@ class StudysessionsController < ApplicationController
     #update_current_user=@room.current_user
     @room.update_attributes(current_students:@room.current_students.to_i+1)
     #Room.find(params[:studysession][:room]).increment(:minutes_total,1)
+    @activities = PublicActivity::Activity.all
     if @studysession.save
+      @studysession.create_activity :create, owner: current_user
       redirect_to "/studysessions/studying/#{current_user.id}/#{session[:room]}"
     else
       render 'new'
@@ -85,6 +90,7 @@ class StudysessionsController < ApplicationController
       # root_path
       return
     end
+    @activities = PublicActivity::Activity.all
   end
 
   def like

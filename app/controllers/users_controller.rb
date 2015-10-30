@@ -3,11 +3,14 @@ class UsersController < ApplicationController
     @active_now=Studysession.find_by(user:current_user.id,active:true)
     @user=User.find(params[:id])
     @study_lst=Studysession.where(user:params[:id])
+    @activities = PublicActivity::Activity.all
   end
   
   def index
     @active_now=Studysession.find_by(user:current_user.id,active:true)
     @user=User.all.order("created_at desc")
+    @activities = PublicActivity::Activity.all
+
   end
   
   def following
@@ -15,7 +18,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     #@users = @user.followed_users.paginate(page: params[:page])
     @users = @user.followed_users
-    
+
     render 'show_follow'
   end
 
