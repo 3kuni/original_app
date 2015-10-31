@@ -12,6 +12,7 @@
               <% @user=User.find(feed_item.user) %>
               <%= @user.nickname %>
             </a>
+            <%= Room.find(feed_item.room).name %>
           </span>
           <p>
             <% if feed_item.active %>
@@ -20,7 +21,11 @@
               <%= feed_item.time %>分のセッションを終了しました。
             <% end %>
             <br>
-              <%= Room.find(feed_item.room).name %>
+            <% if Textbook.find_by(asin:feed_item.textbook).present? %>
+              <%= Textbook.find_by(asin:feed_item.textbook).title %>
+            <% else %>
+              <%= feed_item.textbook %>
+            <% end %>
           </p>
           
           <span class="secondary-content">
