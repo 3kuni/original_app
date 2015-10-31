@@ -60,6 +60,7 @@ class StudysessionsController < ApplicationController
     if @studysession.save
       @studysession.create_activity :create, owner: current_user
       @room.update_attributes(current_students:@room.current_students.to_i+1)
+      SessionMailer.session_email(current_user, @studysession).deliver
       redirect_to "/studysessions/studying/#{current_user.id}/#{session[:room]}"
     else
       render 'new'

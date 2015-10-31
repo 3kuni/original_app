@@ -36,4 +36,15 @@ OriginalApp::Application.configure do
   # config.action_view.raise_on_missing_translations = true
   
   config.action_mailer.default_url_options = { :host => 'https://stardy-a3kuni.c9.io' }
+  
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+  	address:               'smtp.gmail.com',
+  	port:      	           587,
+  	domain:                'example.com',
+  	user_name:             'stardyexample@gmail.com',
+  	password:              'starstarstar',
+  	authentication:        'plain',
+  	enable_starttls_auto:  true
+  }
 end

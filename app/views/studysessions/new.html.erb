@@ -75,7 +75,7 @@
       <a href="http://amazon.co.jp/dp/<%= studysession %>" target="_blank">
           <img src="http://images-jp.amazon.com/images/P/<%= studysession %>.09.TZZZZZZZ.jpg" alt="" class="circle">
       </a>
-      <span class="title">          
+      <span class="title">        
         <% if Textbook.find_by(asin:studysession).present? %>
           <%= cut_off(Textbook.find_by(asin:studysession).title,15)%>
         <% else %>
