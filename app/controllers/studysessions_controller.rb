@@ -55,11 +55,11 @@ class StudysessionsController < ApplicationController
     end
     @room=Room.find(params[:studysession][:room])
     #update_current_user=@room.current_user
-    @room.update_attributes(current_students:@room.current_students.to_i+1)
     #Room.find(params[:studysession][:room]).increment(:minutes_total,1)
     @activities = PublicActivity::Activity.all
     if @studysession.save
       @studysession.create_activity :create, owner: current_user
+      @room.update_attributes(current_students:@room.current_students.to_i+1)
       redirect_to "/studysessions/studying/#{current_user.id}/#{session[:room]}"
     else
       render 'new'
