@@ -1,0 +1,52 @@
+        <li class="collection-item avatar 
+          <% if feed_item.active %>
+            yellow lighten-5
+          <% end %>
+        ">
+          <a href="http://amazon.co.jp/dp/<%= feed_item.textbook %>" target="_blank">
+              <img src="http://images-jp.amazon.com/images/P/<%= feed_item.textbook %>.09.TZZZZZZZ.jpg" alt="" class="circle">
+          </a>
+          
+          <span class="title">          
+            <a href="/users/<%= feed_item.user %>">
+              <% @user=User.find(feed_item.user) %>
+              <%= @user.nickname %>
+            </a>
+          </span>
+          <p>
+            <% if feed_item.active %>
+              セッションを開始しました！
+            <% else %>
+              <%= feed_item.time %>分のセッションを終了しました。
+            <% end %>
+            <br>
+              <%= Room.find(feed_item.room).name %>
+          </p>
+          
+          <span class="secondary-content">
+            
+            
+            <% if feed_item.evaluators_for(:stars).include?(@current_user) %>
+              <span style="color:gold;" class="star">
+                <%= fa_icon 'star' %>
+              </span>
+            <% else %>
+              <span style="color:lightgray" id="star-icon<%= feed_item.id  %>" class="star">
+                <%= link_to (fa_icon 'star'), "/studysessions/like/#{feed_item.id}" , remote:true,:class=>"unstarred"%>
+              </span>
+            <% end %>
+            <span id="star-sum<%= feed_item.id  %>">
+              <% starred_by_lst=Array.new %>
+              <% feed_item.evaluators_for(:stars).each do |starred_by| %>
+                <% starred_by_lst.push("#{starred_by.nickname}<br>") %>
+              <% end %>
+              <%= link_to feed_item.reputation_for(:stars).to_i ,"javascript:void(0);" ,'data-container'=>"body", 'data-toggle'=>"popover", 'data-placement'=>"bottom", 
+                'data-html'=>"true",'data-content'=>starred_by_lst %>
+              <script>
+              $(function () {
+                $('[data-toggle="popover"]').popover()
+              })
+              </script>
+            </span>
+          </span>
+        </li>

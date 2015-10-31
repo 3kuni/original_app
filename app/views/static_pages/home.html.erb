@@ -50,64 +50,12 @@
 
 <!-- カード -->  
 <% if signed_in? %>
-    <h4>タイムライン</h4>
-    <ul class="collection">
-      <% @feed_items.each do |studysession| %>
-        <li class="collection-item avatar 
-          <% if studysession.active %>
-            yellow lighten-5
-          <% end %>
-        ">
-          <a href="http://amazon.co.jp/dp/<%= studysession.textbook %>" target="_blank">
-              <img src="http://images-jp.amazon.com/images/P/<%= studysession.textbook %>.09.TZZZZZZZ.jpg" alt="" class="circle">
-          </a>
-          
-          <span class="title">          
-            <a href="/users/<%= studysession.user %>">
-              <% @user=User.find(studysession.user) %>
-              <%= @user.nickname %>
-            </a>
-          </span>
-          <p>
-            <% if studysession.active %>
-              セッションを開始しました！
-            <% else %>
-              <%= studysession.time %>分のセッションを終了しました。
-            <% end %>
-            <br>
-              <%= Room.find(studysession.room).name %>
-          </p>
-          
-          <span class="secondary-content">
-            
-            
-            <% if studysession.evaluators_for(:stars).include?(@current_user) %>
-              <span style="color:gold;" class="star">
-                <%= fa_icon 'star' %>
-              </span>
-            <% else %>
-              <span style="color:lightgray" id="star-icon<%= studysession.id  %>" class="star">
-                <%= link_to (fa_icon 'star'), "/studysessions/like/#{studysession.id}" , remote:true,:class=>"unstarred"%>
-              </span>
-            <% end %>
-            <span id="star-sum<%= studysession.id  %>">
-              <% starred_by_lst=Array.new %>
-              <% studysession.evaluators_for(:stars).each do |starred_by| %>
-                <% starred_by_lst.push("#{starred_by.nickname}<br>") %>
-              <% end %>
-              <%= link_to studysession.reputation_for(:stars).to_i ,"javascript:void(0);" ,'data-container'=>"body", 'data-toggle'=>"popover", 'data-placement'=>"bottom", 
-                'data-html'=>"true",'data-content'=>starred_by_lst %>
-              <script>
-              $(function () {
-                $('[data-toggle="popover"]').popover()
-              })
-              </script>
-            </span>
-          </span>
-        </li>
-      <% end %>
-    </ul>
-
+<h4>タイムライン</h4>
+  <ul class="collection">
+    <% @feeditems.first(20).each do |studysession| %>
+      <%= render '/feeditem' ,feed_item: studysession %>
+    <% end %>
+  </ul>
 <% end %>
 <!--ここまで -->  
 
