@@ -10,7 +10,9 @@ module ApplicationHelper
       if text.length < len
         text
       else
-        text.scan(/^.{#{len}}/m)[0] + "…"
+        text.insert(len/2, "<br>")
+        text.scan(/^.{#{len+4}}/m)[0] + "…"
+
       end
     else
       ''

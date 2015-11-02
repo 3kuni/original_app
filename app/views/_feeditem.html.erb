@@ -22,7 +22,7 @@
             <% end %>
             <br>
             <% if Textbook.find_by(asin:feed_item.textbook).present? %>
-              <%= Textbook.find_by(asin:feed_item.textbook).title %>
+              <%= cut_off(Textbook.find_by(asin:feed_item.textbook).title,30).html_safe %>
             <% else %>
               <%= feed_item.textbook %>
             <% end %>

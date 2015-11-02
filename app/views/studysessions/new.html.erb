@@ -40,7 +40,7 @@
         <% end %>
         
         <span class="title">          
-          <%= cut_off(studysession.get('ItemAttributes/Title'),15) %>
+          <%= cut_off(studysession.get('ItemAttributes/Title'),30).html_safe %>
         </span>
         <p>
           
@@ -77,7 +77,7 @@
       </a>
       <span class="title">        
         <% if Textbook.find_by(asin:studysession).present? %>
-          <%= cut_off(Textbook.find_by(asin:studysession).title,15)%>
+          <%= cut_off(Textbook.find_by(asin:studysession).title,30).html_safe %>
         <% else %>
           <%= studysession %>
         <% end %>
