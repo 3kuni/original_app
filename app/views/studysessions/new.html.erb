@@ -2,30 +2,67 @@
 
 使用する教材・アクティビティを選んで「開始」をクリック！<br>
 
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingOne">
+      <h4 class="panel-title">
+        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          Amazon検索・オリジナル教材
+        </a>
+      </h4>
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+      <div class="panel-body">
+        <div>
+          <p>
+          <%= form_tag "/studysessions/new/#{current_user.id}/#{session[:room]}"  do %>
+            <%= text_field_tag 'keyword', @keyword ,:placeholder=>"Amazonから検索"%>
+            <!-- <%= submit_tag "検索",class:"btn custombutton" %> -->
+            <%= button_tag sanitize('<i class="fa fa-search"></i>  検索'), :type => "submit",
+            :class =>"btn custombutton" %>
+          <% end %>
+          </p>
+        </div>
+
+
+        <div>
+          <%= form_for(@studysession) do |f| %>
+            <%= f.hidden_field :active, :value => true %>
+            <%= f.hidden_field :user, :value => params[:id] %>
+            <%= f.hidden_field :room, :value => session[:room] %>
+            <%= f.text_field :textbook , :placeholder=>"オリジナルで登録" %>
+            <a role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample" style="color:#9e9e9e;">
+              <%= fa_icon 'commenting' %>
+            </a>
+            <div class="collapse" id="collapseExample">
+              <div >
+                 <%= f.text_field :tweet , :placeholder=>"つぶやき" %>
+              </div>
+            </div>
+
+
+            <%= button_tag sanitize('<i class="fa fa-pencil" ></i>  開始'), :type => "submit",
+            :class =>"btn custombutton" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--
 <div>
   <p>
   <%= form_tag "/studysessions/new/#{current_user.id}/#{session[:room]}"  do %>
     <%= text_field_tag 'keyword', @keyword ,:placeholder=>"Amazonから検索"%>
-    <!-- <%= submit_tag "検索",class:"btn custombutton" %> -->
     <%= button_tag sanitize('<i class="fa fa-search"></i>  検索'), :type => "submit",
     :class =>"btn custombutton" %>
   <% end %>
   </p>
-</div>
-
+</div>-->
 
 <!--自分で作成した教材  -->
-<div>
-    <%= form_for(@studysession) do |f| %>
-        <%= f.hidden_field :active, :value => true %>
-        <%= f.hidden_field :user, :value => params[:id] %>
-        <%= f.hidden_field :room, :value => session[:room] %>
-        <%= f.text_field :textbook , :placeholder=>"オリジナルで登録" %>
-        <%= f.text_field :tweet , :placeholder=>"つぶやき" %>
-        <%= button_tag sanitize('<i class="fa fa-pencil" ></i>  開始'), :type => "submit",
-    :class =>"btn custombutton" %>
-    <% end %>
-</div>
+
 
 
 
@@ -39,31 +76,41 @@
           <%= image_tag studysession.get('SmallImage/URL'), {:style => 'border: none;',class:"circle"}  %>
         <% end %>
         
-        <span class="title">          
-          <%= cut_off(studysession.get('ItemAttributes/Title'),28).html_safe %>
-        </span>
-        <p>
+
+        <%= form_for(@studysession) do |f| %>
+          <span class="title">          
+            <%= cut_off(studysession.get('ItemAttributes/Title'),28).html_safe %>
+
+          </span>
+          <p>
+             <div class="collapse" id="collapseExampleAmazon<%= studysession.get('ASIN') %>">
+                <div >
+                   <%= f.text_field :tweet , :placeholder=>"つぶやき" %>
+                </div>
+             </div>
+          </p>
           
-        </p>
-        
-        <span class="secondary-content">
-          
-          <%= form_for(@studysession) do |f| %>
-            <%= f.hidden_field :active, :value => true %>
-            <%= f.hidden_field :textbook, :value => studysession.get('ASIN') %>
-            <%= f.hidden_field :user, :value => params[:id] %>
-            <%= f.hidden_field :room, :value => session[:room] %>
-            
-            <%= button_tag sanitize('<i class="fa fa-pencil" ></i>  開始'), :type => "submit",
-    :class =>"btn custombutton" %>
-          <% end %>
-          
-        </span>
+          <span class="secondary-content">         
+              <%= f.hidden_field :active, :value => true %>
+              <%= f.hidden_field :textbook, :value => studysession.get('ASIN') %>
+              <%= f.hidden_field :user, :value => params[:id] %>
+              <%= f.hidden_field :room, :value => session[:room] %>
+              <a role="button" data-toggle="collapse" href="#collapseExampleAmazon<%=studysession.get('ASIN') %>" aria-expanded="false" 
+              aria-controls="collapseExample" style="color:#9e9e9e;">
+                <%= fa_icon 'commenting' %>
+              </a>
+
+              
+              <%= button_tag sanitize('<i class="fa fa-pencil" ></i>  開始'), :type => "submit",
+               :class =>"btn custombutton" %>
+          </span>
+        <% end %>
       </li>
     <% end %>
   </ul>
 <% end %>
 <!-- ここまで -->  
+
 
 
 <% if !@res.present? and @history.present? %>
@@ -75,27 +122,35 @@
       <a href="http://amazon.co.jp/dp/<%= studysession %>" target="_blank">
           <img src="http://images-jp.amazon.com/images/P/<%= studysession %>.09.TZZZZZZZ.jpg" alt="" class="circle">
       </a>
-      <span class="title">        
-        <% if Textbook.find_by(asin:studysession).present? %>
-          <%= cut_off(Textbook.find_by(asin:studysession).title,28).html_safe %>
-        <% else %>
-          <%= studysession %>
-        <% end %>
-      </span>
-      <p>
-        
-        <%= studysession %>
-      </p>
-      <span class="secondary-content">
-        <%= form_for(@studysession) do |f| %>
-          <%= f.hidden_field :active, :value => true %>
-          <%= f.hidden_field :textbook, :value => studysession %>
-          <%= f.hidden_field :user, :value => params[:id] %>
-          <%= f.hidden_field :room, :value => session[:room] %>
-          <%= button_tag sanitize('<i class="fa fa-pencil" ></i>  開始'), :type => "submit",
-    :class =>"btn custombutton" %>
-        <% end %>
-      </span>
+      <%= form_for(@studysession) do |f| %>
+        <span class="title">        
+          <% if Textbook.find_by(asin:studysession).present? %>
+            <%= cut_off(Textbook.find_by(asin:studysession).title,28).html_safe %>
+          <% else %>
+            <%= studysession %>
+          <% end %>
+        </span>
+        <p>
+          <div class="collapse" id="collapseExampleAmazon<%= studysession %>">
+            <div >
+             <%= f.text_field :tweet , :placeholder=>"つぶやき" %>
+            </div>
+          </div>
+        </p>
+        <span class="secondary-content">
+          
+            <%= f.hidden_field :active, :value => true %>
+            <%= f.hidden_field :textbook, :value => studysession %>
+            <%= f.hidden_field :user, :value => params[:id] %>
+            <%= f.hidden_field :room, :value => session[:room] %>
+            <a role="button" data-toggle="collapse" href="#collapseExampleAmazon<%= studysession %>" aria-expanded="false" 
+              aria-controls="collapseExample" style="color:#9e9e9e;">
+              <%= fa_icon 'commenting' %>
+            </a>
+            <%= button_tag sanitize('<i class="fa fa-pencil" ></i>  開始'), :type => "submit",
+            :class =>"btn custombutton" %>
+        </span>
+      <% end %>
     </li>
   <% end %>
 </ul>
