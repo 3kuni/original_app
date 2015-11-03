@@ -3,6 +3,7 @@ class UsersController < ApplicationController
     @active_now=Studysession.find_by(user:current_user.id,active:true)
     @user=User.find(params[:id])
     @study_lst=Studysession.where(user:params[:id])
+    @daily= Studysession.where(user:params[:id]).group("date(created_at)").sum(:time)
     @activities = PublicActivity::Activity.all
   end
   

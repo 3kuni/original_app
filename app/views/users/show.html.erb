@@ -21,6 +21,12 @@
 
 <!-- カード -->  
 <% if signed_in? %>
+    <% @daily.each do |key,val| %>
+      <%= key %>
+      :
+      <%= val %>時間
+      <br>
+    <% end %>
     <h4>フィード</h4>
     <ul class="collection">
       <% @study_lst.each do |studysession| %>
