@@ -31,9 +31,7 @@
             <%= f.hidden_field :user, :value => params[:id] %>
             <%= f.hidden_field :room, :value => session[:room] %>
             <%= f.text_field :textbook , :placeholder=>"オリジナルで登録" %>
-            <a role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample" style="color:#9e9e9e;">
-              <%= fa_icon 'commenting' %>
-            </a>
+            
             <div class="collapse" id="collapseExample">
               <div >
                  <%= f.text_field :tweet , :placeholder=>"つぶやき" %>
@@ -43,6 +41,9 @@
 
             <%= button_tag sanitize('<i class="fa fa-pencil" ></i>  開始'), :type => "submit",
             :class =>"btn custombutton" %>
+            <a role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample" class="tweet">
+              <%= fa_icon 'commenting' %>
+            </a>
           <% end %>
         </div>
       </div>
@@ -95,14 +96,15 @@
               <%= f.hidden_field :textbook, :value => studysession.get('ASIN') %>
               <%= f.hidden_field :user, :value => params[:id] %>
               <%= f.hidden_field :room, :value => session[:room] %>
-              <a role="button" data-toggle="collapse" href="#collapseExampleAmazon<%=studysession.get('ASIN') %>" aria-expanded="false" 
-              aria-controls="collapseExample" style="color:#9e9e9e;">
+              <%= button_tag sanitize('<i class="fa fa-pencil" ></i>  開始'), :type => "submit",
+               :class =>"btn custombutton" %>
+               <a role="button" data-toggle="collapse" href="#collapseExampleAmazon<%=studysession.get('ASIN') %>" aria-expanded="false" 
+              aria-controls="collapseExample" class="tweet">
                 <%= fa_icon 'commenting' %>
               </a>
 
               
-              <%= button_tag sanitize('<i class="fa fa-pencil" ></i>  開始'), :type => "submit",
-               :class =>"btn custombutton" %>
+              
           </span>
         <% end %>
       </li>
@@ -143,12 +145,13 @@
             <%= f.hidden_field :textbook, :value => studysession %>
             <%= f.hidden_field :user, :value => params[:id] %>
             <%= f.hidden_field :room, :value => session[:room] %>
-            <a role="button" data-toggle="collapse" href="#collapseExampleAmazon<%= studysession %>" aria-expanded="false" 
-              aria-controls="collapseExample" style="color:#9e9e9e;">
-              <%= fa_icon 'commenting' %>
-            </a>
             <%= button_tag sanitize('<i class="fa fa-pencil" ></i>  開始'), :type => "submit",
             :class =>"btn custombutton" %>
+            <a role="button" data-toggle="collapse" href="#collapseExampleAmazon<%= studysession %>" aria-expanded="false" 
+              aria-controls="collapseExample" class="tweet">
+              <%= fa_icon 'commenting' %>
+            </a>
+            
         </span>
       <% end %>
     </li>
