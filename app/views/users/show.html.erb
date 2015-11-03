@@ -24,7 +24,10 @@
     <% @daily.each do |key,val| %>
       <%= key %>
       :
-      <%= val %>時間
+      <% if val.div(60)>0 %>
+        <%= val.div(60) %>時間
+      <% end %>
+      <%= val.modulo(60) %>分
       <br>
     <% end %>
     <h4>フィード</h4>
