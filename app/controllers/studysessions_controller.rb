@@ -107,7 +107,7 @@ class StudysessionsController < ApplicationController
 
   private
     def studysession_params
-      params.require(:studysession).permit(:user,:textbook,:room,:active)
+      params.require(:studysession).permit(:user,:textbook,:room,:active,:tweet)
     end
     
     def correct_user

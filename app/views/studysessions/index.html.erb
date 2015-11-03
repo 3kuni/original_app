@@ -14,6 +14,12 @@
           <% @user=User.find(studysession.user) %>
           <%= @user.nickname %>
         </a>
+        <div class="chip blue lighten-5">
+          <%= @user.area %>
+        </div>
+        <div class="chip light-green lighten-5">
+          <%= @user.grade %>
+        </div>
       </span>
       <p>
         <% if Textbook.find_by(asin:studysession.textbook).present? %>
@@ -22,11 +28,8 @@
           <%= studysession.textbook %>
         <% end %>
         <br>
-        <div class="chip blue lighten-5">
-          <%= @user.area %>
-        </div>
-        <div class="chip light-green lighten-5">
-          <%= @user.grade %>
+        <div class="chip tweet grey lighten-5">
+          <%= studysession.tweet  %>
         </div>
       </p>
       

@@ -6181,13 +6181,13 @@ a.waves-effect .waves-ripple {
 
 .chip {
   display: inline-block;
-  height: 32px;
-  font-size: 0.8rem;
+  max-height: 1rem;
+  font-size: 0.6rem;
   font-weight: 500;
   color: rgba(0, 0, 0, 0.6);
-  line-height: 32px;
-  padding: 0 12px;
-  border-radius: 16px;
+  line-height: 1rem;
+  padding: 0 0.5rem;
+  border-radius: 0.5rem;
   background-color: #E4E4E4; }
   .chip img {
     float: left;
@@ -6204,6 +6204,17 @@ a.waves-effect .waves-ripple {
   .chip.studying{
     color:#fff;
     background-color:#e65100;
+  }
+  .chip.tweet{
+    background-color:#fafafa;
+    max-height: 3rem;
+    padding: 0.5rem 0.5rem;
+    border-radius: 0.2rem;
+  }
+  .chip.room{
+    background-color: #fff;
+    border-style: solid; 
+    border-width: 1px;
   }
 
 .materialboxed {
