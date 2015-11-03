@@ -11,7 +11,7 @@ module ApplicationHelper
         text
       else
         text.insert(len/2, "<br>")
-        text.scan(/^.{#{len+4}}/m)[0] + "…"
+        text.scan(/^.{#{len+3}}/m)[0] + "…"
 
       end
     else
