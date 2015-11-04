@@ -18,7 +18,7 @@
 # end
 
 # Learn more: http://github.com/javan/whenever
-set :environment, :development
+set :environment, :production
 set :output, {:error => 'log/error.log', :standard => 'log/cron.log'}
 
 # Testなので、3分毎に動作するように設定します
