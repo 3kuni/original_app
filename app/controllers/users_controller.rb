@@ -9,7 +9,7 @@ class UsersController < ApplicationController
   
   def index
     @active_now=Studysession.find_by(user:current_user.id,active:true)
-    @user=User.all.order("created_at desc")
+    @user=User.all.order("current_sign_in_at desc")
     @activities = PublicActivity::Activity.all
 
   end
