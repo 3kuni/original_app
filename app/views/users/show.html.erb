@@ -35,10 +35,10 @@ $(document).ready(function() {
 var codropsEvents = {
     '11-23-2015' : '<a href="http://tympanus.net/codrops/2012/11/23/three-script-updates/">Three Script Updates</a>',
     '11-01-2015' : 'x',
-    <% @daily.each_key do |key| %>
+    <% @daily.each do |key,value| %>
       <% s=key.to_s %>
       <% s=s.split("-") %>
-      <%= "\'#{s[1]}-#{s[2]}-#{s[0]}\':\'x\',".html_safe %>
+      <%= "\'#{s[1]}-#{s[2]}-#{s[0]}\':\'<div class=\"calender#{value.div(60)}\"><br></div>\',".html_safe %>
     <% end %>
 };
 </script>
