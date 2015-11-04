@@ -34,7 +34,11 @@ $(document).ready(function() {
 // 表示データ例
 var codropsEvents = {
     '11-23-2015' : '<a href="http://tympanus.net/codrops/2012/11/23/three-script-updates/">Three Script Updates</a>',
-    '11-01-2015' : '',
+    '11-01-2015' : 'x',
+    <% @daily.each_key do |key| %>
+      <% s=key.split("-") %>
+      <%= "\'#{s[1]}-#{s[2]}-#{s[0]}\':\'x\',".html_safe %>
+    <% end %>
 };
 </script>
 <% end %>
