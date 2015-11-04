@@ -33,6 +33,7 @@ module OriginalApp
       :AWS_access_key_id => 'AKIAIL47C47MTYLX7HKA',
       :AWS_secret_key => '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', 
     }
-
+    config.autoload_paths += %W(#{config.root}/lib)
+    config.autoload_paths += Dir["#{config.root}/lib/**/"]
   end
 end
