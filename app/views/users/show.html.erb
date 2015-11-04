@@ -23,6 +23,7 @@
 <% end %>
 
 <!-- カレンダー -->
+<% if @user.id==2 %>
 <div id="calendar" class="fc-calendar-container"></div>
 <script type="text/javascript">
 $(document).ready(function() {
@@ -36,6 +37,7 @@ var codropsEvents = {
     '11-01-2015' : '',
 };
 </script>
+<% end %>
 
 <!-- カード -->  
 <% if signed_in? %>
