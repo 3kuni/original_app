@@ -20,6 +20,9 @@
         <div class="chip light-green lighten-5">
           <%= @user.grade %>
         </div>
+        <% if @user.skype.present? %>
+          <a href="skype:<%= @user.skype %>?call"><%= fa_icon 'skype' %></a>
+        <% end %>
       </span>
       <p>
         <% if Textbook.find_by(asin:studysession.textbook).present? %>
