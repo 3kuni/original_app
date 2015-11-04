@@ -23,7 +23,7 @@
 <% end %>
 
 <!-- カレンダー -->
-<% if @user.id==2 %>
+<% if @user.premium.present? %>
 <div id="calendar" class="fc-calendar-container"></div>
 <script type="text/javascript">
 $(document).ready(function() {
