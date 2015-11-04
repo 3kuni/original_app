@@ -1,7 +1,9 @@
 
 <h5><%= @user.nickname %></h5>
 
-<a href="skype:yupiyupi1234?call">skype</a>
+<% if @user.skype.present? %>
+  <a href="skype:<%= @user.skype %>?call">skype</a>
+<% end %>
 <section>
   <%= render 'shared/stats' %>
 </section>
