@@ -19,7 +19,7 @@
 
 # Learn more: http://github.com/javan/whenever
 set :environment, :production
-set :output, {:error => 'log/error.log', :standard => 'log/cron.log'}
+set :output, {:error => 'log/error.log', :standard => 'var/log/cron.log'}
 
 # Testなので、3分毎に動作するように設定します
 every 1.minute do
