@@ -9,6 +9,17 @@
 <%= image_tag 'STARDY-title.png' ,style:"width:100%;"%>
 <h5 align="center">いま、誰が勉強してる？</h5>
 
+<script type="text/javascript">
+$(function(){
+  var start = new Date();
+  setInterval( function(){
+    var now = new Date();
+    now = Math.round((now.getTime()-start.getTime())/1000)
+    $("#time").text(now);
+  }, 1000);
+});
+</script>
+<p id="time"></p>
 
 
 <br>

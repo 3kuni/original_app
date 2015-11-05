@@ -38,7 +38,20 @@
       
       <span class="secondary-content">
         <%= fa_icon 'clock-o' %>
-        <%= ((Time.now-studysession.created_at)/60).to_i %>分<br>
+        <script type="text/javascript">
+          $(function(){
+            var start = <%= studysession.created_at.to_i %>;
+            setInterval( function(){
+              var now = new Date();
+              //now=Math.round(now.getTime()/1000);
+              now = Math.round((now.getTime()/1000-start)/60)
+              $("#time").text(now);
+            }, 60000);
+          });
+        </script>
+        <span id="time"></span>分
+        <br>
+        
         <% if studysession.evaluators_for(:stars).include?(@current_user) %>
           <span style="color:gold;" class="star">
             <%= fa_icon 'star' %>
