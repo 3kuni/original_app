@@ -60,6 +60,17 @@ var codropsEvents = {
       <% end %>
       <%= val.modulo(60) %>分
       <br>
+      <svg xmlns="http://www.w3.org/2000/svg" width="100%" >
+        <rect x="0%" y="0" width="96%" height="80" fill="#ffffff" stroke="#eceff1" />
+        <rect x="40%" y="0" width="8%" height="80" fill="#ffecb3"  />
+        <% for num in 0..24 do %>
+          <% x=num*4 %>
+          <text class = "svgtext" x="<%= x %>%" y="85" >
+          <%= num %>
+          </text>
+          <line x1="<%= x %>%" y1="80" x2="<%= x %>%" y2="60" stroke="#eceff1" stroke-width="1"/>
+        <% end %>
+      </svg>
     <% end %>
     <h4>フィード</h4>
     <ul class="collection">
@@ -69,4 +80,7 @@ var codropsEvents = {
     </ul>
 
 <% end %>
+
+
+
 <!--ここまで -->  
