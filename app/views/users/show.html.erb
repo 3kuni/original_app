@@ -38,7 +38,13 @@ var codropsEvents = {
     <% @daily.each do |key,value| %>
       <% s=key.to_s %>
       <% s=s.split("-") %>
-      <%= "\'#{s[1]}-#{s[2]}-#{s[0]}\':\'<div class=\"calender#{value.div(60)}\"><br></div>\',".html_safe %>
+      <% value=value/60%>
+      <% if value>10 %>
+        <% rank=10 %>
+      <% else %>
+        <% rank = value %>
+      <% end %>
+      <%= "\'#{s[1]}-#{s[2]}-#{s[0]}\':\'<div class=\"calender calender#{rank}\"><br></div>\',".html_safe %>
     <% end %>
 };
 </script>
