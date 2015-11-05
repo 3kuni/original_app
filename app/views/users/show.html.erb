@@ -24,12 +24,13 @@
 
 <!-- カレンダー -->
 <% if @user.premium.present? %>
+<div id="custom-year"></div>
 <div id="calendar" class="fc-calendar-container"></div>
 <script type="text/javascript">
 $(document).ready(function() {
-    $('#calendar').calendario({
-        caldata : codropsEvents    // 表示データ
-    });
+  $('#calendar').calendario({
+    caldata : codropsEvents    // 表示データ
+  });
 });
 // 表示データ例
 var codropsEvents = {
@@ -46,9 +47,13 @@ var codropsEvents = {
       <% end %>
       <%= "\'#{s[1]}-#{s[2]}-#{s[0]}\':\'<div class=\"calender calender#{rank}\"><br></div>\',".html_safe %>
     <% end %>
+
 };
 </script>
 <% end %>
+
+
+
 
 <!-- カード -->  
 <% if signed_in? %>

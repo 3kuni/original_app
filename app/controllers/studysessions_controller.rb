@@ -76,7 +76,9 @@ class StudysessionsController < ApplicationController
     @room=Room.find(params[:room])
     t_room=@room.minutes_total.to_i + time_minutes
     @room.update_attributes(minutes_total:t_room)
-    @room.update_attributes(current_students:@room.current_students-1)
+    unless @room.current_students=0 
+      @room.update_attributes(current_students:@room.current_students-1)
+    end
     redirect_to root_path
   end
 
