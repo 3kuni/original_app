@@ -9,5 +9,6 @@ class Timeover
         puts "cron run at #{Time.now}"
       end
     end
+    puts "."
   end
 end
