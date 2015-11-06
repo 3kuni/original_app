@@ -73,7 +73,7 @@ var codropsEvents = {
 
           <!-- 勉強グラフ描画 -->
           <!--<rect x="41.93%" y="0" width="8%" height="80" fill="#ffecb3"  /> -->
-            <% spl=key.split("-") %>
+            <% spl=key.to_s.split("-") %>
             <% from = Time.new(spl[0],spl[1],spl[2]) %>
             <% to = from+1.day-1.second %>
             <% daily_session_lst=Studysession.where(created_at:from..to) %>
