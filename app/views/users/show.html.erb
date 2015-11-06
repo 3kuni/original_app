@@ -24,14 +24,16 @@
 
 <!-- カレンダー -->
 <% if @user.premium.present? %>
-<div id="time"></div>
+<span id="time"></span>年<span id="month"></span>
 <div id="calendar" class="fc-calendar-container"></div>
 <script type="text/javascript">
 $(document).ready(function() {
-  $("#time").text("year")
-  $('#calendar').calendario({
+  
+  cal=$('#calendar').calendario({
     caldata : codropsEvents    // 表示データ
   });
+  $('#time').html( cal.getYear()  );
+  $( '#month' ).html( cal.getMonthName() );
 });
 // 表示データ例
 var codropsEvents = {
@@ -66,6 +68,7 @@ var codropsEvents = {
       <% end %>
       <%= val.modulo(60) %>分
       <br>
+      <!--
         <% spl=key.to_s.split("-") %>
           <% from = Time.new(spl[0],spl[1],spl[2]) %>
           <% to = from+1.day-1.second %>
@@ -78,6 +81,7 @@ var codropsEvents = {
             width:<%= session_width=96*(session.time.to_i.round(-1)/10*0.00694) %>
             <br>
         <% end %>
+      -->
 
         <% if @user.premium.present? %>
         <svg xmlns="http://www.w3.org/2000/svg" width="100%" >
@@ -101,7 +105,7 @@ var codropsEvents = {
           <!--  -->
           <% for num in 0..24 do %>
             <% x=num*4 %>
-            <text class = "svgtext" x="<%= x %>%" y="85" >
+            <text class = "svgtext" x="<%= x %>%" y="85" fill="#90a4ae">
             <%= num %>
             </text>
             <line x1="<%= x %>%" y1="80" x2="<%= x %>%" y2="60" stroke="#eceff1" stroke-width="1"/>
