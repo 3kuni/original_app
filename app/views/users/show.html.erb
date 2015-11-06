@@ -24,10 +24,11 @@
 
 <!-- カレンダー -->
 <% if @user.premium.present? %>
-<div id="custom-year"></div>
+<div id="time"></div>
 <div id="calendar" class="fc-calendar-container"></div>
 <script type="text/javascript">
 $(document).ready(function() {
+  $("#time").text("year")
   $('#calendar').calendario({
     caldata : codropsEvents    // 表示データ
   });
@@ -68,7 +69,23 @@ var codropsEvents = {
         <% if @user.premium.present? %>
         <svg xmlns="http://www.w3.org/2000/svg" width="100%" >
           <rect x="0%" y="0" width="96%" height="80" fill="#ffffff" stroke="#eceff1" />
-          <rect x="40%" y="0" width="8%" height="80" fill="#ffecb3"  />
+          <!--<rect x="40%" y="0" width="8%" height="80" fill="#ffecb3"  />-->
+
+          <!-- 勉強グラフ描画 -->
+          <!--<rect x="41.93%" y="0" width="8%" height="80" fill="#ffecb3"  /> -->
+            <% spl=key.split("-") %>
+            <% from = Time.new(spl[0],spl[1],spl[2]) %>
+            <% to = from+1.day-1.second %>
+            <% daily_session_lst=Studysession.where(created_at:from..to) %>
+            <% daily_session_lst.each do |session| %>
+              <% session.created_at.hour %>
+              <% session.created_at.min.round(-1) %>
+              <% session.time.to_i.round(-1) %>
+              <% session_x=96*(session.created_at.hour*0.0416+session.created_at.min.round(-1)/10*0.00694) %>
+              <% session_width=96*(session.time.to_i.round(-1)/10*0.00694) %>
+              <rect x="<%= session_x %>%" y="0" width="<%= session_width %>%" height="80" fill="#ff9800"  />
+            <% end %>
+          <!--  -->
           <% for num in 0..24 do %>
             <% x=num*4 %>
             <text class = "svgtext" x="<%= x %>%" y="85" >

@@ -6,7 +6,7 @@
   <% @ss2.each do |studysession| %>
     <li class="collection-item avatar">
       <a href="http://amazon.co.jp/dp/<%= studysession.textbook %>" target="_blank">
-          <img src="http://images-jp.amazon.com/images/P/<%= studysession.textbook %>.09.TZZZZZZZ.jpg" alt="" class="circle">
+        <img src="http://images-jp.amazon.com/images/P/<%= studysession.textbook %>.09.TZZZZZZZ.jpg" alt="" class="circle">
       </a>
       
       <span class="title">          
@@ -40,6 +40,7 @@
         <%= fa_icon 'clock-o' %>
         <script type="text/javascript">
           $(function(){
+            $("#time").text("0")
             var start = <%= studysession.created_at.to_i %>;
             setInterval( function(){
               var now = new Date();
