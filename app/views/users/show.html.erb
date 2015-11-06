@@ -66,6 +66,19 @@ var codropsEvents = {
       <% end %>
       <%= val.modulo(60) %>分
       <br>
+        <% spl=key.to_s.split("-") %>
+          <% from = Time.new(spl[0],spl[1],spl[2]) %>
+          <% to = from+1.day-1.second %>
+          <% daily_session_lst=Studysession.where(created_at:from..to) %>
+          <% daily_session_lst.each do |session| %>
+            <%= session.created_at.hour %>
+            :<%= session.created_at.min.round(-1) %>
+            min:<%= session.time.to_i.round(-1) %>
+            x:<%= session_x=96*(session.created_at.hour*0.0416+session.created_at.min.round(-1)/10*0.00694) %>
+            width:<%= session_width=96*(session.time.to_i.round(-1)/10*0.00694) %>
+            <br>
+        <% end %>
+
         <% if @user.premium.present? %>
         <svg xmlns="http://www.w3.org/2000/svg" width="100%" >
           <rect x="0%" y="0" width="96%" height="80" fill="#ffffff" stroke="#eceff1" />
