@@ -92,7 +92,8 @@ $(document).ready(function() {
 
 
 <!-- カード -->  
-<% if signed_in? %>
+<% i=0 %>
+<% @user.premium.present? ? l=500 : l=14 %>
     <% @daily.each do |key,val| %>
       <%= key %>
       :
@@ -145,7 +146,14 @@ $(document).ready(function() {
           <% end %>
         </svg>
         <% end %>
+      <% i +=1 %>
+      <% break if i >=l %>
     <% end %>
+    <% unless @user.premium.present? %>
+      <%= link_to "14日以上前の記録","javascript:void(0);" ,'data-container'=>"body",'data-toggle'=>"popover", 'data-placement'=>"bottom", 
+          'data-html'=>"true",'data-content'=>"14日以上前の表示はプレミアム機能です" %>
+    <% end %>
+
     <h4>フィード</h4>
     <ul class="collection">
       <% @study_lst.each do |studysession| %>
@@ -153,7 +161,6 @@ $(document).ready(function() {
       <% end %>
     </ul>
 
-<% end %>
 
 
 
