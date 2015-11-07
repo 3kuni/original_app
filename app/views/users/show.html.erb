@@ -23,22 +23,34 @@
 <% end %>
 
 <!-- カレンダー -->
-<% if @user.premium.present? %>
-<span id="time"></span>年<span id="month"></span>
+<% if @user.premium.present? %> 
+  <%= "<span id=\"custom-prev\">#{fa_icon 'chevron-left'}</span>".html_safe %>
+<% else %>
+  <%= "<span>".html_safe %>
+  <%= link_to (fa_icon 'chevron-left'),"javascript:void(0);" ,'data-container'=>"body",'data-toggle'=>"popover", 'data-placement'=>"bottom", 
+  'data-html'=>"true",'data-content'=>"今月以外のカレンダーはプレミアム機能です" %>
+  <%= "</span>".html_safe %>
+  <script>
+  $(function () {
+    $('[data-toggle="popover"]').popover()
+  })
+  </script>  
+<% end %>
+
+<span id="year"></span>年<span id="month"></span>
+<% if @user.premium.present? %> 
+  <%= "<span id=\"custom-next\">#{fa_icon 'chevron-right'}</span>".html_safe %>
+<% else %>
+  <%= "<span>".html_safe %>
+  <%= link_to (fa_icon 'chevron-right'),"javascript:void(0);" ,'data-container'=>"body",'data-toggle'=>"popover", 'data-placement'=>"bottom", 
+  'data-html'=>"true",'data-content'=>"今月以外のカレンダーはプレミアム機能です" %>
+  <%= "</span>".html_safe %>
+<% end %>
 <div id="calendar" class="fc-calendar-container"></div>
 <script type="text/javascript">
-$(document).ready(function() {
-  
-  cal=$('#calendar').calendario({
-    caldata : codropsEvents    // 表示データ
-  });
-  $('#time').html( cal.getYear()  );
-  $( '#month' ).html( cal.getMonthName() );
-});
 // 表示データ例
 var codropsEvents = {
-    '11-23-2015' : '<a href="http://tympanus.net/codrops/2012/11/23/three-script-updates/">Three Script Updates</a>',
-    '11-01-2015' : 'x',
+    //'11-01-2015' : 'x',
     <% @daily.each do |key,value| %>
       <% s=key.to_s %>
       <% s=s.split("-") %>
@@ -52,8 +64,29 @@ var codropsEvents = {
     <% end %>
 
 };
+$(document).ready(function() {
+  
+  cal=$('#calendar').calendario({
+    caldata : codropsEvents    // 表示データ
+  });
+  $('#year').html( cal.getYear()  );
+  $( '#month' ).html( cal.getMonthName() );
+
+        $( '#custom-next' ).on( 'click', function() {
+          cal.gotoNextMonth( updateMonthYear );
+        } );
+        $( '#custom-prev' ).on( 'click', function() {
+          cal.gotoPreviousMonth( updateMonthYear );
+        } );
+
+  function updateMonthYear() {        
+    $('#month').html( cal.getMonthName() );
+    $('#year').html( cal.getYear() );
+    }
+});
+
 </script>
-<% end %>
+
 
 
 

@@ -39,7 +39,7 @@ class StudysessionsController < ApplicationController
      return
     end  
   end
-  
+
   def create
 
     @studysession=Studysession.new(studysession_params)
