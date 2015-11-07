@@ -1,5 +1,9 @@
 class Users::RegistrationsController < Devise::RegistrationsController
- 
+
+  def create
+    super { |resource| resource.remember_me = true }
+  end
+   
   def build_resource(hash=nil)
     hash[:uid] = User.create_unique_string
     super
