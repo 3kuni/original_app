@@ -25,7 +25,7 @@
 <!-- カレンダー -->
 <% if @user.premium.present? %> 
   <%= "<span id=\"custom-prev\">#{fa_icon 'chevron-left'}</span>".html_safe %>
-<% else %>
+<% elsif current_user.id==@user.id %>
   <%= "<span>".html_safe %>
   <%= link_to (fa_icon 'chevron-left'),"javascript:void(0);" ,'data-container'=>"body",'data-toggle'=>"popover", 'data-placement'=>"bottom", 
   'data-html'=>"true",'data-content'=>"今月以外のカレンダーはプレミアム機能です" %>
@@ -40,7 +40,7 @@
 <span id="year"></span>年<span id="month"></span>
 <% if @user.premium.present? %> 
   <%= "<span id=\"custom-next\">#{fa_icon 'chevron-right'}</span>".html_safe %>
-<% else %>
+<% elsif current_user.id==@user.id %>
   <%= "<span>".html_safe %>
   <%= link_to (fa_icon 'chevron-right'),"javascript:void(0);" ,'data-container'=>"body",'data-toggle'=>"popover", 'data-placement'=>"bottom", 
   'data-html'=>"true",'data-content'=>"今月以外のカレンダーはプレミアム機能です" %>
