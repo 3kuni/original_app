@@ -19,7 +19,7 @@
 
 <% if @user.total_time.present? %>
   <p>セッション:<%= @study_lst.count %>回</p>
-  <p>総学習時間:<%= (@user.total_time/60).to_i %>時間</p>
+  <p>総学習時間:<%= @study_lst.sum(:time)/60.to_i %>時間</p>
 <% end %>
 
 <!-- カレンダー -->
