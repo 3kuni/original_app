@@ -40,8 +40,6 @@
           </p>
           
           <span class="secondary-content">
-            
-            
             <% if feed_item.evaluators_for(:stars).include?(@current_user) %>
               <span style="color:gold;" class="star">
                 <%= fa_icon 'star' %>
@@ -64,5 +62,9 @@
               })
               </script>
             </span>
+            <br>
+            <% if feed_item.user==current_user.id && feed_item.active==false %>
+            <%= link_to "編集" ,"/studysessions/edit/#{feed_item.id}" ,"class"=>"secondary-small"%>
+            <% end %>
           </span>
         </li>

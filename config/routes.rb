@@ -19,13 +19,15 @@ Rails.application.routes.draw do
     end
   end  
   match '/studysessions/amazon' ,to:'studysessions#amazon_index',via: [:post]
-  match 'studysessions/stop/:id/:user/:time/:room' , to: 'studysessions#update' ,via: [:patch,:get]
+  match 'studysessions/stop/:id/:user/:time/:room' , to: 'studysessions#stop' ,via: [:patch,:get]
   match 'studysessions/studying/:id/:room' ,to:'studysessions#index',via: [:get]
   match '/ssession' , to:'studysessions#first_step', via: [:get]
   match '/studysessions/new/:id/:room' , to:'studysessions#new', via: [:get,:post]
   get  "/studysessions/new/:id" => redirect("/ssession")
   resources :relationships, only: [:create, :destroy]
   match '/studysessions/like/:studysession_id/' , to:'studysessions#like', via: [:get]
+  match '/studysessions/edit/:studysession_id/' , to:'studysessions#edit',via:[:get]
+  
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

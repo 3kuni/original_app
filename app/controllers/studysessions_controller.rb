@@ -66,7 +66,7 @@ class StudysessionsController < ApplicationController
     end
   end
 
-  def update
+  def stop
     @update=Studysession.find(params[:id])
     @total=User.find(params[:user])
     time_minutes=(Time.now.to_i-params[:time].to_i)/60
@@ -79,6 +79,19 @@ class StudysessionsController < ApplicationController
     unless @room.current_students==0 
       @room.update_attributes(current_students:@room.current_students-1)
     end
+    redirect_to root_path
+  end
+
+  def edit
+    @studysession=Studysession.find(params[:studysession_id])
+    unless @studysession.user==current_user.id
+      redirect_to root_path
+    end
+  end
+
+  def update
+    @studysession=Studysession.find(params[:id])
+    @studysession.update_attributes(studysession_params)
     redirect_to root_path
   end
 
@@ -109,7 +122,7 @@ class StudysessionsController < ApplicationController
 
   private
     def studysession_params
-      params.require(:studysession).permit(:user,:textbook,:room,:active,:tweet)
+      params.require(:studysession).permit(:user,:textbook,:room,:active,:tweet,:time)
     end
     
     def correct_user

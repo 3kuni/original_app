@@ -1,0 +1,15 @@
+<h2>セッション編集</h2>
+
+セッション時間を入力してください
+<%= form_for(@studysession) do |f| %>
+  <%= f.hidden_field :studysession_id, :value => params[:studysession_id] %>
+  <div>
+    <%= f.label "時間" %><br />
+    <%= f.text_field :time %>
+  </div>
+  
+
+  <div class="actions">
+    <%= f.submit "更新" %>
+  </div>
+<% end %>
