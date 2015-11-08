@@ -40,17 +40,21 @@
         <%= fa_icon 'clock-o' %>
         <script type="text/javascript">
           $(function(){
-            $("#time").text("0")
+            <% if Time.now-studysession.created_at>60 %>
+              $("#time-<%= studysession.id %>").text(<%= (Time.now-studysession.created_at).to_i/60 %>)
+            <% else %>
+              $("#time-<%= studysession.id %>").text("0")
+            <% end %>
             var start = <%= studysession.created_at.to_i %>;
             setInterval( function(){
               var now = new Date();
               //now=Math.round(now.getTime()/1000);
               now = Math.round((now.getTime()/1000-start)/60)
-              $("#time").text(now);
-            }, 60000);
+              $("#time-<%= studysession.id %>").text(now);
+            }, 3000);
           });
         </script>
-        <span id="time"></span>分
+        <span id="time-<%= studysession.id %>"></span>分
         <br>
         
         <% if studysession.evaluators_for(:stars).include?(@current_user) %>
