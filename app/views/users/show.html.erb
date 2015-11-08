@@ -117,7 +117,6 @@ $(document).ready(function() {
         <% end %>
       -->
 
-        <% if @user.premium.present? %>
         <svg xmlns="http://www.w3.org/2000/svg" width="100%" >
           <rect x="0%" y="0" width="96%" height="80" fill="#ffffff" stroke="#eceff1" />
           <!--<rect x="40%" y="0" width="8%" height="80" fill="#ffecb3"  />-->
@@ -145,7 +144,7 @@ $(document).ready(function() {
             <line x1="<%= x %>%" y1="80" x2="<%= x %>%" y2="60" stroke="#eceff1" stroke-width="1"/>
           <% end %>
         </svg>
-        <% end %>
+
       <% i +=1 %>
       <% break if i >=l %>
     <% end %>
