@@ -7,7 +7,10 @@
     <%= f.label "単位：分" %><br />
     <%= f.text_field :time %>
   </div>
-  
+  <div>
+    <%= f.label "つぶやき" %><br />
+    <%= f.text_field :tweet %>
+  </div>
 
   <div class="actions">
     <%= button_tag sanitize('<i class="fa fa-pencil" ></i>  更新'), :type => "submit",
