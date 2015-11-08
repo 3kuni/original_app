@@ -104,7 +104,7 @@ $(document).ready(function() {
       <br>
 
         <svg xmlns="http://www.w3.org/2000/svg" width="100%" >
-          <rect x="0%" y="0" width="96%" height="80" fill="#ffffff" stroke="#eceff1" />
+          
           <!--<rect x="40%" y="0" width="8%" height="80" fill="#ffecb3"  />-->
 
           <!-- 勉強グラフ描画 -->
@@ -133,14 +133,17 @@ $(document).ready(function() {
             </text>
             <line x1="<%= x %>%" y1="80" x2="<%= x %>%" y2="60" stroke="#eceff1" stroke-width="1"/>
           <% end %>
+          <rect x="0%" y="0" width="96%" height="80" fill="#ffffff" fill-opacity="0" stroke="#90a4ae" />
         </svg>
 
       <% i +=1 %>
       <% break if i >=l %>
     <% end %>
-    <% unless @user.premium.present? %>
-      <%= link_to "14日以上前の記録","javascript:void(0);" ,'data-container'=>"body",'data-toggle'=>"popover", 'data-placement'=>"bottom", 
-          'data-html'=>"true",'data-content'=>"14日以上前の表示はプレミアム機能です" %>
+    <% if current_user.id==@user.id %>
+      <% unless @user.premium.present? %>
+        <%= link_to "14日以上前の記録","javascript:void(0);" ,'data-container'=>"body",'data-toggle'=>"popover", 'data-placement'=>"bottom", 
+            'data-html'=>"true",'data-content'=>"14日以上前の表示はプレミアム機能です" %>
+      <% end %>
     <% end %>
 
     <h4>フィード</h4>
