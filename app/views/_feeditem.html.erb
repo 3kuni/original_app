@@ -57,7 +57,7 @@
                 <% starred_by_lst.push("#{starred_by.nickname}<br>") %>
               <% end %>
               <%= link_to feed_item.reputation_for(:stars).to_i ,"javascript:void(0);" ,'data-container'=>"body", 'data-toggle'=>"popover", 'data-placement'=>"bottom", 
-                'data-html'=>"true",'data-content'=>starred_by_lst %>
+                'data-html'=>"true",'data-content'=>starred_by_lst,'id'=>"href-#{feed_item.id}" %>
               <script>
               $(function () {
                 $('[data-toggle="popover"]').popover()

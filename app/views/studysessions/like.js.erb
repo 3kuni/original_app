@@ -1,2 +1,4 @@
 $("#star-icon<%= @id %>").html('<span style="color:gold;" class="animated bounceIn" ><%= fa_icon 'star' %></span>')
-$("#star-sum<%= @id %>").html('<%= Studysession.find(@id).reputation_for(:stars).to_i %>')
+$("#href-<%= @id %>").html('<%= Studysession.find(@id).
+	reputation_for(:stars).to_i %>')
+
