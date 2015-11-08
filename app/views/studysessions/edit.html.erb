@@ -4,12 +4,17 @@
 <%= form_for(@studysession) do |f| %>
   <%= f.hidden_field :studysession_id, :value => params[:studysession_id] %>
   <div>
-    <%= f.label "時間" %><br />
+    <%= f.label "単位：分" %><br />
     <%= f.text_field :time %>
   </div>
   
 
   <div class="actions">
-    <%= f.submit "更新" %>
+    <%= button_tag sanitize('<i class="fa fa-pencil" ></i>  更新'), :type => "submit",
+            :class =>"btn custombutton" ,data: { disable_with: '送信中...' }%>
   </div>
 <% end %>
+<br>
+<ul class="collection" style="margin-top:3rem">
+      <%= render '/feeditem' ,feed_item: Studysession.find(params[:studysession_id]) %>
+</ul>
