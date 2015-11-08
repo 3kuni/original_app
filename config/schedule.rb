@@ -22,7 +22,7 @@ set :environment, :production
 #set :output, {:error => 'log/error.log', :standard => 'var/log/cron'}
 
 # Testなので、3分毎に動作するように設定します
-every 1.minute do
+every 10.minute do
   # cronのコマンドライン上で動くので、二重引用符で囲っておきます
   runner "Timeover.kill"
 end
