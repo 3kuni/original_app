@@ -5034,13 +5034,13 @@ nav ul a span.badge {
   content: "\e8f5"; }
 
 .container {
-  margin: 60px auto;
+  margin: 130px auto;
   max-width: 1280px;
   width: 90%; }
 
 @media only screen and (min-width : 601px) {
   .container {
-    width: 85%; } }
+    width: 95%; } }
 
 @media only screen and (min-width : 993px) {
   .container {
