@@ -6210,6 +6210,7 @@ a.waves-effect .waves-ripple {
     max-height: 3rem;
     padding: 0.5rem 0.5rem;
     border-radius: 0.2rem;
+    font-size: 0.8rem;
   }
   .chip.room{
     background-color: #fff;

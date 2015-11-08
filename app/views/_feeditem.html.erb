@@ -27,11 +27,13 @@
               セッションを終了しました。
             <% end %>
             <br>
-            <% if Textbook.find_by(asin:feed_item.textbook).present? %>
-              <%= cut_off(Textbook.find_by(asin:feed_item.textbook).title,28).html_safe %>
-            <% else %>
-              <%= feed_item.textbook %>
-            <% end %>
+            <p class="feed-item">
+              <% if Textbook.find_by(asin:feed_item.textbook).present? %>
+                <%= cut_off(Textbook.find_by(asin:feed_item.textbook).title,38).html_safe %>
+              <% else %>
+                <%= feed_item.textbook %>
+              <% end %>
+            </p>
             <% if feed_item.tweet.present? %>
               <div class="chip tweet grey lighten-5">
                 <%= feed_item.tweet  %>
