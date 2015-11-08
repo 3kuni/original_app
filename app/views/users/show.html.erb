@@ -114,12 +114,16 @@ $(document).ready(function() {
             <% to = from+1.day-1.second %>
             <% daily_session_lst=Studysession.where(user:@user.id,created_at:from..to) %>
             <% daily_session_lst.each do |session| %>
+              <% sc=session.created_at %>
               <% session.created_at.hour %>
               <% session.created_at.min.round(-1) %>
               <% session.time.to_i.round(-1) %>
-              <% session_x=96*(session.created_at.hour*0.0416+session.created_at.min.round(-1)/10*0.00694) %>
-              <% session_width=96*(session.time.to_i.round(-1)/10*0.00694) %>
+              <% session_x=96*(sc.hour*0.0416+sc.min.round(-1)/10*0.00694) %>
+              <% session.time.to_i.round(-1)==0 ? session_width=0.3 : session_width=96*(session.time.to_i.round(-1)/10*0.00694) %>
+              <g>
+              <title><%= "#{sc.hour}:#{sprintf('%02d',sc.min)}開始 #{session.time}分"%></title>
               <rect x="<%= session_x %>%" y="0" width="<%= session_width %>%" height="80" fill="#ff9800"  />
+              </g>
             <% end %>
 
           <% for num in 0..24 do %>
