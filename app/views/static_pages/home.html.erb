@@ -4,6 +4,11 @@
     <div class="alert alert-danger" role="alert">
       <%= link_to "こちらから",edit_user_registration_path%>ニックネーム、学年、地域、ひとことを設定してください</div>
   <% end %>
+  <% if current_user.email.include?("@example.com")%>
+    <div class="alert alert-danger" role="alert">
+      メールアドレスを設定して通知を受け取りましょう！<%= link_to "こちらから",edit_user_registration_path%>
+    </div>
+  <% end %>
 <% end %>
 
 <%= image_tag 'STARDY-title.png' ,style:"width:100%;"%>
