@@ -4,8 +4,14 @@
 <ul class="collection">
   <% @user.each do |user| %>
     <li class="collection-item avatar">
-      <a href="" target="_blank">
-          <img src="" alt="" class="circle">
+      <a href="" target="_blank" class="circle">
+          <% if user.image? %>
+            <span class="cover index" style="background-image: url('<%= user.image.thumb.url %>')" >
+            </span>
+          <% else %>
+            <span class="cover index" style="background-image: url('noname.png')" >
+            </span>
+          <% end %>
       </a>
       <span class="title">          
         <a href="users/<%= user.id %>">
