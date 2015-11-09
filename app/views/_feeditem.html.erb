@@ -11,7 +11,7 @@
           <span class="title">          
             <a href="/users/<%= feed_item.user %>">
               <% @user=User.find(feed_item.user) %>
-              <% if @user.image? %>
+              <% if @user.image.thumb.url.present? %>
                 <span class="cover feed" style="background-image: url('<%= @user.image.thumb.url %>')" >
                 </span>
               <% else %>

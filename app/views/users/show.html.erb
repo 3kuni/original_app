@@ -1,5 +1,5 @@
 
-<% if @user.image? %>
+<% if @user.image.thumb.url.present? %>
   <span class="cover prof" style="background-image: url('<%= @user.image.thumb.url %>')" >
   </span>
 <% else %>
