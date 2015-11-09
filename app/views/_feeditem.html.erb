@@ -3,8 +3,9 @@
             yellow lighten-5
           <% end %>
         ">
-          <a href="http://amazon.co.jp/dp/<%= feed_item.textbook %>" target="_blank">
-              <img src="http://images-jp.amazon.com/images/P/<%= feed_item.textbook %>.09.TZZZZZZZ.jpg" alt="" class="circle">
+          <a href="http://amazon.co.jp/dp/<%= feed_item.textbook %>" target="_blank" class="circle">
+            <span class="contain" style="background-image: url('http://images-jp.amazon.com/images/P/<%= feed_item.textbook %>')" >
+            </span>
           </a>
           
           <span class="title">          

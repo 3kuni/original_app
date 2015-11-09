@@ -719,3 +719,14 @@ a.tweet{
   font-size:0.6rem;
   line-height:0.9rem;
 }
+
+.contain {
+    display: inline-block;
+    background-color: #fff;
+    background-position: center center;
+    background-repeat: no-repeat;
+    width: 4rem;
+    height: 4rem;
+    border: 1px solid #e0e0e0;
+    background-size: contain;
+}

@@ -2290,12 +2290,15 @@ td, th {
       position: relative; }
       .collection .collection-item.avatar .circle {
         position: absolute;
-        max-width: 4rem;
-        max-height: 4rem;
+        width: 4rem;
+        height: 4rem;
         overflow: hidden;
         left: 0.5rem;
         display: inline-block;
-        vertical-align: middle; }
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: contain;
+      }
       .collection .collection-item.avatar i.circle {
         font-size: 18px;
         line-height: 42px;
