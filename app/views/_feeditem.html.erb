@@ -15,7 +15,7 @@
                 <span class="cover feed" style="background-image: url('<%= @user.image.thumb.url %>')" >
                 </span>
               <% else %>
-                <span class="cover feed" style="background-image: url('noname.png')" >
+                <span class="cover feed" style="background-image: url('<%= asset_path "noname.png" %>')" >
                 </span>
               <% end %>
               <span >

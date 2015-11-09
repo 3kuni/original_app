@@ -3,7 +3,7 @@
   <span class="cover prof" style="background-image: url('<%= @user.image.thumb.url %>')" >
   </span>
 <% else %>
-  <span class="cover prof" style="background-image: url('noname.png')" >
+  <span class="cover prof" style="background-image: url('<%= asset_path "noname.png" %>')" >
   </span>
 <% end %>
 <h5><%= @user.nickname %></h5>
@@ -29,6 +29,8 @@
 <% if @user.total_time.present? %>
   <p>セッション:<%= @study_lst.count %>回</p>
   <p>総学習時間:<%= @study_lst.sum(:time)/60.to_i %>時間</p>
+  
+  <!--<p>合計スター数:<%= %></p>-->
 <% end %>
 
 <!-- カレンダー -->
