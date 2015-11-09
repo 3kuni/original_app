@@ -18,8 +18,9 @@
                 <span class="cover feed" style="background-image: url('noname.png')" >
                 </span>
               <% end %>
-              
-              <%= @user.nickname %>
+              <span >
+                <%= @user.nickname %>
+              </span>
             </a>
             <div class="chip room white">
               <%= Room.find(feed_item.room).name %>

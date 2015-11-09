@@ -5,7 +5,7 @@
   <% @user.each do |user| %>
     <li class="collection-item avatar">
       <a href="" target="_blank" class="circle">
-          <% if user.image? %>
+          <% if user.image.thumb.url.present? %>
             <span class="cover index" style="background-image: url('<%= user.image.thumb.url %>')" >
             </span>
           <% else %>
