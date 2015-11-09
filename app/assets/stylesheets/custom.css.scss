@@ -730,3 +730,37 @@ a.tweet{
     border: 1px solid #e0e0e0;
     background-size: contain;
 }
+.covers {
+    display: inline-block;
+    background-color: #fff;
+    background-position: center center;
+    background-repeat: no-repeat;
+    margin: 5px;
+    width: 6rem;
+    height: 6rem;
+    border:none;
+    background-size: cover;
+}
+.cover {
+    display: inline-block;
+    background-color: #fff;
+    background-position: center center;
+    background-repeat: no-repeat;
+    border:none;
+    background-size: cover;
+}
+.cover.prof {   
+  border-radius: 3rem;
+  width: 6rem;
+  height: 6rem;
+}
+.cover.index {   
+  border-radius: 2rem;
+  width: 4rem;
+  height: 4rem;
+}
+.cover.feed {   
+  border-radius: 0.5rem;
+  width: 1rem;
+  height: 1rem;
+}

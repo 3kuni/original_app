@@ -1,4 +1,11 @@
 
+<% if @user.image? %>
+  <span class="cover prof" style="background-image: url('<%= @user.image.thumb.url %>')" >
+  </span>
+<% else %>
+  <span class="cover prof" style="background-image: url('noname.png')" >
+  </span>
+<% end %>
 <h5><%= @user.nickname %></h5>
 
 <% if @user.skype.present? %>
@@ -17,11 +24,7 @@
   </div>
 <% end %>
 
-<% if @user.image? %>
-　　<%= image_tag @user.image.thumb.url %>
-　<% else %>
-　　<%= image_tag 'noimage.gif' %>
-　<% end %>
+
 
 <% if @user.total_time.present? %>
   <p>セッション:<%= @study_lst.count %>回</p>

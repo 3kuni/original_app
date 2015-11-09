@@ -11,6 +11,14 @@
           <span class="title">          
             <a href="/users/<%= feed_item.user %>">
               <% @user=User.find(feed_item.user) %>
+              <% if @user.image? %>
+                <span class="cover feed" style="background-image: url('<%= @user.image.thumb.url %>')" >
+                </span>
+              <% else %>
+                <span class="cover feed" style="background-image: url('noname.png')" >
+                </span>
+              <% end %>
+              
               <%= @user.nickname %>
             </a>
             <div class="chip room white">
