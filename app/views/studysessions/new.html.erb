@@ -5,11 +5,11 @@
 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
   <div class="panel panel-default">
     <div class="panel-heading" role="tab" id="headingOne">
-      <h4 class="panel-title">
+      <h5 class="panel-title">
         <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-          Amazon検索・オリジナル教材
+          Amazon検索・オリジナル教材から選ぶ
         </a>
-      </h4>
+      </h5>
     </div>
     <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
       <div class="panel-body">
@@ -50,7 +50,7 @@
     </div>
   </div>
 </div>
-
+<br>
 <!--
 <div>
   <p>
@@ -117,7 +117,7 @@
 
 
 <% if !@res.present? and @history.present? %>
-<h5>履歴</h5>
+<h5>履歴から選ぶ</h5>
 <!-- 履歴カード  -->
 <ul class="collection">
   <% @history.each do |studysession| %>
