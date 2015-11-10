@@ -114,12 +114,16 @@ $(document).ready(function() {
       <%= val.modulo(60) %>分
       <br>
 
+
         <svg xmlns="http://www.w3.org/2000/svg" width="100%" >
           
           <!--<rect x="40%" y="0" width="8%" height="80" fill="#ffecb3"  />-->
 
           <!-- 勉強グラフ描画 -->
           <!--<rect x="41.93%" y="0" width="8%" height="80" fill="#ffecb3"  /> -->
+
+
+          
             <% spl=key.to_s.split("-") %>
             <% from = Time.new(spl[0],spl[1],spl[2]) %>
             <% to = from+1.day-1.second %>
@@ -136,15 +140,18 @@ $(document).ready(function() {
               <rect x="<%= session_x %>%" y="0" width="<%= session_width %>%" height="80" fill="#ff9800"  />
               </g>
             <% end %>
-
           <% for num in 0..24 do %>
             <% x=num*4 %>
             <text class = "svgtext" x="<%= x %>%" y="85" fill="#90a4ae">
             <%= num %>
             </text>
-            <line x1="<%= x %>%" y1="80" x2="<%= x %>%" y2="60" stroke="#eceff1" stroke-width="1"/>
+            <% unless num ==0 || num ==24 %>
+              <line x1="<%= x %>%" y1="80" x2="<%= x %>%" y2="60" stroke="#eceff1" stroke-width="1"/>
+            <% end %>
           <% end %>
           <rect x="0%" y="0" width="96%" height="80" fill="#ffffff" fill-opacity="0" stroke="#90a4ae" >
+
+ 
         </svg>
 
       <% i +=1 %>
@@ -166,5 +173,3 @@ $(document).ready(function() {
 
 
 
-
-<!--ここまで -->  

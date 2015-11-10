@@ -73,8 +73,9 @@
   <ul class="collection">
     <% @res.items.each do |studysession| %>
       <li class="collection-item avatar">
-        <%= link_to studysession.get('DetailPageURL') do %>
-          <%= image_tag studysession.get('SmallImage/URL'), {:style => 'border: none;',class:"circle"}  %>
+        <%= link_to studysession.get('DetailPageURL'),{:class=>"circle"} do %>
+          <% image_tag studysession.get('SmallImage/URL'), {:style => 'border: none;',class:"circle"}  %>
+          <span class="contain" style="background-image: url('<%=studysession.get('SmallImage/URL') %>')" >
         <% end %>
         
 
@@ -121,8 +122,10 @@
 <ul class="collection">
   <% @history.each do |studysession| %>
     <li class="collection-item avatar">
-      <a href="http://amazon.co.jp/dp/<%= studysession %>" target="_blank">
-          <img src="http://images-jp.amazon.com/images/P/<%= studysession %>.09.TZZZZZZZ.jpg" alt="" class="circle">
+      <a href="http://amazon.co.jp/dp/<%= studysession %>" target="_blank" class="circle">
+        <!--  <img src="http://images-jp.amazon.com/images/P/<%= studysession %>.09.TZZZZZZZ.jpg" alt="" class="circle">
+        -->
+        <span class="contain" style="background-image: url('http://images-jp.amazon.com/images/P/<%= studysession %>.09.TZZZZZZZ.jpg')" >
       </a>
       <%= form_for(@studysession) do |f| %>
         <span class="title">        
