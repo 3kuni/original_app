@@ -17,6 +17,4 @@ class ApplicationController < ActionController::Base
       devise_parameter_sanitizer.for(:account_update) << :image
       devise_parameter_sanitizer.for(:account_update) << :image_cache
     end
-
-  
 end
