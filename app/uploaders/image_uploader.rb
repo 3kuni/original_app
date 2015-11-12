@@ -25,7 +25,8 @@ class ImageUploader < CarrierWave::Uploader::Base
    # super.chomp(File.extname(super)) + '.jpg' if original_filename.present?
   #end
 
-##change something to deploy
+##rewrite
+
 
 
  # ファイル名は日本語が入ってくると嫌なので、下記のようにしてみてもいい。
