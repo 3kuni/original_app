@@ -25,6 +25,9 @@ class ImageUploader < CarrierWave::Uploader::Base
    # super.chomp(File.extname(super)) + '.jpg' if original_filename.present?
   #end
 
+##something deploy
+
+
  # ファイル名は日本語が入ってくると嫌なので、下記のようにしてみてもいい。
  # 日付(20131001.jpgみたいなファイル名)で保存する
  # 表示に失敗する
