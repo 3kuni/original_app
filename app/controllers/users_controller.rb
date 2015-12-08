@@ -12,7 +12,7 @@ class UsersController < ApplicationController
     @user=User.all.order("current_sign_in_at desc")
     @activities = PublicActivity::Activity.all
   end
-  
+    
   def following
     @title = "Following"
     @user = User.find(params[:id])
