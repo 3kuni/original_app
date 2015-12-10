@@ -49,6 +49,7 @@ gem 'public_activity'
 gem 'whenever', :require => false
 gem 'carrierwave'
 gem 'rmagick'
+gem 'cloudinary'
 
 group :doc do
   gem 'sdoc', '0.3.20', require: false

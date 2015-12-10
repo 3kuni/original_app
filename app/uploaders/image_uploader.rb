@@ -1,6 +1,7 @@
 # encoding: utf-8
 
 class ImageUploader < CarrierWave::Uploader::Base
+  include Cloudinary::CarrierWave
  # リサイズしたり画像形式を変更するのに必要
   include CarrierWave::RMagick
 
@@ -42,7 +43,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   # include CarrierWave::MiniMagick
 
   # Choose what kind of storage to use for this uploader:
-  storage :file
+  #?? storage :file
   # storage :fog
 
   # Override the directory where uploaded files will be stored.
