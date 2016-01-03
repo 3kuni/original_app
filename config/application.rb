@@ -9,6 +9,8 @@ require "action_view/railtie"
 require "sprockets/railtie"
 # require "rails/test_unit/railtie
 require 'amazon/ecs' # 追記
+# 外部ymlファイルから読み込み
+ENV.update YAML.load_file('config/secrets.yml')[Rails.env] rescue {}
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
