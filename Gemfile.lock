@@ -5,6 +5,17 @@ GIT
   specs:
     activerecord-reputation-system (2.0.2)
 
+GIT
+  remote: git://github.com/satoruk/carrierwave.git
+  revision: 43179f94d6a4e62f69e812f5082d6447c9138480
+  ref: 43179f94d6a4e62f69e812f5082d6447c9138480
+  specs:
+    carrierwave (0.10.0)
+      activemodel (>= 3.2.0)
+      activesupport (>= 3.2.0)
+      json (>= 1.7)
+      mime-types (>= 1.16)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -63,11 +74,6 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
-    carrierwave (0.10.0)
-      activemodel (>= 3.2.0)
-      activesupport (>= 3.2.0)
-      json (>= 1.7)
-      mime-types (>= 1.16)
     childprocess (0.3.6)
       ffi (~> 1.0, >= 1.0.6)
     chronic (0.10.2)
@@ -292,7 +298,7 @@ DEPENDENCIES
   bootstrap-sass (= 2.3.2.0)
   bootstrap-will_paginate (= 0.0.9)
   capybara (= 2.1.0)
-  carrierwave
+  carrierwave!
   childprocess (= 0.3.6)
   cloudinary
   coffee-rails (= 4.0.1)
