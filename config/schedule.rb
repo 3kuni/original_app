@@ -26,3 +26,8 @@ every 10.minute do
   # cronのコマンドライン上で動くので、二重引用符で囲っておきます
   runner "Timeover.kill"
 end
+
+every 1.minute do
+  # cronのコマンドライン上で動くので、二重引用符で囲っておきます
+  runner "Twbot.search"
+end
