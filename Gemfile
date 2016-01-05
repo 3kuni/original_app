@@ -48,7 +48,7 @@ gem 'jbuilder', '1.0.2'
 gem 'public_activity'
 gem 'whenever', :require => false
 gem 'carrierwave'
-gem 'rmagick'
+gem 'rmagick', require: false
 gem 'cloudinary'
 gem 'twitter' 
 
