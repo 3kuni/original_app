@@ -11,4 +11,7 @@ class Timeover
     end
     puts "."
   end
+  def self.hoge
+    puts "hogeeeeeeeee"
+  end
 end

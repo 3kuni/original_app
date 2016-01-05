@@ -50,6 +50,7 @@ gem 'whenever', :require => false
 gem 'carrierwave'
 gem 'rmagick'
 gem 'cloudinary'
+gem 'twitter' 
 
 group :doc do
   gem 'sdoc', '0.3.20', require: false
