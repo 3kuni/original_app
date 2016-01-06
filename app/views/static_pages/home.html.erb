@@ -13,9 +13,9 @@
 
 <%= image_tag 'STARDY-title.png' ,style:"width:100%;"%>
 <h5 align="center">いま、誰が勉強してる？</h5>
-<%= ENV['tw_consumer_key'] %>
-<%= Rails.application.secrets.tw_consumer_key %>
-
+<%= "env: #{ENV['tw_consumer_key']}" %>
+<%= "secrets: #{Rails.application.secrets.tw_consumer_key}" %>
+<%= ENV['GOOGLE_ACCESS_TOKEN'] %>
 <!-- -->
 <!-- -->
 

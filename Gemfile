@@ -51,6 +51,7 @@ gem 'carrierwave', :github => 'satoruk/carrierwave' , :ref => '43179f94d6a4e62f6
 gem 'rmagick', require: false
 gem 'cloudinary'
 gem 'twitter' 
+gem 'dotenv-rails'
 
 group :doc do
   gem 'sdoc', '0.3.20', require: false
