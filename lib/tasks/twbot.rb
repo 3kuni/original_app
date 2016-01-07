@@ -1,6 +1,7 @@
 class Twbot
   require 'twitter'
-
+  Dotenv.load
+  
   def self.search
     client = Twitter::REST::Client.new(
       consumer_key:        ENV['tw_consumer_key'] ,
