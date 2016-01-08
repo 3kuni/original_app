@@ -20,6 +20,12 @@ class Twbot
     result_tweets = client.search(query, count: 10, result_type: "recent",  exclude: "retweets", since_id: since_id, to: "benkyo_stardy")
     result_tweets.take(10).each_with_index do |tw, i| 
       puts "#{i}: @#{tw.user.screen_name}: #{tw.full_text}: id[#{tw.id}]: #{tw.created_at}" 
+      stardy_user = User.find_by(provider:"twitter",name:tw.user.screen_name)
+      if stardy_user.present?
+        #puts "stardy_nickname: #{stardy_user.nickname},#{stardy_user.area},#{stardy_user.grade},#{stardy_user.word}"
+        @studysession=Studysession.new(user: stardy_user.id, room: "1", textbook: "勉強")
+        @studysession.save
+      end
       client.update("@#{tw.user.screen_name} ふぁいてぃん！", in_reply_to_status_id: tw.id)
       if i==0 
         last_update = tw.id
@@ -33,19 +39,4 @@ class Twbot
     
   end
 
-  def self.kill
-    @current_active=Studysession.where(active:true)  
-    @current_active.each do |i|
-      if (Time.now-i.created_at) > 10800
-        i.update_attributes(active:false)
-        current_students=Room.find(i.room).current_students
-        Room.find(i.room).update_attributes(current_students:current_students-1)
-        puts "cron run at #{Time.now}"
-      end
-    end
-    puts "."
-  end
-  def self.hoge
-    puts "hogeeeeeeeee"
-  end
 end

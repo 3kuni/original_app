@@ -41,7 +41,6 @@ class StudysessionsController < ApplicationController
   end
 
   def create
-
     @studysession=Studysession.new(studysession_params)
     @active_now=Studysession.find_by(user:current_user.id,active:true)
     unless Textbook.find_by(asin:params[:studysession][:textbook])
