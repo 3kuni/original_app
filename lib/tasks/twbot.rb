@@ -30,7 +30,7 @@ class Twbot
         @room = Room.find(1)
         @room.update_attributes(current_students:@room.current_students.to_i+1)
       end
-      client.update("@#{tw.user.screen_name} ふぁいてぃん！", in_reply_to_status_id: tw.id)
+      client.update("@#{tw.user.screen_name} ふぁいてぃん！(*•̀ᴗ•́*)و ̑̑", in_reply_to_status_id: tw.id)
       client.favorite(tw.id)
       if i==0 
         last_update_start = tw.id
