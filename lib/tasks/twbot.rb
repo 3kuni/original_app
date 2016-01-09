@@ -55,7 +55,7 @@ class Twbot
           @room.update_attributes(current_students:@room.current_students-1)
         end
       end
-      client.update("@#{tw.user.screen_name} おつかれ〜", in_reply_to_status_id: tw.id)
+      client.update("@#{tw.user.screen_name} おつかれ〜(๑´ω`ﾉﾉﾞ✧", in_reply_to_status_id: tw.id)
       if i==0 
         last_update_stop = tw.id
       end
