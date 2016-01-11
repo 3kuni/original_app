@@ -35,6 +35,7 @@ class Twbot
         end
         @studysession = Studysession.new(user: stardy_user.id, room: "1", textbook: textbook,active:true)
         @studysession.save
+        @studysession.create_activity :create, owner: current_user
         @room = Room.find(1)
         @room.update_attributes(current_students:@room.current_students.to_i+1)
       end

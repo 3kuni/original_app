@@ -63,8 +63,10 @@
             <% end %>
             <span id="star-sum<%= feed_item.id  %>">
               <% starred_by_lst=Array.new %>
-              <% feed_item.evaluators_for(:stars).each do |starred_by| %>
-                <% starred_by_lst.push("#{starred_by.nickname}<br>") %>
+              <% if feed_item.evaluators_for(:stars).present? %>
+                <% feed_item.evaluators_for(:stars).each do |starred_by| %>
+                  <% starred_by_lst.push("#{starred_by.nickname}<br>") %>
+                <% end %>
               <% end %>
               <%= link_to feed_item.reputation_for(:stars).to_i ,"javascript:void(0);" ,'data-container'=>"body", 'data-toggle'=>"popover", 'data-placement'=>"bottom", 
                 'data-html'=>"true",'data-content'=>starred_by_lst,'id'=>"href-#{feed_item.id}" %>
