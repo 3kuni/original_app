@@ -50,6 +50,7 @@ class Twbot
     result_tweets.take(10).each_with_index do |tw, i| 
       puts "STOP: #{i}: @#{tw.user.screen_name}: #{tw.full_text}: id[#{tw.id}]: #{tw.created_at}" 
       stardy_user = User.find_by(provider:"twitter",name:tw.user.screen_name)
+      time_minutes = nil
       if stardy_user.present?
         stardy_active_session = Studysession.find_by(user: stardy_user.id,active: true)
         if stardy_active_session.present?
@@ -66,7 +67,8 @@ class Twbot
           end
         end
       end
-      client.update("@#{tw.user.screen_name} おつかれ〜(๑´ω`ﾉﾉﾞ✧", in_reply_to_status_id: tw.id) if Rails.env == 'production'
+      time_minutes = "勉強時間は#{time_minutes}分です！！" if time_minutes.present?
+      client.update("@#{tw.user.screen_name} おつかれ〜(๑´ω`ﾉﾉﾞ✧ #{time_minutes}", in_reply_to_status_id: tw.id) if Rails.env == 'production'
       if i==0 
         last_update_stop = tw.id
       end
