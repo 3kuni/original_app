@@ -125,8 +125,8 @@ class StudysessionsController < ApplicationController
     to = from+1.day-1.second
     @total_minutes_all =Studysession.sum(:time)
     @count_all =Studysession.count
-    @count_daily= Studysession.group("date(created_at)").count
-    @total_minutes_daily= Studysession.group("date(created_at)").sum(:time)
+    #@count_daily= Studysession.group("date(created_at)").count
+    #@total_minutes_daily= Studysession.group("date(created_at)").sum(:time)
   end
 
   private

@@ -6,6 +6,8 @@
 <br>
 
 <h4>デイリー</h4>
+  <% @count_daily= Studysession.group("date(created_at)").count %>
+  <% @total_minutes_daily= Studysession.group("date(created_at)").sum(:time) %>
   <% @count_daily.each do |i,n| %>
     <%=  "#{i} : #{n}回 : #{(@total_minutes_daily[i]/60).to_i}時間" %>
     <br>
