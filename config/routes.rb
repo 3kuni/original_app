@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'studysessions/stats'
+
   get 'textbooks/new'
   get 'users/show'
 
@@ -27,6 +29,7 @@ Rails.application.routes.draw do
   resources :relationships, only: [:create, :destroy]
   match '/studysessions/like/:studysession_id/' , to:'studysessions#like', via: [:get]
   match '/studysessions/edit/:studysession_id/' , to:'studysessions#edit',via:[:get]
+  #match '/studysessions/stats' , to:'studysessions#stats', via: [:get]
   
   
   # The priority is based upon order of creation: first created -> highest priority.
