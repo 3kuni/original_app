@@ -11,5 +11,10 @@ class Stats
     count_all =Studysession.count
     puts "total: #{(total_minutes_all/60).to_i}時間"
     puts "count: #{count_all}回"
+    @count_daily= Studysession.group("date(created_at)").count
+    @total_minutes_daily= Studysession.group("date(created_at)").sum(:time)
+    @count_daily.each do |i,n|
+    	puts "#{i} : #{n}回 : #{@total_minutes_daily[i]}時間"
+    end
   end
 end
