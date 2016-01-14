@@ -89,7 +89,7 @@ class Twbot
     
   end
 
-  def self.update_settings
+  def self.set
     #設定
     client = Twitter::REST::Client.new(
       consumer_key:        ENV['tw_consumer_key'] ,
