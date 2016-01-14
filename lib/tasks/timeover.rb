@@ -25,15 +25,14 @@ class Timeover
         stardy_user = User.find_by(provider:"twitter",id:i.user)
         if stardy_user.present?
           stardy_active_session = i
-          client.update("@#{stardy_user.name} 2時間経過")
+          client.update("@#{stardy_user.name} 2時間経過٩(ˊᗜˋ*)و ")
           #puts "KILLED @#{stardy_user.name} 3時間超えたので自動終了しました〜"
         end
       elsif (Time.now-i.created_at) > 3600
         stardy_user = User.find_by(provider:"twitter",id:i.user)
         if stardy_user.present?
           stardy_active_session = i
-          client.update("@#{stardy_user.name} 1時間経過")
-          #puts "KILLED @#{stardy_user.name} 3時間超えたので自動終了しました〜"
+          client.update("@#{stardy_user.name} 1時間経過(๑′ᴗ‵๑)")
         end
       end
     end
