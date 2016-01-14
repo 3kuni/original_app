@@ -26,7 +26,6 @@ class StudysessionsController < ApplicationController
     session[:room]=params[:room]
     @active_now=Studysession.find_by(user:current_user.id,active:true)
     @keyword = params[:keyword]
-    #@history = Studysession.where(user:current_user.id).limit(5)
     @history = Studysession.where(user:current_user.id).uniq.limit(10).pluck(:textbook)
     @activities = PublicActivity::Activity.all
     if @keyword.present?
@@ -82,8 +81,12 @@ class StudysessionsController < ApplicationController
   end
 
   def edit
-    @studysession=Studysession.find(params[:studysession_id])
-    unless @studysession.user==current_user.id
+    if user_signed_in?
+      @studysession=Studysession.find(params[:studysession_id])
+      unless @studysession.user==current_user.id
+        redirect_to root_path
+      end
+    else
       redirect_to root_path
     end
   end

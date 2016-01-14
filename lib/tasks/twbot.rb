@@ -74,6 +74,7 @@ class Twbot
       end
       time_minutes = "勉強時間は#{time_minutes}分です！！" if time_minutes.present?
       client.update("@#{tw.user.screen_name} おつかれ〜(๑´ω`ﾉﾉﾞ✧ #{time_minutes}", in_reply_to_status_id: tw.id) if Rails.env == 'production'
+      
       if i==0 
         last_update_stop = tw.id
       end
