@@ -38,6 +38,6 @@ module OriginalApp
     config.autoload_paths += %W(#{config.root}/lib)
     config.autoload_paths += Dir["#{config.root}/lib/**/"]
     #DBのタイムゾーン
-    config.active_record.default_timezone (:local)
+    config.active_record.default_timezone = :local
   end
 end
