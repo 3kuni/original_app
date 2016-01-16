@@ -1,29 +1,12 @@
-module ApplicationHelper
+class Feed
+  require 'twitter'
+  Dotenv.load
   require 'net/http'
   require 'uri'
   require 'json'
-  require 'twitter'
-  # 字数制限をつける
-  # 引数 =>
-  # text:カットしたい対象の文字列
-  # len:字数
-  
-  def cut_off(text, len)
-    if text != nil
-      if text.length < len
-        text
-      else
-        text.insert(len/2, "<br>")
-        text.scan(/^.{#{len+3}}/m)[0] + "…"
 
-      end
-    else
-      ''
-    end
-  end
-
-  def feed_from_tw
-      # twitterAPIのセッティング
+  def self.search
+    # twitterAPIのセッティング
     client = Twitter::REST::Client.new(
       consumer_key:        ENV['tw_consumer_key'] ,
       consumer_secret:     ENV['tw_consumer_secret'] ,
@@ -37,12 +20,23 @@ module ApplicationHelper
     query_start = "勉強しよ since:#{before_onehour}"
     result_tweets = client.search(query_start, count: 100, result_type: "recent",  exclude: "retweets")
     puts "結果: #{result_tweets.count}件"
-    tweets_embed = [] #
-    #result_tweets.take(10).each_with_index do |tw, i| 
-    #  puts "START: #{i}: @#{tw.user.screen_name}: #{tw.full_text}: id[#{tw.id}]: #{tw.created_at}"
-    #end 
-    search_res= "#{result_tweets.count}人が「勉強しよ」と言っています！(直近30分)"
-    return [search_res ,result_tweets] #
+    tweets_embed = []
+    result_tweets.take(10).each_with_index do |tw, i| 
+      uri = URI.parse('https://api.twitter.com/1/statuses/oembed.json?id=' + tw.id.to_s + '&lang=ja')
+      json = Net::HTTP.get(uri)
+      result = JSON.parse(json)
+      tweets_embed[i] = result["html"]
+      puts tweets_embed[i]
+      puts "START: #{i}: @#{tw.user.screen_name}: #{tw.full_text}: id[#{tw.id}]: #{tw.created_at}" 
+    end
+  end
+
+  def self.json
+    uri = URI.parse('https://api.twitter.com/1/statuses/oembed.json?id=319648428621692928&lang=ja')
+    json = Net::HTTP.get(uri)
+    result = JSON.parse(json)
+    #puts result
+    puts result["html"]
   end
 
 end

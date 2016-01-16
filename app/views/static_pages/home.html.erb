@@ -10,12 +10,46 @@
     </div>
   <% end %>
 <% end %>
-
+<!--
 <%= image_tag 'STARDY-title.png' ,style:"width:100%;"%>
 <h5 align="center">いま、誰が勉強してる？</h5>
+-->
 
-<blockquote class="twitter-tweet" lang="ja"><p lang="ja" dir="ltr">「<a href="https://twitter.com/benkyo_stardy">@benkyo_stardy</a> 勉強しよ」「<a href="https://twitter.com/benkyo_stardy">@benkyo_stardy</a> 勉強おわ」ってつぶやくとリプ返します！<a href="https://t.co/UQXpiGXasC">https://t.co/UQXpiGXasC</a> に登録すると勉強時間を計測します！</p>&mdash; 「勉強しよ」で応援リプ飛ばすSTARDY (@benkyo_stardy) <a href="https://twitter.com/benkyo_stardy/status/685751789019205633">2016, 1月 9</a></blockquote>
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<!-- tweet埋め込みテスト -->
+<h5><%= feed_from_tw[0] %></h5>
+<ul class="collection">
+  <% feed_from_tw[1].take(10).each_with_index do |tw, i| %>
+    <li class="collection-item">
+      <span class="title">          
+        <a href="https://twitter.com/<%= tw.user.screen_name %>">
+          <span class="cover twicon" style="background-image: url('http://www.paper-glasses.com/api/twipi/<%= tw.user.screen_name %>')">
+          </span>
+          <span>
+            <%= tw.user.name %>
+          </span>
+        </a>
+        <span class="feed-item">
+          @<%= tw.user.screen_name %>
+        </span>
+      </span>
+      <p class="tweet">
+        <%= tw.full_text %>
+      <br>
+      </p>
+      <div class="twcard-footer">
+        <span class="feed-item">
+          <%= tw.created_at.strftime("%Y年%m月%d日 %H:%M") %>
+        </span>
+        <span >
+          <a href="http://twitter.com/intent/tweet?in_reply_to=<%= tw.id %>" class="tw-action" target="_blank"><i class="fa fa-reply"></i></a>
+          <a href="http://twitter.com/intent/retweet?tweet_id=<%= tw.id %>" class="tw-action" target="_blank"><i class="fa fa-retweet"></i></a>
+          <a href="http://twitter.com/intent/favorite?tweet_id=<%= tw.id %>" class="tw-action" target="_blank"><i class="fa fa-heart"></i></a>
+        </span>
+      </div>
+    </li>
+  <% end %>
+</ul>
 
 <!-- -->
 <!-- -->
