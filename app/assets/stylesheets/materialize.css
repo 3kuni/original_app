@@ -2309,7 +2309,7 @@ td, th {
         font-size: 1rem; }
       .collection .collection-item.avatar p {
         margin: 0;
-        padding-right: :3rem; 
+        padding-right: 3rem; 
       }
       .collection .collection-item.avatar .secondary-content {
         position: absolute;
