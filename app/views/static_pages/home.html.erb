@@ -19,6 +19,11 @@
 <!-- tweet埋め込みテスト -->
 <h5><%= feed_from_tw[0] %></h5>
 <ul class="collection">
+  <% @feeditems.first(20).each do |studysession| %>
+    <% if studysession.active.present? %>
+      <%= render '/feeditem' ,feed_item: studysession %>
+    <% end %>
+  <% end %>
   <% feed_from_tw[1].take(10).each_with_index do |tw, i| %>
     <li class="collection-item">
       <span class="title">          
