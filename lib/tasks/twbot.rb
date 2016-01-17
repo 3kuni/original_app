@@ -30,13 +30,14 @@ class Twbot
       puts "START: #{i}: @#{tw.user.screen_name}: #{tw.full_text}: id[#{tw.id}]: #{tw.created_at}" 
       stardy_user = User.find_by(provider:"twitter",name:tw.user.screen_name)
       if stardy_user.present?
-        textbook = tw.full_text.match(/@benkyo_stardy[[:blank:]]+勉強しよ[[:blank:]]+(?<text>.+)/)
+        textbook = tw.full_text.match(/@benkyo_stardy[[:blank:]]+勉強しよ[[:blank:]]+(?<text>.+)[[:blank:]]+(?<tweet>.+)/)
         if textbook.present?
           textbook = textbook[:text].html_safe
+          tweet = textbook[:tweet].html_safe
         else
           textbook = "勉強"
         end
-        @studysession = Studysession.new(user: stardy_user.id, room: "1", textbook: textbook,active:true)
+        @studysession = Studysession.new(user: stardy_user.id, room: "1", textbook: textbook,tweet: tweet,active: true)
         @studysession.save
         @studysession.create_activity :create, owner: stardy_user
         @room = Room.find(1)
