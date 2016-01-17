@@ -32,7 +32,7 @@ class Twbot
       if stardy_user.present?
         textbook = tw.full_text.match(/@benkyo_stardy[[:blank:]]+勉強しよ[[:blank:]]+(?<text>.+)/)
         if textbook.present?
-          textbook = textbook[:text]
+          textbook = textbook[:text].html_safe
         else
           textbook = "勉強"
         end
