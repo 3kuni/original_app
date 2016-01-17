@@ -58,15 +58,42 @@ class Twbot
       puts "STOP: #{i}: @#{tw.user.screen_name}: #{tw.full_text}: id[#{tw.id}]: #{tw.created_at}" 
       stardy_user = User.find_by(provider:"twitter",name:tw.user.screen_name)
       time_minutes = nil
+      praise_word = nil
       if stardy_user.present?
         stardy_active_session = Studysession.find_by(user: stardy_user.id,active: true)
         if stardy_active_session.present?
           puts "Now active!"
+          # 時間、回数のカウント
           time_minutes=(Time.now.to_i-stardy_active_session.created_at.to_i)/60
           t_user=stardy_user.total_time.to_i + time_minutes
           times = stardy_user.times.to_i + 1
+          # User,Studysessionの更新
           stardy_user.update_attributes(total_time:t_user,times: times)
           stardy_active_session.update_attributes(active:false,time:time_minutes)
+          # ほめリプ
+          if  times==1
+            praise_word = "おめでとうございます！初めて記録しました！"
+          elsif stardy_user.total_time.to_i < (60*3) && t_user >= (60*3)
+            praise_word =  "3時間突破！"
+          elsif times == 3
+            praise_word =  "3回目の勉強記録です！この調子で継続できたらいいですね！！"
+          elsif stardy_user.total_time.to_i < (60*6) && t_user >= (60*6)
+            praise_word =  "勉強記録が6時間を超えました！"
+          elsif times == 6
+            praise_word =  "勉強を記録したのは6回目です！もう慣れてきましたか？？"
+          elsif stardy_user.total_time.to_i < (60*10) && t_user >= (60*10)
+            praise_word =  "記録が10時間を超えました！すごい！"
+          elsif times == 10
+            praise_word =  "10回目の記録です！習慣になってきましたね！！"
+          elsif stardy_user.total_time.to_i < (60*30) && t_user >= (60*30)
+            praise_word =  "祝！30時間以上勉強しました！"
+          elsif (times/30).integer?
+            praise_word =  "#{(times/30)*30}回記録しましたー！"
+          elsif (stardy_user.total_time.to_i/100).floor <= (t_user/100).floor
+            praise_word =  "#{((new_total_time.to_i/100)*100)/60}時間を超えました！！"     
+          end
+
+          # Roomの更新
           @room=Room.find(stardy_active_session.room)
           t_room=@room.minutes_total.to_i + time_minutes
           @room.update_attributes(minutes_total:t_room)
@@ -76,7 +103,7 @@ class Twbot
         end
       end
       time_minutes = "勉強時間は#{time_minutes}分です！！" if time_minutes.present?
-      client.update("@#{tw.user.screen_name} おつかれ〜(๑´ω`ﾉﾉﾞ✧ #{time_minutes}", in_reply_to_status_id: tw.id) if Rails.env == 'production'
+      client.update("@#{tw.user.screen_name} #{praise_word}おつかれ〜(๑´ω`ﾉﾉﾞ✧ #{time_minutes}", in_reply_to_status_id: tw.id) if Rails.env == 'production'
       
       if i==0 
         last_update_stop = tw.id

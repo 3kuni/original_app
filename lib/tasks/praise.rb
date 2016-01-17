@@ -41,4 +41,35 @@ class Praise
   def self.hoge
     puts "hogeeeeeeeee"
   end
+
+  def self.home
+    total_time = 60*199
+    new_total_time =60*200
+    times = 60
+
+    if   times==1
+      puts "おめでとうございます！初めて記録しました！"
+    elsif total_time < (60*3) && new_total_time >= (60*3)
+      puts "3時間突破！"
+    elsif times == 3
+      puts "3回目の勉強記録です！この調子で継続できたらいいですね！！"
+    elsif total_time < (60*6) && new_total_time >= (60*6)
+      puts "勉強記録が6時間を超えました！"
+    elsif times == 6
+      puts "勉強を記録したのは6回目です！もう慣れてきましたか？？"
+    elsif total_time < (60*10) && new_total_time >= (60*10)
+      puts "記録が10時間を超えました！すごい！"
+    elsif times == 10
+      puts "10回目の記録です！習慣になってきましたね！！"
+    elsif total_time < (60*30) && new_total_time >= (60*30)
+      puts "祝！30時間以上勉強しました！"
+    elsif (times/30).integer?
+      puts "#{(times/30)*30}回記録しましたー！"
+    elsif (total_time/100).floor <= (new_total_time/100).floor
+      puts "#{((new_total_time/100)*100)/60}時間を超えました！！"     
+    else
+      puts "ほめることは特にありません"
+    end
+
+  end
 end
