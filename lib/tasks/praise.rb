@@ -43,9 +43,9 @@ class Praise
   end
 
   def self.home
-    total_time = 60*199
+    total_time = 60*200
     new_total_time =60*200
-    times = 60
+    times = 4
 
     if   times==1
       puts "おめでとうございます！初めて記録しました！"
@@ -63,9 +63,9 @@ class Praise
       puts "10回目の記録です！習慣になってきましたね！！"
     elsif total_time < (60*30) && new_total_time >= (60*30)
       puts "祝！30時間以上勉強しました！"
-    elsif (times/30).integer?
-      puts "#{(times/30)*30}回記録しましたー！"
-    elsif (total_time/100).floor <= (new_total_time/100).floor
+    elsif (times/30).to_f.integer?
+      puts "#{(times/30)*30}回記録しましたー！" ### 機能していない！！
+    elsif (total_time/100).floor < (new_total_time/100).floor
       puts "#{((new_total_time/100)*100)/60}時間を超えました！！"     
     else
       puts "ほめることは特にありません"

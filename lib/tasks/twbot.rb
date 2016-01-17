@@ -22,35 +22,6 @@ class Twbot
     puts "since_start_id #{since_start_id}"
     puts "since_stop_id #{since_stop_id}"
 
-    # 勉強開始
-    query_start = "勉強しよ "
-    result_tweets = client.search(query_start, count: 10, result_type: "recent",  exclude: "retweets", since_id: since_start_id, to: "benkyo_stardy")
-    result_tweets.take(10).each_with_index do |tw, i| 
-      puts "START: #{i}: @#{tw.user.screen_name}: #{tw.full_text}: id[#{tw.id}]: #{tw.created_at}" 
-      stardy_user = User.find_by(provider:"twitter",name:tw.user.screen_name)
-      if stardy_user.present?
-        option = tw.full_text.match(/@benkyo_stardy[[:blank:]]+勉強しよ[[:blank:]]+(?<text>.+)[[:blank:]]+(?<tweet>.+)/)
-        textbook = nil
-        tweet = nil
-        if option.present?
-          textbook = option[:text]
-          tweet = option[:tweet]
-        else
-          textbook = "勉強"
-        end
-        @studysession = Studysession.new(user: stardy_user.id, room: "1", textbook: textbook, tweet: tweet,active: true)
-        @studysession.save
-        @studysession.create_activity :create, owner: stardy_user
-        @room = Room.find(1)
-        @room.update_attributes(current_students:@room.current_students.to_i+1)
-      end
-      client.update("@#{tw.user.screen_name} ふぁいてぃん！(*•̀ᴗ•́*)و ̑̑", in_reply_to_status_id: tw.id) if Rails.env == 'production'
-      client.favorite(tw.id) if Rails.env == 'production'
-      if i==0 
-        last_update_start = tw.id
-      end
-    end
-
     # 勉強終了
     query_stop = "勉強おわ "
     result_tweets = client.search(query_stop, count: 10, result_type: "recent",  exclude: "retweets", since_id: since_stop_id, to: "benkyo_stardy")
@@ -87,9 +58,9 @@ class Twbot
             praise_word =  "10回目の記録です！習慣になってきましたね！！"
           elsif stardy_user.total_time.to_i < (60*30) && t_user >= (60*30)
             praise_word =  "祝！30時間以上勉強しました！"
-          elsif (times/30).integer?
+          elsif (times/30).to_f.integer?
             praise_word =  "#{(times/30)*30}回記録しましたー！"
-          elsif (stardy_user.total_time.to_i/100).floor <= (t_user/100).floor
+          elsif (stardy_user.total_time.to_i/100).floor < (t_user/100).floor
             praise_word =  "#{((new_total_time.to_i/100)*100)/60}時間を超えました！！"     
           end
 
@@ -110,6 +81,35 @@ class Twbot
       end
     end
 
+    # 勉強開始
+    query_start = "勉強しよ "
+    result_tweets = client.search(query_start, count: 10, result_type: "recent",  exclude: "retweets", since_id: since_start_id, to: "benkyo_stardy")
+    result_tweets.take(10).each_with_index do |tw, i| 
+      puts "START: #{i}: @#{tw.user.screen_name}: #{tw.full_text}: id[#{tw.id}]: #{tw.created_at}" 
+      stardy_user = User.find_by(provider:"twitter",name:tw.user.screen_name)
+      if stardy_user.present?
+        option = tw.full_text.match(/@benkyo_stardy[[:blank:]]+勉強しよ[[:blank:]]+(?<text>.+)[[:blank:]]+(?<tweet>.+)/)
+        textbook = nil
+        tweet = nil
+        if option.present?
+          textbook = option[:text]
+          tweet = option[:tweet]
+        else
+          textbook = "勉強"
+        end
+        @studysession = Studysession.new(user: stardy_user.id, room: "1", textbook: textbook, tweet: tweet,active: true)
+        @studysession.save
+        @studysession.create_activity :create, owner: stardy_user
+        @room = Room.find(1)
+        @room.update_attributes(current_students:@room.current_students.to_i+1)
+      end
+      client.update("@#{tw.user.screen_name} ふぁいてぃん！(*•̀ᴗ•́*)و ̑̑", in_reply_to_status_id: tw.id) if Rails.env == 'production'
+      client.favorite(tw.id) if Rails.env == 'production'
+      if i==0 
+        last_update_start = tw.id
+      end
+    end
+
     # 設定ファイルの更新
     f = File.open('./config/twbot_settings.yml', 'w') # wは書き込み権限
     f.puts last_update_start
@@ -117,7 +117,6 @@ class Twbot
     f.puts last_update_stop
     #f.puts 686142291103203329
     f.close
-    
   end
 
   def self.set

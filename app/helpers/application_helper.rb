@@ -32,8 +32,9 @@ module ApplicationHelper
     )
 
     # ツイッターから30分以内に「勉強しよ」とつぶやいた人を検索
-    before_onehour = 30.minutes.ago.to_s.match(/(\S+)[[:blank:]](\S+)[[:blank:]](\S+)/)
-    before_onehour = before_onehour[1] + "_" + before_onehour[2] + "_JST"
+    #before_onehour = 30.minutes.ago.to_s.match(/(\S+)[[:blank:]](\S+)[[:blank:]](\S+)/)
+    #before_onehour = before_onehour[1] + "_" + before_onehour[2] + "_JST"
+    before_onehour = time_for_tw(30.minutes.ago)
     query_start = "勉強しよ since:#{before_onehour}"
     result_tweets = client.search(query_start, count: 100, result_type: "recent",  exclude: "retweets")
     puts "結果: #{result_tweets.count}件"
@@ -43,6 +44,11 @@ module ApplicationHelper
     #end 
     search_res= "#{result_tweets.count}人が「勉強しよ」と言っています！(直近30分)"
     return [search_res ,result_tweets] #
+  end
+
+  def time_for_tw(time)
+    time = time.to_s.match(/(\S+)[[:blank:]](\S+)[[:blank:]](\S+)/)
+    formatted = time[1] + "_" + time[2] + "_JST"
   end
 
 end
