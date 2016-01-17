@@ -11,7 +11,6 @@ class Twbot
       access_token_secret: ENV['tw_access_token_secret'],
     )
 
-
     # 設定ファイルの読み込み
     f = File.open('./config/twbot_settings.yml', 'r')
     since =f.readlines
@@ -65,7 +64,8 @@ class Twbot
           puts "Now active!"
           time_minutes=(Time.now.to_i-stardy_active_session.created_at.to_i)/60
           t_user=stardy_user.total_time.to_i + time_minutes
-          stardy_user.update_attributes(total_time:t_user)
+          times = stardy_user.times.to_i + 1
+          stardy_user.update_attributes(total_time:t_user,times: times)
           stardy_active_session.update_attributes(active:false,time:time_minutes)
           @room=Room.find(stardy_active_session.room)
           t_room=@room.minutes_total.to_i + time_minutes

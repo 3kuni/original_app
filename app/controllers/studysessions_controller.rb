@@ -69,7 +69,8 @@ class StudysessionsController < ApplicationController
     @total=User.find(params[:user])
     time_minutes=(Time.now.to_i-params[:time].to_i)/60
     t_user=@total.total_time.to_i + time_minutes
-    @total.update_attributes(total_time:t_user)
+    times = @total.times.to_i+1
+    @total.update_attributes(total_time:t_user,times:times)
     @update.update_attributes(active:false,time:time_minutes)
     @room=Room.find(params[:room])
     t_room=@room.minutes_total.to_i + time_minutes
