@@ -37,7 +37,7 @@ class Twbot
         else
           textbook = "勉強"
         end
-        @studysession = Studysession.new(user: stardy_user.id, room: "1", textbook: textbook, tweet: tweet,active: true)
+        @studysession = Studysession.new(user: stardy_user.id, room: "1", textbook: textbook, active: true)
         @studysession.save
         @studysession.create_activity :create, owner: stardy_user
         @room = Room.find(1)
