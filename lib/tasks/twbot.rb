@@ -33,7 +33,7 @@ class Twbot
         textbook = tw.full_text.match(/@benkyo_stardy[[:blank:]]+勉強しよ[[:blank:]]+(?<text>.+)[[:blank:]]+(?<tweet>.+)/)
         if textbook.present?
           textbook = textbook[:text]
-          tweet = textbook[:tweet]
+          #tweet = textbook[:tweet]
         else
           textbook = "勉強"
         end
