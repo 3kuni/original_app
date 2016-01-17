@@ -17,4 +17,3 @@
 
 /config/secrets.yml
 .env
-/config/twbot_settings.yml
