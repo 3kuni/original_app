@@ -46,7 +46,7 @@
             </p>
             <% if feed_item.tweet.present? %>
               <div class="chip tweet grey lighten-5">
-                <%= feed_item.tweet  %>
+                <%= feed_item.tweet.html_safe  %>
               </div>
             <% end %>
           </p>
