@@ -88,7 +88,7 @@ class Twbot
       puts "START: #{i}: @#{tw.user.screen_name}: #{tw.full_text}: id[#{tw.id}]: #{tw.created_at}" 
       stardy_user = User.find_by(provider:"twitter",name:tw.user.screen_name)
       if stardy_user.present?
-        option = tw.full_text.match(/@benkyo_stardy(\n+|[[:blank:]]+)勉強しよ(\n+|[[:blank:]]+)(?<text>\S+)(\n|[[:blank:]]*)(?<tweet>\S*)/)
+        option = tw.full_text.match(/@benkyo_stardy(\n+|[[:blank:]]+)勉強しよ(\n+|[[:blank:]]+)(?<text>\S+)($|(\n|[[:blank:]]+)(?<tweet>\S*))/)
         textbook = nil
         tweet = nil
         if option.present?
@@ -98,10 +98,13 @@ class Twbot
           textbook = "勉強"
         end
         @studysession = Studysession.new(user: stardy_user.id, room: "1", textbook: textbook, tweet: tweet,active: true)
-        @studysession.save
-        @studysession.create_activity :create, owner: stardy_user
-        @room = Room.find(1)
-        @room.update_attributes(current_students:@room.current_students.to_i+1)
+        already_exist = Studysession.find_by(user: stardy_user.id,active: true)
+        unless already_exist.present?
+          @studysession.save
+          @studysession.create_activity :create, owner: stardy_user
+          @room = Room.find(1)
+          @room.update_attributes(current_students:@room.current_students.to_i+1)
+        end
       end
       client.update("@#{tw.user.screen_name} ふぁいてぃん！(*•̀ᴗ•́*)و ̑̑", in_reply_to_status_id: tw.id) if Rails.env == 'production'
       client.favorite(tw.id) if Rails.env == 'production'
