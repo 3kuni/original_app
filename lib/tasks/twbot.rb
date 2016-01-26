@@ -88,12 +88,13 @@ class Twbot
       puts "START: #{i}: @#{tw.user.screen_name}: #{tw.full_text}: id[#{tw.id}]: #{tw.created_at}" 
       stardy_user = User.find_by(provider:"twitter",name:tw.user.screen_name)
       if stardy_user.present?
-        option = tw.full_text.match(/@benkyo_stardy(\n+|[[:blank:]]+)勉強しよ(\n+|[[:blank:]]+)(?<text>\S+)($|(\n|[[:blank:]]+)(?<tweet>\S*))/)
+        option1 = tw.full_text.match(/@benkyo_stardy(\n+|[[:blank:]]+)勉強しよ(\n|[[:blank:]]+)(?<text>\S+)(\n|[[:blank:]]*)/)
+        option2 = tw.full_text.match(/@benkyo_stardy(\n+|[[:blank:]]+)勉強しよ(\n|[[:blank:]]+)\S+(\n|[[:blank:]]+)(?<tweet>\S+)/)
         textbook = nil
         tweet = nil
-        if option.present?
-          textbook = option[:text]
-          tweet = option[:tweet]
+        if option1.present?
+          textbook = option1[:text]
+          tweet = option2[:tweet] if option2.present?
         else
           textbook = "勉強"
         end
