@@ -42,8 +42,8 @@ module ApplicationHelper
     #result_tweets.take(10).each_with_index do |tw, i| 
     #  puts "START: #{i}: @#{tw.user.screen_name}: #{tw.full_text}: id[#{tw.id}]: #{tw.created_at}"
     #end 
-    search_res= "#{result_tweets.count}人が「勉強しよ」と言っています！(直近30分)"
-    return [search_res ,result_tweets] #
+    search_res= "<span style=\"font-size:3rem\">#{result_tweets.count}</span>人が<br>「勉強しよ」と言っています！(直近30分)" 
+    return [search_res.html_safe ,result_tweets] #
   end
 
   def time_for_tw(time)

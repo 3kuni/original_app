@@ -52,6 +52,8 @@ gem 'rmagick', require: false
 gem 'cloudinary'
 gem 'twitter' 
 gem 'dotenv-rails'
+#gem 'open-uri' 
+#gem 'todoist-ruby', require: 'todoist'
 
 group :doc do
   gem 'sdoc', '0.3.20', require: false
