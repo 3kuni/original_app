@@ -58,8 +58,8 @@ class Twbot
             praise_word =  "10回目の記録です！習慣になってきましたね！！"
           elsif stardy_user.total_time.to_i < (60*30) && t_user >= (60*30)
             praise_word =  "祝！30時間以上勉強しました！"
-          elsif (times/30).to_f.integer?
-            praise_word =  "#{(times/30)*30}回記録しましたー！"
+          elsif (times/5).to_f.integer?
+            praise_word =  "#{times}回記録しましたー！"
           elsif (stardy_user.total_time.to_i/100).floor < (t_user/100).floor
             praise_word =  "#{((new_total_time.to_i/100)*100)/60}時間を超えました！！"     
           end
