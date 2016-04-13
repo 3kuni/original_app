@@ -86,7 +86,7 @@ class Twbot
     #result_tweets = client.search(query_start, count: 10, result_type: "recent",  exclude: "retweets", since_id: since_start_id, to: "benkyo_stardy")
     # STARDYのタイムラインを取得
     result_tweets = client.home_timeline(since_id: since_start_id,count: 200)
-    first=true
+    first = true
     result_tweets.take(200).each_with_index do |tw, i| 
       if tw.text.match(/@benkyo_stardy(\n+|[[:blank:]]+)勉強しよ.*/).present?
         puts "START: #{i}: @#{tw.user.screen_name}: #{tw.full_text}: id[#{tw.id}]: #{tw.created_at}" 
@@ -116,10 +116,10 @@ class Twbot
         client.update("@#{tw.user.screen_name} ふぁいてぃん！(*•̀ᴗ•́*)و ̑̑", in_reply_to_status_id: tw.id) if Rails.env == 'production'
         client.favorite(tw.id) if Rails.env == 'production'
         client.retweet(tw.id) if Rails.env == 'production'
-      end
-      if first 
+        if first 
         last_update_start = tw.id
         first=nil
+      end
       end
     end
 
