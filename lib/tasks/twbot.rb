@@ -83,9 +83,9 @@ class Twbot
 
     # 勉強開始
     query_start = "勉強しよ "
-    result_tweets = client.search(query_start, count: 10, result_type: "recent",  exclude: "retweets", since_id: since_start_id, to: "benkyo_stardy")
+    #result_tweets = client.search(query_start, count: 10, result_type: "recent",  exclude: "retweets", since_id: since_start_id, to: "benkyo_stardy")
     # STARDYのタイムラインを取得
-    #result_tweets = client.home_timeline(since_id: since_start_id,count: 200)
+    result_tweets = client.home_timeline(since_id: since_start_id,count: 200)
     result_tweets.take(200).each_with_index do |tw, i| 
       if tw.text.match(/@benkyo_stardy(\n+|[[:blank:]]+)勉強しよ.*/).present?
         puts "START: #{i}: @#{tw.user.screen_name}: #{tw.full_text}: id[#{tw.id}]: #{tw.created_at}" 
@@ -93,8 +93,8 @@ class Twbot
         # ゲストユーザとして登録
         # User.create!(name: "dfasaaa",provider: "guest",uid:User.create_unique_string,email: User.create_unique_guest_email,password: User.create_unique_guest_password)
         if stardy_user.present?
-          option1 = tw.full_text.match(/@benkyo_stardy(\n+|[[:blank:]]+)勉強しよ(\n|[[:blank:]]+)(?<text>\S+)(\n|[[:blank:]]*)/)
-          option2 = tw.full_text.match(/@benkyo_stardy(\n+|[[:blank:]]+)勉強しよ(\n|[[:blank:]]+)\S+(\n|[[:blank:]]+)(?<tweet>\S+)/)
+          option1 = tw.text.match(/@benkyo_stardy(\n+|[[:blank:]]+)勉強しよ(\n|[[:blank:]]+)(?<text>\S+)(\n|[[:blank:]]*)/)
+          option2 = tw.text.match(/@benkyo_stardy(\n+|[[:blank:]]+)勉強しよ(\n|[[:blank:]]+)\S+(\n|[[:blank:]]+)(?<tweet>\S+)/)
           textbook = nil
           tweet = nil
           if option1.present?
@@ -112,10 +112,10 @@ class Twbot
             @room.update_attributes(current_students:@room.current_students.to_i+1)
           end
         end
+        client.update("@#{tw.user.screen_name} ふぁいてぃん！(*•̀ᴗ•́*)و ̑̑", in_reply_to_status_id: tw.id) if Rails.env == 'production'
+        client.favorite(tw.id) if Rails.env == 'production'
+        client.retweet(tw.id) if Rails.env == 'production'
       end
-      client.update("@#{tw.user.screen_name} ふぁいてぃん！(*•̀ᴗ•́*)و ̑̑", in_reply_to_status_id: tw.id) if Rails.env == 'production'
-      client.favorite(tw.id) if Rails.env == 'production'
-      #client.retweet(tw.id) if Rails.env == 'production'
       if i==0 
         last_update_start = tw.id
       end
@@ -194,7 +194,7 @@ class Twbot
 
     # 自分のタイムラインを取得
     client.home_timeline(since_id: since_start_id,count: 200).each do |tw|
-      puts tw.text  if tw.text.match(/@benkyo_stardy(\n+|[[:blank:]]+)勉強しよ.*/).present?
+      puts "#{tw.user.screen_name}:#{tw.text}"  if tw.text.match(/@benkyo_stardy(\n+|[[:blank:]]+)勉強しよ.*/).present?
       #puts tw.text
     end
     (1..60).each do |i|
