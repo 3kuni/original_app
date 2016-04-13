@@ -84,27 +84,33 @@ class Twbot
     # 勉強開始
     query_start = "勉強しよ "
     result_tweets = client.search(query_start, count: 10, result_type: "recent",  exclude: "retweets", since_id: since_start_id, to: "benkyo_stardy")
-    result_tweets.take(10).each_with_index do |tw, i| 
-      puts "START: #{i}: @#{tw.user.screen_name}: #{tw.full_text}: id[#{tw.id}]: #{tw.created_at}" 
-      stardy_user = User.find_by(provider:"twitter",name:tw.user.screen_name)
-      if stardy_user.present?
-        option1 = tw.full_text.match(/@benkyo_stardy(\n+|[[:blank:]]+)勉強しよ(\n|[[:blank:]]+)(?<text>\S+)(\n|[[:blank:]]*)/)
-        option2 = tw.full_text.match(/@benkyo_stardy(\n+|[[:blank:]]+)勉強しよ(\n|[[:blank:]]+)\S+(\n|[[:blank:]]+)(?<tweet>\S+)/)
-        textbook = nil
-        tweet = nil
-        if option1.present?
-          textbook = option1[:text]
-          tweet = option2[:tweet] if option2.present?
-        else
-          textbook = "勉強"
-        end
-        @studysession = Studysession.new(user: stardy_user.id, room: "1", textbook: textbook, tweet: tweet,active: true)
-        already_exist = Studysession.find_by(user: stardy_user.id,active: true)
-        unless already_exist.present?
-          @studysession.save
-          @studysession.create_activity :create, owner: stardy_user
-          @room = Room.find(1)
-          @room.update_attributes(current_students:@room.current_students.to_i+1)
+    # STARDYのタイムラインを取得
+    # client.home_timeline(since_id: since_start_id,count: 200)
+    result_tweets.take(200).each_with_index do |tw, i| 
+      if tw.text.match(/@benkyo_stardy(\n+|[[:blank:]]+)勉強しよ/).present?
+        puts "START: #{i}: @#{tw.user.screen_name}: #{tw.full_text}: id[#{tw.id}]: #{tw.created_at}" 
+        stardy_user = User.find_by(provider:"twitter",name:tw.user.screen_name)
+        # ゲストユーザとして登録
+        # User.create!(name: "dfasaaa",provider: "guest",uid:User.create_unique_string,email: User.create_unique_guest_email,password: User.create_unique_guest_password)
+        if stardy_user.present?
+          option1 = tw.full_text.match(/@benkyo_stardy(\n+|[[:blank:]]+)勉強しよ(\n|[[:blank:]]+)(?<text>\S+)(\n|[[:blank:]]*)/)
+          option2 = tw.full_text.match(/@benkyo_stardy(\n+|[[:blank:]]+)勉強しよ(\n|[[:blank:]]+)\S+(\n|[[:blank:]]+)(?<tweet>\S+)/)
+          textbook = nil
+          tweet = nil
+          if option1.present?
+            textbook = option1[:text]
+            tweet = option2[:tweet] if option2.present?
+          else
+            textbook = "勉強"
+          end
+          @studysession = Studysession.new(user: stardy_user.id, room: "1", textbook: textbook, tweet: tweet,active: true)
+          already_exist = Studysession.find_by(user: stardy_user.id,active: true)
+          unless already_exist.present?
+            @studysession.save
+            @studysession.create_activity :create, owner: stardy_user
+            @room = Room.find(1)
+            @room.update_attributes(current_students:@room.current_students.to_i+1)
+          end
         end
       end
       client.update("@#{tw.user.screen_name} ふぁいてぃん！(*•̀ᴗ•́*)و ̑̑", in_reply_to_status_id: tw.id) if Rails.env == 'production'
@@ -169,6 +175,33 @@ class Twbot
     f.puts last_update_stop
     #f.puts 686142291103203329
     f.close
+  end
+
+  def self.test
+    #設定
+    client = Twitter::REST::Client.new(
+      consumer_key:        ENV['tw_consumer_key'] ,
+      consumer_secret:     ENV['tw_consumer_secret'] ,
+      access_token:        "#{ENV['tw_access_token']}",
+      access_token_secret: ENV['tw_access_token_secret'],
+    )
+    # 設定ファイルの読み込み
+    f = File.open('./config/twbot_settings.yml', 'r')
+    since =f.readlines
+    since_start_id = since[0]
+    since_stop_id = since[1]
+    f.close
+
+    # 自分のタイムラインを取得
+    client.home_timeline(since_id: since_start_id,count: 200).each do |tw|
+      puts tw.text  if tw.text.match(/@benkyo_stardy(\n+|[[:blank:]]+)勉強しよ/).present?
+    end
+    (1..60).each do |i|
+      printf("%2s",60-i)
+      sleep(1)
+      printf "\e[1D\e[1D"
+    end
+
   end
 
 end

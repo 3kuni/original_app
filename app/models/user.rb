@@ -46,7 +46,17 @@ class User < ActiveRecord::Base
   def self.create_unique_email
     User.create_unique_string + "@example.com"
   end
+
+  # twitterからのゲストにメールアドレスを生成
+  def self.create_unique_guest_email
+    User.create_unique_string + "@guest.com"
+  end
   
+  # twitterからのゲストにパスワードを生成
+  def self.create_unique_guest_password
+    SecureRandom.hex(4)
+  end 
+
   # allow users to update their accounts without passwords
   def update_without_current_password(params, *options)
     params.delete(:current_password)
@@ -77,6 +87,10 @@ class User < ActiveRecord::Base
     Studysession.from_users_followed_by(self)
   end
   
+  def create_guest
+
+
+  end  
 
 
 end
