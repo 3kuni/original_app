@@ -87,7 +87,7 @@ class Twbot
     # STARDYのタイムラインを取得
     # client.home_timeline(since_id: since_start_id,count: 200)
     result_tweets.take(200).each_with_index do |tw, i| 
-      if tw.text.match(/@benkyo_stardy(\n+|[[:blank:]]+)勉強しよ/).present?
+      if tw.text.match(/@benkyo_stardy(\n+|[[:blank:]]+)勉強しよ.*/).present?
         puts "START: #{i}: @#{tw.user.screen_name}: #{tw.full_text}: id[#{tw.id}]: #{tw.created_at}" 
         stardy_user = User.find_by(provider:"twitter",name:tw.user.screen_name)
         # ゲストユーザとして登録
@@ -194,7 +194,8 @@ class Twbot
 
     # 自分のタイムラインを取得
     client.home_timeline(since_id: since_start_id,count: 200).each do |tw|
-      puts tw.text  if tw.text.match(/@benkyo_stardy(\n+|[[:blank:]]+)勉強しよ/).present?
+      puts tw.text  if tw.text.match(/@benkyo_stardy(\n+|[[:blank:]]+)勉強しよ.*/).present?
+      #puts tw.text
     end
     (1..60).each do |i|
       printf("%2s",60-i)
