@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   def show
-    @active_now=Studysession.find_by(user:current_user.id,active:true)
+    if current_user
+      @active_now=Studysession.find_by(user:current_user.id,active:true)
+    end
     @user=User.find(params[:id])
     @study_lst=Studysession.where(user:params[:id])
     @daily= Studysession.where(user:params[:id]).group("date(created_at)").sum(:time)

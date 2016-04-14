@@ -14,14 +14,16 @@
 <section>
   <%= render 'shared/stats' %>
 </section>
-<% unless current_user.id==@user.id %>
-  <div id="follow_form">
-    <% if current_user.following?(@user) %>
-      <%= render 'unfollow' %>
-    <% else %>
-      <%= render 'follow' %>
-    <% end %>
-  </div>
+<% if current_user %>
+  <% unless current_user.id==@user.id %>
+    <div id="follow_form">
+      <% if current_user.following?(@user) %>
+        <%= render 'unfollow' %>
+      <% else %>
+        <%= render 'follow' %>
+      <% end %>
+    </div>
+  <% end %>
 <% end %>
 
 
@@ -36,7 +38,7 @@
 <!-- カレンダー -->
 <% if @user.premium.present? %> 
   <%= "<span id=\"custom-prev\">#{fa_icon 'chevron-left'}</span>".html_safe %>
-<% elsif current_user.id==@user.id %>
+<% elsif current_user && current_user.id==@user.id %>
   <%= "<span>".html_safe %>
   <%= link_to (fa_icon 'chevron-left'),"javascript:void(0);" ,'data-container'=>"body",'data-toggle'=>"popover", 'data-placement'=>"bottom", 
   'data-html'=>"true",'data-content'=>"今月以外のカレンダーはプレミアム機能です" %>
@@ -51,7 +53,7 @@
 <span id="year"></span>年<span id="month"></span>
 <% if @user.premium.present? %> 
   <%= "<span id=\"custom-next\">#{fa_icon 'chevron-right'}</span>".html_safe %>
-<% elsif current_user.id==@user.id %>
+<% elsif current_user && current_user.id==@user.id %>
   <%= "<span>".html_safe %>
   <%= link_to (fa_icon 'chevron-right'),"javascript:void(0);" ,'data-container'=>"body",'data-toggle'=>"popover", 'data-placement'=>"bottom", 
   'data-html'=>"true",'data-content'=>"今月以外のカレンダーはプレミアム機能です" %>
@@ -149,7 +151,7 @@ $(document).ready(function() {
     <% end %>
     -->
 
-    <% if current_user.id==@user.id %>
+    <% if current_user && current_user.id==@user.id %>
       <% unless @user.premium.present? %>
         <%= link_to "14日以上前の記録","javascript:void(0);" ,'data-container'=>"body",'data-toggle'=>"popover", 'data-placement'=>"bottom", 
             'data-html'=>"true",'data-content'=>"14日以上前の表示はプレミアム機能です" %>
