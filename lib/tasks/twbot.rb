@@ -117,6 +117,7 @@ class Twbot
         else
           # 未登録ならゲストユーザとして登録
           User.create!(name: tw.user.screen_name,provider: "guest",uid:User.create_unique_string,email: User.create_unique_guest_email,password: User.create_unique_guest_password)
+          client.update("@#{tw.user.screen_name} ふぁい！(*•̀ᴗ•́*)و ̑̑", in_reply_to_status_id: tw.id) if Rails.env == 'production'
           
         end
       end
