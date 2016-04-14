@@ -37,6 +37,7 @@ class Twbot
         unless User.find_by(name:tw.user.screen_name)
           # 未登録ならゲストユーザとして登録
           User.create!(name: tw.user.screen_name,provider: "guest",uid: User.create_unique_string,
+                        nickname: tw.user.screen_name,
                        email: User.create_unique_guest_email,password: User.create_unique_guest_password)
           
           # ツイートからテキスト・つぶやきを取得
@@ -61,7 +62,7 @@ class Twbot
 
           # はじめてのメッセージ
           puts "登録して勉強開始しました！"
-          client.update("@#{tw.user.screen_name} はじめての勉強記録です！(*•̀ᴗ•́*)و ̑̑", in_reply_to_status_id: tw.id) if Rails.env == 'production'
+          client.update("@#{tw.user.screen_name} はじめての勉強記録です！⁽⁽٩(๑˃̶͈̀ ᗨ ˂̶͈́)۶⁾⁾", in_reply_to_status_id: tw.id) if Rails.env == 'production'
           client.favorite(tw.id) if Rails.env == 'production'
           client.retweet(tw.id) if Rails.env == 'production'
         else
