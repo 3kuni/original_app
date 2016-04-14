@@ -62,7 +62,7 @@ class Twbot
 
           # はじめてのメッセージ
           puts "登録して勉強開始しました！"
-          client.update("@#{tw.user.screen_name} はじめての勉強記録です！⁽⁽٩(๑˃̶͈̀ ᗨ ˂̶͈́)۶⁾⁾", in_reply_to_status_id: tw.id) if Rails.env == 'production'
+          client.update("@#{tw.user.screen_name} はじめての勉強記録です！⁽⁽٩(๑˃̶͈̀ ᗨ ˂̶͈́)۶⁾⁾「勉強おわ」のツイートでここに記録されます！http://www.stardy.co/users/#{guest_user.id}", in_reply_to_status_id: tw.id) if Rails.env == 'production'
           client.favorite(tw.id) if Rails.env == 'production'
           client.retweet(tw.id) if Rails.env == 'production'
         else
