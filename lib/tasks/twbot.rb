@@ -117,9 +117,9 @@ class Twbot
         client.favorite(tw.id) if Rails.env == 'production'
         client.retweet(tw.id) if Rails.env == 'production'
         if first 
-        last_update_start = tw.id
-        first=nil
-      end
+          last_update_start = tw.id
+          first=nil
+        end
       end
     end
 
