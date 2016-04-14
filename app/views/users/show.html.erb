@@ -160,7 +160,7 @@ $(document).ready(function() {
 
     <h4>フィード</h4>
     <ul class="collection">
-      <% @study_lst.each do |studysession| %>
+      <% @study_lst.take(30).each do |studysession| %>
         <%= render '/feeditem' ,feed_item: studysession %>
       <% end %>
     </ul>
