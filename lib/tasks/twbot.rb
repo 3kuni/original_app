@@ -120,16 +120,17 @@ class Twbot
       if first 
         last_update_start = tw.id
         first=nil
+        # 設定ファイルの更新
+        f = File.open('./config/twbot_settings.yml', 'w') # wは書き込み権限
+        f.puts last_update_start
+        #f.puts 686143010174713856
+        f.puts last_update_stop
+        #f.puts 686142291103203329
+        f.close
       end
     end
 
-    # 設定ファイルの更新
-    f = File.open('./config/twbot_settings.yml', 'w') # wは書き込み権限
-    f.puts last_update_start
-    #f.puts 686143010174713856
-    f.puts last_update_stop
-    #f.puts 686142291103203329
-    f.close
+
   end
 
   def self.set
