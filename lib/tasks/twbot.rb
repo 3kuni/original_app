@@ -116,10 +116,10 @@ class Twbot
         client.update("@#{tw.user.screen_name} ふぁいてぃん！(*•̀ᴗ•́*)و ̑̑", in_reply_to_status_id: tw.id) if Rails.env == 'production'
         client.favorite(tw.id) if Rails.env == 'production'
         client.retweet(tw.id) if Rails.env == 'production'
-        if first 
-          last_update_start = tw.id
-          first=nil
-        end
+      end
+      if first 
+        last_update_start = tw.id
+        first=nil
       end
     end
 
