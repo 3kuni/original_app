@@ -101,6 +101,7 @@ $(document).ready(function() {
 <!-- カード -->  
 <% i=0 %>
 <% @user.premium.present? ? l=500 : l=14 %>
+    <!--
     <% @daily.each do |key,val| %>
       <%= key %>
       :
@@ -109,10 +110,11 @@ $(document).ready(function() {
       <% end %>
       <%= val.modulo(60) %>分
       <br>
+      -->
+      <!-- 勉強グラフ描画 -->
+      <!--
         <svg xmlns="http://www.w3.org/2000/svg" width="100%" >
-          <!--<rect x="40%" y="0" width="8%" height="80" fill="#ffecb3"  />-->
-          <!-- 勉強グラフ描画 -->
-          <!--<rect x="41.93%" y="0" width="8%" height="80" fill="#ffecb3"  /> -->
+          
             <% spl=key.to_s.split("-") %>
             <% from = Time.new(spl[0],spl[1],spl[2]) %>
             <% to = from+1.day-1.second %>
@@ -140,10 +142,13 @@ $(document).ready(function() {
           <% end %>
           <rect x="0%" y="0" width="96%" height="80" fill="#ffffff" fill-opacity="0" stroke="#90a4ae" >
         </svg>
-
+      -->
+    <!--
       <% i +=1 %>
       <% break if i >=l %>
     <% end %>
+    -->
+
     <% if current_user.id==@user.id %>
       <% unless @user.premium.present? %>
         <%= link_to "14日以上前の記録","javascript:void(0);" ,'data-container'=>"body",'data-toggle'=>"popover", 'data-placement'=>"bottom", 
