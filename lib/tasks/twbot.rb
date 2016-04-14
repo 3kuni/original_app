@@ -27,7 +27,7 @@ class Twbot
     result_tweets = client.home_timeline(since_id: since_start_id,count: 200)
     first = true
     result_tweets.take(200).each_with_index do |tw, i| 
-      # 「勉強おわ」への処理
+      # 「勉強おわ」が本文にあった時の処理
       if tw.text.match(/@benkyo_stardy(\n+|[[:blank:]]+)勉強おわ.*/).present?
         puts "STOP: #{i}: @#{tw.user.screen_name}: #{tw.full_text}: id[#{tw.id}]: #{tw.created_at}" 
         stardy_user = User.find_by(provider:"twitter",name:tw.user.screen_name)
@@ -84,23 +84,25 @@ class Twbot
         end
       end
 
-      # 「勉強しよ」への処理
+      # 「勉強しよ」が本文にあった時の処理
       if tw.text.match(/@benkyo_stardy(\n+|[[:blank:]]+)勉強しよ.*/).present?
         puts "START: #{i}: @#{tw.user.screen_name}: #{tw.full_text}: id[#{tw.id}]: #{tw.created_at}" 
+        # ツイートからテキスト・つぶやきを取得
+        option1 = tw.text.match(/@benkyo_stardy(\n+|[[:blank:]]+)勉強しよ(\n|[[:blank:]]+)(?<text>\S+)(\n|[[:blank:]]*)/)
+        option2 = tw.text.match(/@benkyo_stardy(\n+|[[:blank:]]+)勉強しよ(\n|[[:blank:]]+)\S+(\n|[[:blank:]]+)(?<tweet>\S+)/)
+        textbook = nil
+        tweet = nil
+        if option1.present?
+          textbook = option1[:text]
+          tweet = option2[:tweet] if option2.present?
+        else
+          textbook = "勉強"
+        end
+
+        # すでに登録済みのユーザかどうか判定
         stardy_user = User.find_by(provider:"twitter",name:tw.user.screen_name)
-        # ゲストユーザとして登録
-        # User.create!(name: "dfasaaa",provider: "guest",uid:User.create_unique_string,email: User.create_unique_guest_email,password: User.create_unique_guest_password)
         if stardy_user.present?
-          option1 = tw.text.match(/@benkyo_stardy(\n+|[[:blank:]]+)勉強しよ(\n|[[:blank:]]+)(?<text>\S+)(\n|[[:blank:]]*)/)
-          option2 = tw.text.match(/@benkyo_stardy(\n+|[[:blank:]]+)勉強しよ(\n|[[:blank:]]+)\S+(\n|[[:blank:]]+)(?<tweet>\S+)/)
-          textbook = nil
-          tweet = nil
-          if option1.present?
-            textbook = option1[:text]
-            tweet = option2[:tweet] if option2.present?
-          else
-            textbook = "勉強"
-          end
+          # 登録済みユーザ
           @studysession = Studysession.new(user: stardy_user.id, room: "1", textbook: textbook, tweet: tweet,active: true)
           already_exist = Studysession.find_by(user: stardy_user.id,active: true)
           unless already_exist.present?
@@ -109,11 +111,16 @@ class Twbot
             @room = Room.find(1)
             @room.update_attributes(current_students:@room.current_students.to_i+1)
           end
+          client.update("@#{tw.user.screen_name} ふぁいてぃん！(*•̀ᴗ•́*)و ̑̑", in_reply_to_status_id: tw.id) if Rails.env == 'production'
+          client.favorite(tw.id) if Rails.env == 'production'
+          client.retweet(tw.id) if Rails.env == 'production'
+        else
+          # 未登録ならゲストユーザとして登録
+          User.create!(name: tw.user.screen_name,provider: "guest",uid:User.create_unique_string,email: User.create_unique_guest_email,password: User.create_unique_guest_password)
+          
         end
-        client.update("@#{tw.user.screen_name} ふぁいてぃん！(*•̀ᴗ•́*)و ̑̑", in_reply_to_status_id: tw.id) if Rails.env == 'production'
-        client.favorite(tw.id) if Rails.env == 'production'
-        client.retweet(tw.id) if Rails.env == 'production'
       end
+
       if first 
         last_update_start = tw.id
         first=nil
