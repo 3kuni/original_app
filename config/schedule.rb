@@ -36,6 +36,6 @@ every 1.day , :at => '5:30 pm' do
 	runner "Twbot.evening"
 end
 
-every 1.minute  do
+every 10000.minute  do
 	runner "Twbot.crontest"
 end
