@@ -36,6 +36,6 @@ every 1.day , at: => '4:35 pm' do
 	runner "Twbot.evening"
 end
 
-every 1.day , at: => '7:35 am' do
+every 1.minute , at: => '7:35 am' do
 	runner "Twbot.crontest"
 end
