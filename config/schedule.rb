@@ -32,7 +32,7 @@ every 90.seconds do
   runner "Twbot.search"
 end
 
-every 1.day , :at => '7:00 pm' do
+every 1.day , :at => '7:00 am' do
 	runner "Twbot.morning"
 end
 
