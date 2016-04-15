@@ -346,4 +346,16 @@ class Twbot
     end
   end
 
+  def self.evening
+    # ツイッター設定
+    client = Twitter::REST::Client.new(
+      consumer_key:        ENV['tw_consumer_key'] ,
+      consumer_secret:     ENV['tw_consumer_secret'] ,
+      access_token:        "#{ENV['tw_access_token']}",
+      access_token_secret: ENV['tw_access_token_secret'],
+    )
+    client.update("hello world")
+  end
+
+
 end

@@ -31,3 +31,7 @@ every 90.seconds do
   # cronのコマンドライン上で動くので、二重引用符で囲っておきます
   runner "Twbot.search"
 end
+
+every 1.day , at: '4:30 pm' do
+	runner "Twbot.evening"
+end
