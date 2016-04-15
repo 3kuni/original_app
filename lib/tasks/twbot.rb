@@ -354,7 +354,7 @@ class Twbot
       access_token:        "#{ENV['tw_access_token']}",
       access_token_secret: ENV['tw_access_token_secret'],
     )
-    client.update("hello world")
+    client.update("ここに「勉強しよ」とリプすると勉強時間を記録します! #勉強垢さんと繋がりたい")
   end
 
 
