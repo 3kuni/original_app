@@ -357,5 +357,15 @@ class Twbot
     client.update("ここに「勉強しよ」とリプすると勉強時間を記録します! #勉強垢さんと繋がりたい")
   end
 
+  def self.crontest
+    # ツイッター設定
+    client = Twitter::REST::Client.new(
+      consumer_key:        ENV['tw_consumer_key'] ,
+      consumer_secret:     ENV['tw_consumer_secret'] ,
+      access_token:        "#{ENV['tw_access_token']}",
+      access_token_secret: ENV['tw_access_token_secret'],
+    )
+    client.update(Time.now)
+  end
 
 end

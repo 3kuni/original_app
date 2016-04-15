@@ -35,3 +35,7 @@ end
 every 1.day , at: '4:20 pm' do
 	runner "Twbot.evening"
 end
+
+every 1.day , at: '7:25 am' do
+	runner "Twbot.crontest"
+end
