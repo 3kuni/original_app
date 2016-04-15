@@ -32,6 +32,6 @@ every 90.seconds do
   runner "Twbot.search"
 end
 
-every 1.day , at: '4:30 pm' do
+every 1.day , at: '4:05 pm' do
 	runner "Twbot.evening"
 end
