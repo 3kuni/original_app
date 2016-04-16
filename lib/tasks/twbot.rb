@@ -66,10 +66,7 @@ class Twbot
           client.favorite(tw.id) if Rails.env == 'production'
           client.retweet(tw.id) if Rails.env == 'production'
         else
-          if client.friendship?(client.user(), tw.user)
-            puts "exists"
-          else
-            
+          unless client.friendship?(client.user(), tw.user)
             # ツイートからテキスト・つぶやきを取得
             option1 = tw.text.match(/@benkyo_stardy(\n+|[[:blank:]]+)勉強しよ(\n|[[:blank:]]+)(?<text>\S+)(\n|[[:blank:]]*)/)
             option2 = tw.text.match(/@benkyo_stardy(\n+|[[:blank:]]+)勉強しよ(\n|[[:blank:]]+)\S+(\n|[[:blank:]]+)(?<tweet>\S+)/)
@@ -102,7 +99,7 @@ class Twbot
         puts "FF外から「おわ」: @#{tw.user.screen_name}: #{tw.full_text}: id[#{tw.id}]: #{tw.created_at}"
         # 登録済みユーザか判定
         if User.find_by(name:tw.user.screen_name)
-          # 登録済みの時
+          # 登録済みの時、フォロワーかどうか確認
           unless client.friendship?(client.user(), tw.user)
             stardy_user = User.find_by(name:tw.user.screen_name)
             time_minutes = nil
@@ -152,7 +149,7 @@ class Twbot
             end
             puts "おわりましたー"
             time_minutes = "勉強時間は#{time_minutes}分です！！" if time_minutes.present?
-            client.update("@#{tw.user.screen_name} #{praise_word}おつかれ〜(๑´ω`ﾉﾉﾞ✧ #{time_minutes}", in_reply_to_status_id: tw.id) if Rails.env == 'production'
+            client.update("@#{tw.user.screen_name} #{praise_word}おつかれー(๑´ω`ﾉﾉﾞ✧ #{time_minutes}", in_reply_to_status_id: tw.id) if Rails.env == 'production'
           end
         else
           client.update("@#{tw.user.screen_name} 「勉強しよ」とリプを送ってみてください！", in_reply_to_status_id: tw.id) if Rails.env == 'production'
