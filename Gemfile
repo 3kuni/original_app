@@ -54,6 +54,7 @@ gem 'twitter'
 gem 'dotenv-rails'
 #gem 'open-uri' 
 #gem 'todoist-ruby', require: 'todoist'
+gem 'tweetstream'
 
 group :doc do
   gem 'sdoc', '0.3.20', require: false

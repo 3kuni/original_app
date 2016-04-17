@@ -1,5 +1,6 @@
 class Twbot
   require 'twitter'
+  require 'tweetstream'
   Dotenv.load
 
   def self.search
@@ -31,7 +32,7 @@ class Twbot
       end
 
       # 「勉強しよ」の処理
-      if tw.full_text.match(/@benkyo_stardy(\n+|[[:blank:]]+)勉強しよ.*/).present?
+      if tw.full_text.match(/@benkyo_stardy.*[\r\n]*.*勉強しよ.*/).present?
         puts "FF外から: @#{tw.user.screen_name}: #{tw.full_text}: id[#{tw.id}]: #{tw.created_at}"
         # 未登録のユーザか判定
         unless User.find_by(name:tw.user.screen_name)
@@ -222,7 +223,7 @@ class Twbot
       end
 
       # 「勉強しよ」が本文にあった時の処理
-      if tw.text.match(/@benkyo_stardy(\n+|[[:blank:]]+)勉強しよ.*/).present?
+      if tw.text.match(/@benkyo_stardy.*[\r\n]*.*勉強しよ.*/).present?
         puts "START: #{i}: @#{tw.user.screen_name}: #{tw.full_text}: id[#{tw.id}]: #{tw.created_at}" 
         # ツイートからテキスト・つぶやきを取得
         option1 = tw.text.match(/@benkyo_stardy(\n+|[[:blank:]]+)勉強しよ(\n|[[:blank:]]+)(?<text>\S+)(\n|[[:blank:]]*)/)
@@ -256,7 +257,7 @@ class Twbot
       end
 
       if first 
-        last_update_start = tw.id if tw.id > last_update_start
+        #last_update_start = tw.id if tw.id.to_i > last_update_start.to_i
         first=nil
         # 設定ファイルの更新
         f = File.open('./config/twbot_settings.yml', 'w') # wは書き込み権限
@@ -333,11 +334,11 @@ class Twbot
     result_tweets_non_follower.take(200).each do |tw|
       puts "FF外から: @#{tw.user.screen_name}: #{tw.full_text}: id[#{tw.id}]: #{tw.created_at}"
       # 未登録のユーザか判定
-      unless User.find_by(name:tw.user.screen_name)
+      if User.find_by(name:tw.user.screen_name)
         if client.friendship?(client.user(), tw.user)
-          puts "following"
+          puts "following @#{tw.user.screen_name}"
         else
-          puts "not following"
+          puts "not following @#{tw.user.screen_name}"
         end
       end
     end
@@ -376,6 +377,31 @@ class Twbot
     client.update("こんばんは( ･ㅂ･ )ここに「勉強しよ」とリプすると勉強時間を記録します! #勉強垢")
   end
 
+  def self.streaming
+    TweetStream.configure do |config|
+      config.consumer_key       = ENV['tw_consumer_key'] 
+      config.consumer_secret    = ENV['tw_consumer_secret']
+      config.oauth_token        = "#{ENV['tw_access_token']}"
+      config.oauth_token_secret = ENV['tw_access_token_secret']
+      config.auth_method        = :oauth
+    end
 
+    # This will pull a sample of all tweets based on
+    # your Twitter account's Streaming API role.
+    TweetStream::Client.new.track('勉強') do |status|
+      # The status object is a special Hash with
+      # method access to its keys.
+      puts "#{status.text}"
+    end
+  end
 
+  def self.start
+  end
+
+  def self.guest_start
+  end
+
+  def self.stop
+  end
+  
 end
