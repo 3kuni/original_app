@@ -257,9 +257,11 @@ class Twbot
       end
 
       if first 
-        #last_update_start = tw.id if tw.id.to_i > last_update_start.to_i
+        puts "Timeline #{tw.id.to_i} Lastupdate #{last_update_start.to_i}"
+        last_update_start = tw.id if tw.id.to_i > last_update_start.to_i
         first=nil
         # 設定ファイルの更新
+        puts "New lastupdate #{last_update_start}"
         f = File.open('./config/twbot_settings.yml', 'w') # wは書き込み権限
         f.puts last_update_start
         f.close
@@ -403,5 +405,5 @@ class Twbot
 
   def self.stop
   end
-  
+
 end
