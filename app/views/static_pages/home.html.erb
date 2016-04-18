@@ -45,29 +45,7 @@
 <% end %>
 
 <% unless @active_now.present? %>
-    <!--
-    <div class="row" style="margin-top:3rem;">
-      <div class="col  m12 l6">
-        <div class="card-panel grey lighten-5">
-          <span>
-            <h5>1.部屋を選択</h5>
-            目標や学年別に部屋があるので、好きな部屋に入って勉強することができます :)
-            
-          </span>
-        </div>
-      </div>
-      <div class="col m12 l6">
-        <div class="card-panel grey lighten-5">
-          <span>
-            <h5>2.教材・活動を選択</h5>
-            Amazonで検索するか、教材を自分で登録すると勉強セッションが開始します！
-          </span>
-        </div>
-      </div>
-    </div>
-  -->
   <%= link_to "今すぐ開始" , ssession_path ,class: "waves-effect waves-light btn-large start" %>
-
 <% else %>
   <% session[:room]=@active_now.room %>
   <%= link_to "セッションに戻る", "/studysessions/studying/#{@active_now.id}/#{session[:room]}" ,class: "waves-effect waves-light btn-large custombutton" %>
@@ -78,7 +56,7 @@
 
 <!-- カード -->  
 <% if signed_in? %>
-<h4>タイムライン</h4>
+  <h4>タイムライン</h4>
   <ul class="collection">
     <% @feeditems.first(20).each do |studysession| %>
       <%= render '/feeditem' ,feed_item: studysession %>
