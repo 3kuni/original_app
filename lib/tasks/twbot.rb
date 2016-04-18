@@ -224,17 +224,20 @@ class Twbot
       end
 
       # 「勉強しよ」が本文にあった時の処理
+      # 「勉強しよ」は「勉強しよ！」「勉強しよ(改行)」なども含め確実に捕捉するが、テキストとツイートは規則どおりに捕捉
       if tw.text.match(/@benkyo_stardy.*[\r\n]*.*勉強しよ.*/).present?
         puts "START: #{i}: @#{tw.user.screen_name}: #{tw.full_text}: id[#{tw.id}]: #{tw.created_at}" 
         
         # ツイートからテキスト・つぶやきを取得
+        # 
+        optional = tw.text.match(/@benkyo_stardy[[:blank:]]{0,1}(\n+|[[:blank:]]+)勉強しよ(\n*|[[:blank:]]*)(?<text>\S+)(\n+|[[:blank:]]+|\S*)(?<tweet>\S+|.*)/)
         option1 = tw.text.match(/@benkyo_stardy(\n+|[[:blank:]]+)勉強しよ(\n|[[:blank:]]+)(?<text>\S+)(\n|[[:blank:]]*)/)
         option2 = tw.text.match(/@benkyo_stardy(\n+|[[:blank:]]+)勉強しよ(\n|[[:blank:]]+)\S+(\n|[[:blank:]]+)(?<tweet>\S+)/)
         textbook = nil
         tweet = nil
-        if option1.present?
-          textbook = option1[:text]
-          tweet = option2[:tweet] if option2.present?
+        if optional.present?
+          textbook = optional[:text]
+          tweet = optional[:tweet] if optionl[:tweet].present?
         else
           textbook = "勉強"
         end
@@ -447,8 +450,10 @@ class Twbot
   def self.stop
   end
 
+  # ほめリプ
   def self.praise(times = 0 ,new_total_time = 0 ,last_total_time = 0)
-    # ほめリプ
+    # timesはセッション回数、new_total_timeは今回を含む勉強時間（分）、last_total_timeは前回までの勉強時間（分）
+    # 戻り値はほめリプの文章
     if  times == 1
       "おめでとうございます！初めて記録しました！"
     elsif new_total_time >= (60*3) && last_total_time < (60*3) 
