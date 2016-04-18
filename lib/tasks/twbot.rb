@@ -110,14 +110,14 @@ class Twbot
               if stardy_active_session.present?
                 puts "Now active!"
                 # 時間、回数のカウント
-                time_minutes=(Time.now.to_i-stardy_active_session.created_at.to_i)/60
-                t_user=stardy_user.total_time.to_i + time_minutes
+                time_minutes = (Time.now.to_i-stardy_active_session.created_at.to_i)/60
+                t_user = stardy_user.total_time.to_i + time_minutes
                 times = stardy_user.times.to_i + 1
                 # User,Studysessionの更新
                 stardy_user.update_attributes(total_time:t_user,times: times)
                 stardy_active_session.update_attributes(active:false,time:time_minutes)
                 # ほめリプ
-                if  times==1
+                if  times == 1
                   praise_word = "おめでとうございます！初めて記録しました！"
                 elsif stardy_user.total_time.to_i < (60*3) && t_user >= (60*3)
                   praise_word =  "3時間突破！"
@@ -168,7 +168,7 @@ class Twbot
       # 「勉強おわ」が本文にあった時の処理
       if tw.text.match(/@benkyo_stardy(\n+|[[:blank:]]+)勉強おわ.*/).present?
         puts "STOP: #{i}: @#{tw.user.screen_name}: #{tw.full_text}: id[#{tw.id}]: #{tw.created_at}" 
-        stardy_user = User.find_by(provider:"twitter",name:tw.user.screen_name)
+        stardy_user = User.find_by(name:tw.user.screen_name)
         time_minutes = nil
         praise_word = nil
         if stardy_user.present?
@@ -238,7 +238,7 @@ class Twbot
         end
 
         # すでに登録済みのユーザかどうか判定
-        stardy_user = User.find_by(provider:"twitter",name:tw.user.screen_name)
+        stardy_user = User.find_by(name:tw.user.screen_name)
         if stardy_user.present?
           # 登録済みユーザ
           @studysession = Studysession.new(user: stardy_user.id, room: "1", textbook: textbook, tweet: tweet,active: true)
@@ -387,13 +387,21 @@ class Twbot
       config.oauth_token_secret = ENV['tw_access_token_secret']
       config.auth_method        = :oauth
     end
+        # ツイッターREST API設定
+    client = Twitter::REST::Client.new(
+      consumer_key:        ENV['tw_consumer_key'] ,
+      consumer_secret:     ENV['tw_consumer_secret'] ,
+      access_token:        "#{ENV['tw_access_token']}",
+      access_token_secret: ENV['tw_access_token_secret'],
+    )
 
     # This will pull a sample of all tweets based on
     # your Twitter account's Streaming API role.
-    TweetStream::Client.new.track('勉強') do |status|
+    TweetStream::Client.new.track('オスプレイ') do |status|
       # The status object is a special Hash with
       # method access to its keys.
-      puts "#{status.text}"
+      puts "id: #{status.id} #{status.text}"
+      client.favorite(status.id)
     end
   end
 
@@ -404,6 +412,31 @@ class Twbot
   end
 
   def self.stop
+  end
+
+  def self.praise(times = 0 ,new_total_time = 0 ,last_total_time = 0)
+    # ほめリプ
+    if  times == 1
+      "おめでとうございます！初めて記録しました！"
+    elsif new_total_time >= (60*3) && last_total_time < (60*3) 
+      "3時間突破！"
+    elsif times == 3
+      "3回目の勉強記録です！この調子で継続できたらいいですね！！"
+    elsif new_total_time >= (60*6) && last_total_time < (60*6) 
+      "勉強記録が6時間を超えました！"
+    elsif times == 6
+      "勉強を記録したのは6回目です！もう慣れてきましたか？？"
+    elsif new_total_time >= (60*10) && last_total_time < (60*10)
+      "記録が10時間を超えました！すごい！"
+    elsif times == 10
+      "10回目の記録です！習慣になってきましたね！！"
+    elsif new_total_time >= (60*30) && last_total_time < (60*30)
+      "祝！30時間以上勉強しました！"
+    elsif times > 10 && (times % 5 == 0)
+      "#{times}回記録しましたー！"
+    elsif (last_total_time/300).floor < (new_total_time/300).floor && last_total_time > 600
+      "#{new_total_time.to_i/60}時間を超えました！！"     
+    end
   end
 
 end
