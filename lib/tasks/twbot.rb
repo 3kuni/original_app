@@ -237,7 +237,7 @@ class Twbot
         tweet = nil
         if optional.present?
           textbook = optional[:text]
-          tweet = optional[:tweet] if optionl[:tweet].present?
+          tweet = optional[:tweet] if optional[:tweet].present?
         else
           textbook = "勉強"
         end
