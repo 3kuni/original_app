@@ -19,7 +19,7 @@ class Twbot
     f.close
     last_update_start=since_start_id
     puts "since_start_id #{since_start_id}"
-    
+
 =begin
     # 検索でFF外から
     query_start = "勉強しよ OR 勉強おわ"
@@ -226,6 +226,7 @@ class Twbot
       # 「勉強しよ」が本文にあった時の処理
       if tw.text.match(/@benkyo_stardy.*[\r\n]*.*勉強しよ.*/).present?
         puts "START: #{i}: @#{tw.user.screen_name}: #{tw.full_text}: id[#{tw.id}]: #{tw.created_at}" 
+        
         # ツイートからテキスト・つぶやきを取得
         option1 = tw.text.match(/@benkyo_stardy(\n+|[[:blank:]]+)勉強しよ(\n|[[:blank:]]+)(?<text>\S+)(\n|[[:blank:]]*)/)
         option2 = tw.text.match(/@benkyo_stardy(\n+|[[:blank:]]+)勉強しよ(\n|[[:blank:]]+)\S+(\n|[[:blank:]]+)(?<tweet>\S+)/)
@@ -254,12 +255,43 @@ class Twbot
           client.update("@#{tw.user.screen_name} ふぁいてぃん！(*•̀ᴗ•́*)و ̑̑", in_reply_to_status_id: tw.id) if Rails.env == 'production'
           client.favorite(tw.id) if Rails.env == 'production'
           client.retweet(tw.id) if Rails.env == 'production'
+        else
+          # 未登録ならゲストユーザとして登録
+          User.create!(name: tw.user.screen_name,provider: "guest",uid: User.create_unique_string,
+                        nickname: tw.user.screen_name,
+                       email: User.create_unique_guest_email,password: User.create_unique_guest_password)
+          
+          # ツイートからテキスト・つぶやきを取得
+          option1 = tw.text.match(/@benkyo_stardy(\n+|[[:blank:]]+)勉強しよ(\n|[[:blank:]]+)(?<text>\S+)(\n|[[:blank:]]*)/)
+          option2 = tw.text.match(/@benkyo_stardy(\n+|[[:blank:]]+)勉強しよ(\n|[[:blank:]]+)\S+(\n|[[:blank:]]+)(?<tweet>\S+)/)
+          textbook = nil
+          tweet = nil
+          if option1.present?
+            textbook = option1[:text]
+            tweet = option2[:tweet] if option2.present?
+          else
+            textbook = "勉強"
+          end
+
+          # ユーザインスタンスを作成、セッションを開始
+          guest_user = User.find_by(name: tw.user.screen_name)
+          @studysession = Studysession.new(user: guest_user.id, room: "1", textbook: textbook, tweet: tweet,active: true)
+          @studysession.save
+          @studysession.create_activity :create, owner: guest_user
+          @room = Room.find(1)
+          @room.update_attributes(current_students:@room.current_students.to_i+1)
+
+          # はじめてのメッセージ
+          puts "登録して勉強開始しました！"
+          client.update("@#{tw.user.screen_name} はじめての勉強記録です！⁽⁽٩(๑˃̶͈̀ ᗨ ˂̶͈́)۶⁾⁾「勉強おわ」のツイートでここに記録されます！http://www.stardy.co/users/#{guest_user.id}", in_reply_to_status_id: tw.id) if Rails.env == 'production'
+          client.favorite(tw.id) if Rails.env == 'production'
+          client.retweet(tw.id) if Rails.env == 'production'
         end
       end
 
       if first 
         puts "Timeline #{tw.id.to_i} Lastupdate #{last_update_start.to_i}"
-        last_update_start = tw.id if tw.id.to_i > last_update_start.to_i
+        last_update_start = tw.id 
         first=nil
         # 設定ファイルの更新
         puts "New lastupdate #{last_update_start}"

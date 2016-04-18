@@ -36,14 +36,14 @@ module ApplicationHelper
     #before_onehour = before_onehour[1] + "_" + before_onehour[2] + "_JST"
     before_onehour = time_for_tw(30.minutes.ago)
     query_start = "勉強しよ since:#{before_onehour}"
-    result_tweets = client.search(query_start, count: 100, result_type: "recent",  exclude: "retweets")
-    puts "結果: #{result_tweets.count}件"
+  #result_tweets = client.search(query_start, count: 100, result_type: "recent",  exclude: "retweets")
+  #puts "結果: #{result_tweets.count}件"
     tweets_embed = [] #
     #result_tweets.take(10).each_with_index do |tw, i| 
     #  puts "START: #{i}: @#{tw.user.screen_name}: #{tw.full_text}: id[#{tw.id}]: #{tw.created_at}"
     #end 
-    search_res= "<span style=\"font-size:3rem\">#{result_tweets.count}</span>人が<br>「勉強しよ」と言っています！(直近30分)" 
-    return [search_res.html_safe ,result_tweets] #
+  #search_res= "<span style=\"font-size:3rem\">#{result_tweets.count}</span>人が<br>「勉強しよ」と言っています！(直近30分)" 
+  #return [search_res.html_safe ,result_tweets] #
   end
 
   def time_for_tw(time)
