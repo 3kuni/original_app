@@ -19,7 +19,8 @@ class Twbot
     f.close
     last_update_start=since_start_id
     puts "since_start_id #{since_start_id}"
-
+    
+=begin
     # 検索でFF外から
     query_start = "勉強しよ OR 勉強おわ"
     result_tweets_non_follower = client.search(query_start, count: 200, result_type: "recent",  exclude: "retweets", since_id: since_start_id, to: "benkyo_stardy")
@@ -159,7 +160,7 @@ class Twbot
       end
     end
     sleep(5)
-
+=end
 
     # STARDYのタイムラインを取得
     result_tweets = client.home_timeline(since_id: since_start_id,count: 200)

@@ -27,7 +27,7 @@ every 10.minute do
   runner "Timeover.kill"
 end
 
-every 90.seconds do
+every 3.minute do
   # cronのコマンドライン上で動くので、二重引用符で囲っておきます
   runner "Twbot.search"
 end
