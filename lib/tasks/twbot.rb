@@ -229,7 +229,6 @@ class Twbot
         puts "START: #{i}: @#{tw.user.screen_name}: #{tw.full_text}: id[#{tw.id}]: #{tw.created_at}" 
         
         # ツイートからテキスト・つぶやきを取得
-        # 
         optional = tw.text.match(/@benkyo_stardy[[:blank:]]{0,1}(\n+|[[:blank:]]+)勉強しよ(\n*|[[:blank:]]*)(?<text>\S+)(\n+|[[:blank:]]+|\S*)(?<tweet>\S+|.*)/)
         option1 = tw.text.match(/@benkyo_stardy(\n+|[[:blank:]]+)勉強しよ(\n|[[:blank:]]+)(?<text>\S+)(\n|[[:blank:]]*)/)
         option2 = tw.text.match(/@benkyo_stardy(\n+|[[:blank:]]+)勉強しよ(\n|[[:blank:]]+)\S+(\n|[[:blank:]]+)(?<tweet>\S+)/)
@@ -241,6 +240,7 @@ class Twbot
         else
           textbook = "勉強"
         end
+        puts "Text: #{textbook} Tweet: #{tweet}"
 
         # すでに登録済みのユーザかどうか判定
         stardy_user = User.find_by(name:tw.user.screen_name)
@@ -351,36 +351,7 @@ class Twbot
     f.close
   end
 
-  def self.test
-    #設定
-    client = Twitter::REST::Client.new(
-      consumer_key:        ENV['tw_consumer_key'] ,
-      consumer_secret:     ENV['tw_consumer_secret'] ,
-      access_token:        "#{ENV['tw_access_token']}",
-      access_token_secret: ENV['tw_access_token_secret'],
-    )
-    # 設定ファイルの読み込み
-    f = File.open('./config/twbot_settings.yml', 'r')
-    since =f.readlines
-    since_start_id = since[0]
-    f.close
-    # 手動で設定
-    since_start_id = 720591998600609792
-    # FF外からのツイートの処理
-    query_start = "勉強しよ OR 勉強おわ"
-    result_tweets_non_follower = client.search(query_start, count: 200, result_type: "recent",  exclude: "retweets", since_id: since_start_id, to: "benkyo_stardy")
-    result_tweets_non_follower.take(200).each do |tw|
-      puts "FF外から: @#{tw.user.screen_name}: #{tw.full_text}: id[#{tw.id}]: #{tw.created_at}"
-      # 未登録のユーザか判定
-      if User.find_by(name:tw.user.screen_name)
-        if client.friendship?(client.user(), tw.user)
-          puts "following @#{tw.user.screen_name}"
-        else
-          puts "not following @#{tw.user.screen_name}"
-        end
-      end
-    end
-  end
+
 
   def self.morning
     # ツイッター設定
@@ -424,7 +395,7 @@ class Twbot
       config.auth_method        = :oauth
     end
         # ツイッターREST API設定
-    client = Twitter::REST::Client.new(
+    client_rest = Twitter::REST::Client.new(
       consumer_key:        ENV['tw_consumer_key'] ,
       consumer_secret:     ENV['tw_consumer_secret'] ,
       access_token:        "#{ENV['tw_access_token']}",
@@ -433,21 +404,125 @@ class Twbot
 
     # This will pull a sample of all tweets based on
     # your Twitter account's Streaming API role.
-    TweetStream::Client.new.track('オスプレイ') do |status|
+    client = TweetStream::Client.new
+    client.userstream do |status|
       # The status object is a special Hash with
       # method access to its keys.
       puts "id: #{status.id} #{status.text}"
-      client.favorite(status.id)
+      #client.favorite(status.id)
+
+      if status.text.match(/@benkyo_stardy.*[\r\n]*.*勉強しよ.*/).present?
+        puts "now streaming"
+        Twbot.start(status)
+      end
+
+      if status.text.match(/@benkyo_stardy.*[\r\n]*.*勉強おわ.*/).present?
+        puts "stop!!"
+        Twbot.stop(status)
+      end
     end
   end
 
-  def self.start
+  def self.start(tw)
+    # REST APIの設定
+    client = Twitter::REST::Client.new(
+      consumer_key:        ENV['tw_consumer_key'] ,
+      consumer_secret:     ENV['tw_consumer_secret'] ,
+      access_token:        "#{ENV['tw_access_token']}",
+      access_token_secret: ENV['tw_access_token_secret'],
+    )
+
+    # ツイートからテキスト・つぶやきを取得
+    optional = tw.text.match(/@benkyo_stardy[[:blank:]]{0,1}(\n+|[[:blank:]]+)勉強しよ(\n*|[[:blank:]]*)(?<text>\S+)(\n+|[[:blank:]]+|\S*)(?<tweet>\S+|.*)/)
+    option1 = tw.text.match(/@benkyo_stardy(\n+|[[:blank:]]+)勉強しよ(\n|[[:blank:]]+)(?<text>\S+)(\n|[[:blank:]]*)/)
+    option2 = tw.text.match(/@benkyo_stardy(\n+|[[:blank:]]+)勉強しよ(\n|[[:blank:]]+)\S+(\n|[[:blank:]]+)(?<tweet>\S+)/)
+    textbook = nil
+    tweet = nil
+    if optional.present?
+      textbook = optional[:text]
+      tweet = optional[:tweet] if optional[:tweet].present?
+    else
+      textbook = "勉強"
+    end
+    puts "Text: #{textbook} Tweet: #{tweet}"
+
+    # デフォルトの励ましコメント
+    encourage = "ふぁいてぃん!!(*•̀ᴗ•́*)و ̑̑"
+
+    # ツイッターからの新規ゲストユーザー
+    stardy_user = User.find_by(name:tw.user.screen_name)
+    unless stardy_user.present?
+      User.create!(name: tw.user.screen_name,provider: "guest",uid: User.create_unique_string,
+                        nickname: tw.user.screen_name,
+                       email: User.create_unique_guest_email,password: User.create_unique_guest_password)
+      stardy_user = User.find_by(name:tw.user.screen_name)
+      encourage = "はじめての勉強記録です！⁽⁽٩(๑˃̶͈̀ ᗨ ˂̶͈́)۶⁾⁾「勉強おわ」のツイートでここに記録されます！http://www.stardy.co/users/#{stardy_user.id}"
+    end
+    # セッションオブジェクトを作成
+    @studysession = Studysession.new(user: stardy_user.id, room: "1", textbook: textbook, tweet: tweet,active: true)
+    already_exist = Studysession.find_by(user: stardy_user.id,active: true)
+    # セッション中でないことを確認して.save
+    unless already_exist.present?
+      @studysession.save
+      @studysession.create_activity :create, owner: stardy_user
+      @room = Room.find(1)
+      @room.update_attributes(current_students:@room.current_students.to_i+1)
+    end
+    client.update("@#{tw.user.screen_name} #{encourage}", in_reply_to_status_id: tw.id) if Rails.env == 'production'
+    puts "@#{tw.user.screen_name} #{encourage}"
+    client.favorite(tw.id) if Rails.env == 'production'
+    client.retweet(tw.id) if Rails.env == 'production'
   end
 
-  def self.guest_start
-  end
+  def self.stop(tw)
+    # REST APIの設定
+    client = Twitter::REST::Client.new(
+      consumer_key:        ENV['tw_consumer_key'] ,
+      consumer_secret:     ENV['tw_consumer_secret'] ,
+      access_token:        "#{ENV['tw_access_token']}",
+      access_token_secret: ENV['tw_access_token_secret'],
+    )
 
-  def self.stop
+    stardy_user = User.find_by(name:tw.user.screen_name)
+    time_minutes = nil
+    praise_word = nil
+    if stardy_user.present?
+      # ユーザー登録済みの場合
+      stardy_active_session = Studysession.find_by(user: stardy_user.id,active: true)
+      if stardy_active_session.present?
+        # 時間、回数のカウント
+        time_minutes=(Time.now.to_i-stardy_active_session.created_at.to_i)/60
+        t_user=stardy_user.total_time.to_i + time_minutes
+        times = stardy_user.times.to_i + 1
+        
+        # User,Studysessionの更新
+        stardy_user.update_attributes(total_time:t_user,times: times)
+        stardy_active_session.update_attributes(active:false,time:time_minutes)
+
+        # ほめリプ
+        praise_word = Twbot.praise(times,t_user,time_minutes)
+
+        # Roomの更新
+        @room=Room.find(stardy_active_session.room)
+        t_room=@room.minutes_total.to_i + time_minutes
+        @room.update_attributes(minutes_total:t_room)
+        unless @room.current_students==0 
+          @room.update_attributes(current_students:@room.current_students-1)
+        end
+        time_minutes = "勉強時間は#{time_minutes}分です！！" if time_minutes.present?
+        client.update("@#{tw.user.screen_name} #{praise_word}おつ〜(๑´ω`ﾉﾉﾞ✧ #{time_minutes}", in_reply_to_status_id: tw.id) if Rails.env == 'production'
+        puts "@#{tw.user.screen_name} #{praise_word}おつ〜(๑´ω`ﾉﾉﾞ✧ #{time_minutes}"
+      else
+        # 登録はしているが、「勉強しよ」なしで「勉強おわ」から始まった場合
+        client.update("@#{tw.user.screen_name} 「勉強しよ」とリプを送ってみてくださいね！", in_reply_to_status_id: tw.id) if Rails.env == 'production'
+        puts "登録済みユーザ、「勉強しよ」なし"
+      end
+    else
+      # 未登録、かつ、「勉強おわ」のリプを受け取った場合
+      client.update("@#{tw.user.screen_name} 「勉強しよ」とリプを送ってみてください！", in_reply_to_status_id: tw.id) if Rails.env == 'production'
+      puts "未登録ユーザの「勉強おわ」"
+    end
+    
   end
 
   # ほめリプ
@@ -474,6 +549,41 @@ class Twbot
       "#{times}回記録しましたー！"
     elsif (last_total_time/300).floor < (new_total_time/300).floor && last_total_time > 600
       "#{new_total_time.to_i/60}時間を超えました！！"     
+    end
+  end
+
+  def self.test
+    #設定
+    client = Twitter::REST::Client.new(
+      consumer_key:        ENV['tw_consumer_key'] ,
+      consumer_secret:     ENV['tw_consumer_secret'] ,
+      access_token:        "#{ENV['tw_access_token']}",
+      access_token_secret: ENV['tw_access_token_secret'],
+    )
+    # 設定ファイルの読み込み
+    f = File.open('./config/twbot_settings.yml', 'r')
+    since =f.readlines
+    since_start_id = since[0]
+    f.close
+    # 手動で設定
+    since_start_id = 720591998600609792
+    # FF外からのツイートの処理
+    query_start = "勉強しよ OR 勉強おわ"
+    result_tweets_non_follower = client.search(query_start, count: 200, result_type: "recent",  exclude: "retweets", since_id: since_start_id, to: "benkyo_stardy")
+
+  end
+
+  def self.regex
+    word = "@benkyo_stardy 勉強しよ 開発 今日のまとめ http://ko.asfd"
+    optional = word.match(/@benkyo_stardy[[:blank:]]{0,1}(\n+|[[:blank:]]+)勉強しよ(\n*|[[:blank:]]*)(?<text>\S+)(\n+|[[:blank:]]+|\S*)(?<tweet>\S+|.*)/)
+    textbook = nil
+    tweet = nil
+    if optional.present?
+      textbook = optional[:text]
+      tweet = optional[:tweet] if optional[:tweet].present?
+      puts "#{textbook} #{tweet}"
+    else
+      textbook = "勉強"
     end
   end
 
