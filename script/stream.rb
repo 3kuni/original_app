@@ -1,4 +1,4 @@
-ENV["RAILS_ENV"] ||= "development"
+ENV["RAILS_ENV"] ||= "production"
 
 root = File.expand_path(File.join(File.dirname(__FILE__), '..'))
 require File.join(root, "config", "environment")
