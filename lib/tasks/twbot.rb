@@ -500,7 +500,9 @@ class Twbot
         stardy_active_session.update_attributes(active:false,time:time_minutes)
 
         # ほめリプ
-        praise_word = Twbot.praise(times,t_user,time_minutes)
+        #praise(セッション回数,今回を含む勉強時間（分）,前回までの勉強時間（分）)
+        puts "times: #{times} t_user: #{t_user} time_minutes: #{time_minutes}"
+        praise_word = Twbot.praise(times,t_user,stardy_user.total_time.to_i)
 
         # Roomの更新
         @room=Room.find(stardy_active_session.room)
