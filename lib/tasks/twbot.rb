@@ -534,7 +534,7 @@ class Twbot
     if  times == 1
       "おめでとうございます！初めて記録しました！"
     elsif new_total_time >= (60*3) && last_total_time < (60*3) 
-      "3時間突破！"
+      "勉強時間3時間突破！"
     elsif times == 3
       "3回目の勉強記録です！この調子で継続できたらいいですね！！"
     elsif new_total_time >= (60*6) && last_total_time < (60*6) 
@@ -575,18 +575,5 @@ class Twbot
 
   end
 
-  def self.regex
-    word = "@benkyo_stardy 勉強しよ 開発 今日のまとめ http://ko.asfd"
-    optional = word.match(/@benkyo_stardy[[:blank:]]{0,1}(\n+|[[:blank:]]+)勉強しよ(\n*|[[:blank:]]*)(?<text>\S+)(\n+|[[:blank:]]+|\S*)(?<tweet>\S+|.*)/)
-    textbook = nil
-    tweet = nil
-    if optional.present?
-      textbook = optional[:text]
-      tweet = optional[:tweet] if optional[:tweet].present?
-      puts "#{textbook} #{tweet}"
-    else
-      textbook = "勉強"
-    end
-  end
 
 end

@@ -55,6 +55,7 @@ gem 'dotenv-rails'
 #gem 'open-uri' 
 #gem 'todoist-ruby', require: 'todoist'
 gem 'tweetstream'
+gem 'god'
 
 group :doc do
   gem 'sdoc', '0.3.20', require: false

@@ -130,6 +130,7 @@ GEM
       railties (>= 3.2, < 5.0)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
+    god (0.13.7)
     hashie (3.4.2)
     hike (1.2.3)
     http (0.9.8)
@@ -333,6 +334,7 @@ DEPENDENCIES
   dotenv-rails
   faker (= 1.1.2)
   font-awesome-rails
+  god
   jbuilder (= 1.0.2)
   jquery-rails (= 3.0.4)
   mysql2 (~> 0.3.18)

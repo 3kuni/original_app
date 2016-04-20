@@ -10,7 +10,7 @@ TweetStream.configure do |config|
   config.oauth_token_secret = ENV['tw_access_token_secret']
   config.auth_method        = :oauth
 end
-daemon = TweetStream::Daemon.new('stream', :log_output => true)
+daemon = TweetStream::Daemon.new('stream', {:log_output => true , monitor: true})
 daemon.on_inited do
   ActiveRecord::Base.connection.reconnect!
   daemon_logger = Logger.new(File.join(Rails.root, "log", "stream.log"))
