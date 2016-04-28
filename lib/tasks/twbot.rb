@@ -574,6 +574,10 @@ class Twbot
     result_tweets_non_follower = client.search(query_start, count: 200, result_type: "recent",  exclude: "retweets", since_id: since_start_id, to: "benkyo_stardy")
 
   end
+  def self.printhello
+    puts "hello"
+  end
+
 
 
 end

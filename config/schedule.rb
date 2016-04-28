@@ -38,3 +38,7 @@ end
 every 1.day , :at => '9:00 pm' do
 	runner "Twbot.evening"
 end
+
+every 1.minute do
+	runner "Streammonitor.print"
+end
