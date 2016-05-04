@@ -27,3 +27,4 @@ production:
   password: 46f9eab594a472e588e585d90dbdcacc84d2c213f9d06c7b
   database: sqale_748129660f
   host: mysql001.sqale.jp
+  reconnect: true

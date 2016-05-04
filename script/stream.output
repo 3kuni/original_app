@@ -2834,3 +2834,72 @@ id: 725697865255780352 眠たいんで、明日午前にします！！
 明日は午後から久々の中学♡
 吹部成長してるかなー？？
 楽しみ♡てことで、おやすみなさい
+id: 725699721931554816 バグ修正完了しました！
+id: 725700493649936384 RT @goukaku_suppli: 勉強垢のためのプロフィールサイト「勉強垢図鑑」をリリースしました！
+https://t.co/j6FgO6eqYl
+ 
+プロフィールを共有したり、同じ志望大学・学部の勉強垢を検索して繋がれます。
+ぜひ登録&amp;拡散よろしくお願いします！…
+id: 725700537962786817 RT @cnear_8: かわいい
+クリップ ✏︎
+
+お勉強頑張ろう (`･ ･´)
+
+#勉強垢
+#勉強垢さんと繋がりたい
+
+. https://t.co/1Ac5kTkYMT
+id: 725700973667049472 @benkyo_stardy 勉強しよ　バグフィックス
+now streaming
+Text: 　バグフィックス Tweet: 
+@_3kuni ふぁいてぃん!!(*•̀ᴗ•́*)و ̑̑
+id: 725700978196897792 @_3kuni ふぁいてぃん!!(*•̀ᴗ•́*)و ̑̑
+id: 725700983200739328 RT @_3kuni: @benkyo_stardy 勉強しよ　バグフィックス
+id: 725701111596744704 【センター数学・解テク】
+ 大問の前半〜中盤なのに全然答えが出なくて焦ることがあります。 こういう場合は今まで計算で出したものを利用できることが多い。 とにかく前に戻る！マエニモドル！
+https://t.co/hlpB76egNZ
+id: 725701246686896128 @amami998137 1時間経過(๑′ᴗ‵๑)
+id: 725701716352454656 @benkyo_stardy 勉強おわ　おけ
+stop!!
+times: 35 t_user: 4241 time_minutes: 2
+@_3kuni 35回記録しましたー！おつ〜(๑´ω`ﾉﾉﾞ✧ 勉強時間は2分です！！
+id: 725701719745654784 @_3kuni 95回記録しましたー！おつ〜(๑´ω`ﾉﾉﾞ✧ 勉強時間は2分です！！
+id: 725701917217792001 @amami998137 04-28のポスト数：10 （うちRT：0)
+id: 725708208753401856 #あ行でお前の純粋さを教えてやれ
+
+明日
+色々
+烏養
+縁下
+及川
+
+んん〜(⌒ ͜   ⌒)
+殆どが排球関連だぞ〜(⌒ ͜   ⌒)
+id: 725708391037833216 RT @goukaku_suppli: 勉強垢のためのプロフィールサイト「勉強垢図鑑」をリリースしました！
+https://t.co/j6FgO6eqYl
+ 
+プロフィールを共有したり、同じ志望大学・学部の勉強垢を検索して繋がれます。
+ぜひ登録&amp;拡散よろしくお願いします！…
+/Users/a3kuni/.rbenv/versions/2.1.5/lib/ruby/gems/2.1.0/gems/eventmachine-1.2.0.1/lib/eventmachine.rb:794:in `connect_server': unable to resolve server address: Undefined error: 0 (EventMachine::ConnectionError)
+	from /Users/a3kuni/.rbenv/versions/2.1.5/lib/ruby/gems/2.1.0/gems/eventmachine-1.2.0.1/lib/eventmachine.rb:794:in `reconnect'
+	from /Users/a3kuni/.rbenv/versions/2.1.5/lib/ruby/gems/2.1.0/gems/eventmachine-1.2.0.1/lib/em/connection.rb:686:in `reconnect'
+	from /Users/a3kuni/.rbenv/versions/2.1.5/lib/ruby/gems/2.1.0/gems/em-twitter-0.3.5/lib/em-twitter/connection.rb:291:in `block in reconnect_after'
+	from /Users/a3kuni/.rbenv/versions/2.1.5/lib/ruby/gems/2.1.0/gems/eventmachine-1.2.0.1/lib/eventmachine.rb:194:in `call'
+	from /Users/a3kuni/.rbenv/versions/2.1.5/lib/ruby/gems/2.1.0/gems/eventmachine-1.2.0.1/lib/eventmachine.rb:194:in `run_machine'
+	from /Users/a3kuni/.rbenv/versions/2.1.5/lib/ruby/gems/2.1.0/gems/eventmachine-1.2.0.1/lib/eventmachine.rb:194:in `run'
+	from /Users/a3kuni/.rbenv/versions/2.1.5/lib/ruby/gems/2.1.0/gems/tweetstream-2.6.1/lib/tweetstream/client.rb:403:in `start'
+	from /Users/a3kuni/.rbenv/versions/2.1.5/lib/ruby/gems/2.1.0/gems/tweetstream-2.6.1/lib/tweetstream/daemon.rb:48:in `block in start'
+	from /Users/a3kuni/.rbenv/versions/2.1.5/lib/ruby/gems/2.1.0/gems/daemons-1.2.3/lib/daemons/application.rb:265:in `call'
+	from /Users/a3kuni/.rbenv/versions/2.1.5/lib/ruby/gems/2.1.0/gems/daemons-1.2.3/lib/daemons/application.rb:265:in `block in start_proc'
+	from /Users/a3kuni/.rbenv/versions/2.1.5/lib/ruby/gems/2.1.0/gems/daemons-1.2.3/lib/daemons/daemonize.rb:84:in `call'
+	from /Users/a3kuni/.rbenv/versions/2.1.5/lib/ruby/gems/2.1.0/gems/daemons-1.2.3/lib/daemons/daemonize.rb:84:in `call_as_daemon'
+	from /Users/a3kuni/.rbenv/versions/2.1.5/lib/ruby/gems/2.1.0/gems/daemons-1.2.3/lib/daemons/application.rb:269:in `start_proc'
+	from /Users/a3kuni/.rbenv/versions/2.1.5/lib/ruby/gems/2.1.0/gems/daemons-1.2.3/lib/daemons/application.rb:295:in `start'
+	from /Users/a3kuni/.rbenv/versions/2.1.5/lib/ruby/gems/2.1.0/gems/daemons-1.2.3/lib/daemons/controller.rb:56:in `run'
+	from /Users/a3kuni/.rbenv/versions/2.1.5/lib/ruby/gems/2.1.0/gems/daemons-1.2.3/lib/daemons.rb:193:in `block in run_proc'
+	from /Users/a3kuni/.rbenv/versions/2.1.5/lib/ruby/gems/2.1.0/gems/daemons-1.2.3/lib/daemons/cmdline.rb:88:in `call'
+	from /Users/a3kuni/.rbenv/versions/2.1.5/lib/ruby/gems/2.1.0/gems/daemons-1.2.3/lib/daemons/cmdline.rb:88:in `catch_exceptions'
+	from /Users/a3kuni/.rbenv/versions/2.1.5/lib/ruby/gems/2.1.0/gems/daemons-1.2.3/lib/daemons.rb:192:in `run_proc'
+	from /Users/a3kuni/.rbenv/versions/2.1.5/lib/ruby/gems/2.1.0/gems/tweetstream-2.6.1/lib/tweetstream/daemon.rb:47:in `start'
+	from /Users/a3kuni/.rbenv/versions/2.1.5/lib/ruby/gems/2.1.0/gems/tweetstream-2.6.1/lib/tweetstream/client.rb:143:in `userstream'
+	from stream.rb:23:in `<main>'
