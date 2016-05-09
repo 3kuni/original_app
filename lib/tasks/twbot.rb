@@ -436,6 +436,9 @@ class Twbot
     optional = tw.text.match(/@benkyo_stardy[[:blank:]]{0,1}(\n+|[[:blank:]]+)勉強しよ(\n*|[[:blank:]]*)(?<text>\S+)(\n+|[[:blank:]]+|\S*)(?<tweet>\S+|.*)/)
     option1 = tw.text.match(/@benkyo_stardy(\n+|[[:blank:]]+)勉強しよ(\n|[[:blank:]]+)(?<text>\S+)(\n|[[:blank:]]*)/)
     option2 = tw.text.match(/@benkyo_stardy(\n+|[[:blank:]]+)勉強しよ(\n|[[:blank:]]+)\S+(\n|[[:blank:]]+)(?<tweet>\S+)/)
+    option1.each_char.select{|c| c.bytes.count < 4 }.join('')
+    option2.each_char.select{|c| c.bytes.count < 4 }.join('')
+
     textbook = nil
     tweet = nil
     if optional.present?
