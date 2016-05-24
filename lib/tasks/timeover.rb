@@ -18,7 +18,8 @@ class Timeover
         stardy_user = User.find_by(id:i.user)
         if stardy_user.present? && (stardy_user.provider == "twitter" || stardy_user.provider == "guest")
           stardy_active_session = i
-          client.update("@#{stardy_user.name} 3時間超えたので自動終了しました(・ω・)編集はここからwww.stardy.co/studysessions/edit/#{i.id}")
+          client.update("@#{stardy_user.name} 3時間超えたので自動終了しました(・ω・)")
+          #client.update("@#{stardy_user.name} 3時間超えたので自動終了しました(・ω・)編集はここからwww.stardy.co/studysessions/edit/#{i.id}")
           #puts "KILLED @#{stardy_user.name} 3時間超えたので自動終了しました〜"
         end
       elsif (Time.now-i.created_at) > 7200
