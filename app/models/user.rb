@@ -34,6 +34,18 @@ class User < ActiveRecord::Base
                          password: Devise.friendly_token[0,20]
                         )
     end
+    
+    #guestUser = User.where(:provider => "guest", :name => auth.info.nickname).first
+    #if guestUser
+    #  guestUser.update_attributes(name:     auth.info.nickname,
+    #                              provider: auth.provider,
+    #                              uid:      auth.uid,
+    #                              email:    User.create_unique_email,
+    #                              password: Devise.friendly_token[0,20]
+    #                             )
+    #  user = guestUser
+      # updateしたあとに改めてuserインスタンスを読み込む必要性は？ 
+    #end
     user
   end
  

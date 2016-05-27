@@ -433,18 +433,18 @@ class Twbot
     )
 
     # ツイートからテキスト・つぶやきを取得
-    optional = tw.text.match(/@benkyo_stardy[[:blank:]]{0,1}(\n+|[[:blank:]]+)勉強しよ(\n*|[[:blank:]]*)(?<text>\S+)(\n+|[[:blank:]]+|\S*)(?<tweet>\S+|.*)/)
-    option1 = tw.text.match(/@benkyo_stardy(\n+|[[:blank:]]+)勉強しよ(\n|[[:blank:]]+)(?<text>\S+)(\n|[[:blank:]]*)/)
-    option2 = tw.text.match(/@benkyo_stardy(\n+|[[:blank:]]+)勉強しよ(\n|[[:blank:]]+)\S+(\n|[[:blank:]]+)(?<tweet>\S+)/)
+    #optional = tw.text.match(/@benkyo_stardy[[:blank:]]{0,1}(\n+|[[:blank:]]+)勉強しよ(\n*|[[:blank:]]*)(?<text>\S+)(\n+|[[:blank:]]+|\S*)(?<tweet>\S+|.*)/)
+    #option1 = tw.text.match(/@benkyo_stardy(\n+|[[:blank:]]+)勉強しよ(\n|[[:blank:]]+)(?<text>\S+)(\n|[[:blank:]]*)/)
+    #option2 = tw.text.match(/@benkyo_stardy(\n+|[[:blank:]]+)勉強しよ(\n|[[:blank:]]+)\S+(\n|[[:blank:]]+)(?<tweet>\S+)/)
     
     textbook = nil
     tweet = nil
-    if optional.present?
-      textbook = optional[:text]
-      tweet = optional[:tweet] if optional[:tweet].present?
-    else
+    #if optional.present?
+    #  textbook = optional[:text]
+    #  tweet = optional[:tweet] if optional[:tweet].present?
+    #else
       textbook = "勉強"
-    end
+    #end
     puts "Text: #{textbook} Tweet: #{tweet}"
 
     # デフォルトの励ましコメント
