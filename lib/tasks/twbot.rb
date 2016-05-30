@@ -469,11 +469,13 @@ class Twbot
       @studysession.create_activity :create, owner: stardy_user
       @room = Room.find(1)
       @room.update_attributes(current_students:@room.current_students.to_i+1)
-    else
+      # 現在の人数がゼロでなければ人数を通知
       nowStudying = Studysession.where(active: true).count
       if nowStudying.to_i > 0
         encourage = "いま一緒に勉強してる人が#{nowStudying}人います(๑˃̵ᴗ˂̵)وふぁいてぃん！"
       end
+    else
+
     end
     client.update("@#{tw.user.screen_name} #{encourage}", in_reply_to_status_id: tw.id) if Rails.env == 'production'
     puts "@#{tw.user.screen_name} #{encourage}"
