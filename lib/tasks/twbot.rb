@@ -469,7 +469,7 @@ class Twbot
       @room = Room.find(1)
       @room.update_attributes(current_students:@room.current_students.to_i+1)
     else
-      nowStudying = Studysession.where(active: true).count > 0 
+      nowStudying = Studysession.where(active: true).count
       if nowStudying > 0
         encourage = "いま一緒に勉強してる人が#{nowStudying}人います(๑˃̵ᴗ˂̵)وふぁいてぃん！"
       end
