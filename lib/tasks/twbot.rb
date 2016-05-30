@@ -472,6 +472,7 @@ class Twbot
       nowStudying = Studysession.where(active: true).count > 0 
       if nowStudying > 0
         encourage = "いま一緒に勉強してる人が#{nowStudying}人います(๑˃̵ᴗ˂̵)وふぁいてぃん！"
+      end
     end
     client.update("@#{tw.user.screen_name} #{encourage}", in_reply_to_status_id: tw.id) if Rails.env == 'production'
     puts "@#{tw.user.screen_name} #{encourage}"
