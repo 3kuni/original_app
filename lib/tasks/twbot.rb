@@ -465,15 +465,16 @@ class Twbot
     stardy_user.update_attributes(current_sign_in_at: Time.now)
     # セッション中でないことを確認して.save
     unless already_exist.present?
-      @studysession.save
-      @studysession.create_activity :create, owner: stardy_user
-      @room = Room.find(1)
-      @room.update_attributes(current_students:@room.current_students.to_i+1)
       # 現在の人数がゼロでなければ人数を通知
       nowStudying = Studysession.where(active: true).count
       if nowStudying.to_i > 0
         encourage = "いま一緒に勉強してる人が#{nowStudying}人います(๑˃̵ᴗ˂̵)وふぁいてぃん！"
       end
+      @studysession.save
+      @studysession.create_activity :create, owner: stardy_user
+      @room = Room.find(1)
+      @room.update_attributes(current_students:@room.current_students.to_i+1)
+
     else
 
     end
