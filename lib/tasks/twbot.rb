@@ -462,6 +462,7 @@ class Twbot
     # セッションオブジェクトを作成
     @studysession = Studysession.new(user: stardy_user.id, room: "1", textbook: textbook, tweet: tweet,active: true)
     already_exist = Studysession.find_by(user: stardy_user.id,active: true)
+    stardy_user.update_attributes(current_sign_in_at: Time.now)
     # セッション中でないことを確認して.save
     unless already_exist.present?
       @studysession.save
