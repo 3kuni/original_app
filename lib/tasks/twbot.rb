@@ -543,6 +543,8 @@ class Twbot
     # 戻り値はほめリプの文章
     if  times == 1
       "おめでとうございます！初めて記録しました！"
+    elsif times == 2 
+      "また使ってもらえてうれしいです！(ﾉ≧ڡ≦)"
     elsif new_total_time >= (60*3) && last_total_time < (60*3) 
       "勉強時間3時間突破！"
     elsif times == 3
