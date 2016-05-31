@@ -17,7 +17,8 @@
     </div>
         <ul class="navbar-right">
           <% if user_signed_in? %>
-            <li class="nickname"><%= current_user.nickname %></strong>
+            <li class="nickname"><%= link_to current_user.nickname, '/users/' + current_user.id.to_s %></strong>
+              
             <% if @active_now.present? %>
                 <div class="chip studying">勉強中</div>
             <% end %></li>
