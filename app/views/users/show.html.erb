@@ -27,13 +27,27 @@
 <% end %>
 
 
-
+<!-- 統計 -->
 <% if @user.total_time.present? %>
-  <p>セッション:<%= @study_lst.count %>回</p>
-  <p>総学習時間:<%= @study_lst.sum(:time)/60.to_i %>時間</p>
+<h5>統計</h5>
+  <div class="statsCircle">
+    <%= @user.starpoint %>
+    <div class="statsItem">STARポイント</div>
+  </div>
+  <div class="statsCircle">
+    <%= @study_lst.count %><span class="unit">回</span><br>
+    <div class="statsItem">勉強回数</div>
+  </div>
+  <div class="statsCircle">
+    <%= @study_lst.sum(:time)/60.to_i %><span class="unit">時間</span><br>
+    <div class="statsItem">勉強時間</div>
+  </div>
   
   <!--<p>合計スター数:<%= %></p>-->
 <% end %>
+<!-- end 統計 -->
+
+
 
 <!-- カレンダー -->
 <% if @user.premium.present? %> 

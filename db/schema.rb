@@ -11,21 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160117021951) do
-
-  create_table "Studysessions", force: :cascade do |t|
-    t.integer  "user"
-    t.string   "textbook"
-    t.datetime "start"
-    t.datetime "finish"
-    t.integer  "time"
-    t.integer  "starred"
-    t.boolean  "active"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "room"
-    t.string   "tweet"
-  end
+ActiveRecord::Schema.define(version: 20160531052453) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id"
@@ -107,6 +93,21 @@ ActiveRecord::Schema.define(version: 20160117021951) do
   add_index "rs_reputations", ["reputation_name"], name: "index_rs_reputations_on_reputation_name"
   add_index "rs_reputations", ["target_id", "target_type"], name: "index_rs_reputations_on_target_id_and_target_type"
 
+  create_table "studysessions", force: :cascade do |t|
+    t.integer  "user"
+    t.string   "textbook"
+    t.datetime "start"
+    t.datetime "finish"
+    t.integer  "time"
+    t.integer  "starred"
+    t.boolean  "active"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "room"
+    t.string   "tweet"
+    t.integer  "starpoint",  default: 0
+  end
+
   create_table "textbooks", force: :cascade do |t|
     t.string   "title"
     t.string   "asin"
@@ -145,6 +146,7 @@ ActiveRecord::Schema.define(version: 20160117021951) do
     t.string   "unconfirmed_email"
     t.string   "image"
     t.integer  "times"
+    t.integer  "starpoint",              default: 0
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

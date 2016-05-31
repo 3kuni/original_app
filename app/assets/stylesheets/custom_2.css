@@ -264,4 +264,25 @@
 	}
 }
 
+.statsCircle {
+    border-collapse:separate;
+    border: solid 0.2rem #222777;
+    border-radius: 50%;
+    height: 7rem;
+    width: 7rem;
+    color : #222777;
+    font-size: 2rem;
+    text-align: center;
+    font-weight: 400;
+    line-height: 6rem;
+    margin-bottom: 30px;
+}
+.statsCircle .unit {
+    font-size: 1rem;
+}
+.statsCircle .statsItem {
+    font-size: .7rem;
+    line-height: .7rem;
+    margin-top: -2rem;
+}
 
