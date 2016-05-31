@@ -460,7 +460,7 @@ class Twbot
       encourage = "はじめての勉強記録です！⁽⁽٩(๑˃̶͈̀ ᗨ ˂̶͈́)۶⁾⁾「勉強おわ」のツイートでここに記録されます！http://www.stardy.co/users/#{stardy_user.id}"
     end
     # セッションオブジェクトを作成
-    @studysession = Studysession.new(user: stardy_user.id, room: "1", textbook: textbook, tweet: tweet,active: true)
+    @studysession = Studysession.new(user: stardy_user.id, room: "1", textbook: textbook, tweet: tweet,active: true, starpoint: 27)
     already_exist = Studysession.find_by(user: stardy_user.id,active: true)
     stardy_user.update_attributes(current_sign_in_at: Time.now)
     # セッション中でないことを確認して.save
@@ -506,8 +506,12 @@ class Twbot
         times = stardy_user.times.to_i + 1
         
         # User,Studysessionの更新
-        stardy_user.update_attributes(total_time:t_user,times: times)
-        stardy_active_session.update_attributes(active:false,time:time_minutes)
+        current_points = (time_minutes / 10.to_f).ceil * 13
+        session_before_point = stardy_active_session.starpoint
+        user_before_point = stardy_user.starpoint
+        stardy_user.update_attributes(total_time:t_user,times: times, starpoint: user_before_point + current_points)
+        stardy_active_session.update_attributes(active:false,time:time_minutes, 
+                                                starpoint:  current_points + session_before_point)
 
         # ほめリプ
         #praise(セッション回数,今回を含む勉強時間（分）,前回までの勉強時間（分）)

@@ -31,7 +31,7 @@
 <% if @user.total_time.present? %>
 <h5>統計</h5>
   <div class="statsCircle">
-    <%= @user.starpoint %>
+    <%= @user.starpoint.to_s.gsub(/(\d)(?=(\d{3})+(?!\d))/, '\1,') %>
     <div class="statsItem">STARポイント</div>
   </div>
   <div class="statsCircle">
