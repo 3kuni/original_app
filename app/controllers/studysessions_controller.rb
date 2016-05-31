@@ -94,6 +94,8 @@ class StudysessionsController < ApplicationController
 
   def update
     @studysession=Studysession.find(params[:id])
+    # まだ動かない
+    # @studysession.update_attributes(starpoint: params[:id][:time].to_i)
     @studysession.update_attributes(studysession_params)
     redirect_to root_path
   end
