@@ -268,13 +268,13 @@
     border-collapse:separate;
     border: solid 0.2rem #222777;
     border-radius: 50%;
-    height: 7rem;
-    width: 7rem;
+    height: 12rem;
+    width: 12rem;
     color : #222777;
     font-size: 2rem;
     text-align: center;
     font-weight: 400;
-    line-height: 6rem;
+    line-height: 10rem;
     margin-bottom: 30px;
 }
 .statsCircle .unit {
@@ -283,6 +283,6 @@
 .statsCircle .statsItem {
     font-size: .7rem;
     line-height: .7rem;
-    margin-top: -2rem;
+    margin-top: -3rem;
 }
 

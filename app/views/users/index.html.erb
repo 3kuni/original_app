@@ -24,10 +24,11 @@
         <div class="chip yellow lighten-4">
               <%= user.starpoint.to_s.gsub(/(\d)(?=(\d{3})+(?!\d))/, '\1,') %>pt
         </div>
-        <!--
+        
         <% if Studysession.find_by(user:user.id,active:true) %>
             <div class="chip studying">勉強中</div>
         <% end %>
+        <!--
         <% if user.grade.present? %>
             <div class="chip blue lighten-5">
               <%= user.area %>
