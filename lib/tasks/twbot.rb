@@ -468,7 +468,7 @@ class Twbot
       # 現在の人数がゼロでなければ人数を通知
       nowStudying = Studysession.where(active: true).count
       if nowStudying.to_i > 0
-        encourage = "いま一緒に勉強してる人が#{nowStudying}人います(๑˃̵ᴗ˂̵)وふぁいてぃん！"
+        encourage = "いま#{nowStudying}人が一緒に勉強してます(๑˃̵ᴗ˂̵)وふぁいてぃん！"
       end
       @studysession.save
       @studysession.create_activity :create, owner: stardy_user
