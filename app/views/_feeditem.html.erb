@@ -35,6 +35,9 @@
                 <%= feed_item.time %>分の
               <% end %>
               セッションを終了しました。
+              <% date = feed_item.created_at %>
+              <% min =  date.strftime("%M") %>
+              <%= "#{date.month}月#{date.day}日 #{date.hour}:#{min}" %>
             <% end %>
             <br>
             <p class="feed-item">

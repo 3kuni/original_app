@@ -51,4 +51,9 @@ module ApplicationHelper
     formatted = time[1] + "_" + time[2] + "_JST"
   end
 
+  def wday_to_dayname (date) 
+    japanese_youbi = %w[日 月 火 水 木 金 土]
+    japanese_youbi[date.wday]
+  end
+
 end

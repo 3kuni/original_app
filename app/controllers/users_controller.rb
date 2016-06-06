@@ -6,6 +6,7 @@ class UsersController < ApplicationController
     @user=User.find(params[:id])
     @study_lst=Studysession.where(user:params[:id])
     @daily= Studysession.where(user:params[:id]).group("date(created_at)").sum(:time)
+    @weekly_study_lst = Studysession.where(created_at: (2.weeks.ago)..(Time.now),user: params[:id]).reorder("created_at desc")
     @activities = PublicActivity::Activity.all
   end
   
