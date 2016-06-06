@@ -525,7 +525,8 @@ class Twbot
         unless @room.current_students==0 
           @room.update_attributes(current_students:@room.current_students-1)
         end
-        time_minutes = "勉強時間は#{time_minutes}分です！！" if time_minutes.present?
+        min = session_start.strftime("%M")
+        time_minutes = "#{stardy_active_session.created_at.hour}:#{min}から#{time_minutes}分勉強しました！！" if time_minutes.present?
         client.update("@#{tw.user.screen_name} #{praise_word}おつ〜(๑´ω`ﾉﾉﾞ✧ #{time_minutes}", in_reply_to_status_id: tw.id) if Rails.env == 'production'
         puts "@#{tw.user.screen_name} #{praise_word}おつ〜(๑´ω`ﾉﾉﾞ✧ #{time_minutes}"
       else
