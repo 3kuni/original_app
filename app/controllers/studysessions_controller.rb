@@ -72,7 +72,6 @@ class StudysessionsController < ApplicationController
     t_user=@total.total_time.to_i + time_minutes
     times = @total.times.to_i+1
     
-
     # STARポイントの計算
     current_points = (time_minutes / 10.to_f).ceil * 13
     session_before_point = @update.starpoint

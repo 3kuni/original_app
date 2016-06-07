@@ -6,8 +6,8 @@
 <br>
 
 <h4>デイリー</h4>
-  <% @count_daily= Studysession.where.not(user:[2,14]).group("date(created_at)").count %>
-  <% @total_minutes_daily= Studysession.where.not(user:[2,14]).group("date(created_at)").sum(:time) %>
+  <% @count_daily= Studysession.where.not(user:[2,14]).group("date(created_at)").reorder("created_at desc").count %>
+  <% @total_minutes_daily= Studysession.where.not(user:[2,14]).group("date(created_at)").reorder("created_at desc").sum(:time) %>
   <% @count_daily.each do |i,n| %>
     <%=  "#{i} : #{n}回 : #{(@total_minutes_daily[i]/60).to_i}時間" %>
     <br>
