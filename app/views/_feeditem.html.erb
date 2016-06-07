@@ -31,13 +31,16 @@
             <% if feed_item.active %>
               セッションを開始しました！
             <% else %>
-              <% if feed_item.time.present? %>
-                <%= feed_item.time %>分の
-              <% end %>
-              セッションを終了しました。
               <% date = feed_item.created_at %>
               <% min =  date.strftime("%M") %>
               <%= "#{date.month}月#{date.day}日 #{date.hour}:#{min}" %>
+              から
+              <% if feed_item.time.present? %>
+                <%= feed_item.time %>分
+              <% end %>
+              勉強しました！
+
+              
             <% end %>
             <br>
             <p class="feed-item">
