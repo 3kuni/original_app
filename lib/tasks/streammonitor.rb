@@ -27,7 +27,13 @@ class Streammonitor
 			#{}`ruby /script/stream.rb start`
 		end
 
-		# プロセスが2つあったら一つを停止
+		# stream.logがなければ起動
+		unless File.exist?("log/stream.log")
+			puts "not found log/stream.log"
+			command = 'ruby ' + File.expand_path(File.dirname(__FILE__) + '/../../' + 'script/stream.rb restart')
+			`#{command}`
+			#{}`ruby /script/stream.rb start`
+		end
 
 	end
 	
