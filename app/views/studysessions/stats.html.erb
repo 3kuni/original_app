@@ -8,7 +8,8 @@
 <br>
 <%= "MAU: #{Studysession.where(created_at: (30.days.ago)..(Time.now)).group(:user).count.count}" %>
 <br>
-
+<table>
+</table>
 
 <h4>デイリー</h4>
   <% @count_daily= Studysession.where.not(user:[2,14]).group("date(created_at)").reorder("created_at desc").count %>

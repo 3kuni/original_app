@@ -458,6 +458,12 @@ class Twbot
                        email: User.create_unique_guest_email,password: User.create_unique_guest_password)
       stardy_user = User.find_by(name:tw.user.screen_name)
       encourage = "はじめての勉強記録です！⁽⁽٩(๑˃̶͈̀ ᗨ ˂̶͈́)۶⁾⁾「勉強おわ」のツイートでここに記録されます！http://www.stardy.co/users/#{stardy_user.id}"
+    else
+      # 現在の人数がゼロでなければ人数を通知
+      nowStudying = Studysession.where(active: true).count
+      if nowStudying.to_i > 0
+        encourage = "いま#{nowStudying}人が一緒に勉強してます(๑˃̵ᴗ˂̵)وふぁいてぃん！"
+      end
     end
     # セッションオブジェクトを作成
     @studysession = Studysession.new(user: stardy_user.id, room: "1", textbook: textbook, tweet: tweet,active: true, starpoint: 27)
@@ -465,16 +471,10 @@ class Twbot
     stardy_user.update_attributes(current_sign_in_at: Time.now)
     # セッション中でないことを確認して.save
     unless already_exist.present?
-      # 現在の人数がゼロでなければ人数を通知
-      nowStudying = Studysession.where(active: true).count
-      if nowStudying.to_i > 0
-        encourage = "いま#{nowStudying}人が一緒に勉強してます(๑˃̵ᴗ˂̵)وふぁいてぃん！"
-      end
       @studysession.save
       @studysession.create_activity :create, owner: stardy_user
       @room = Room.find(1)
       @room.update_attributes(current_students:@room.current_students.to_i+1)
-
     else
 
     end
