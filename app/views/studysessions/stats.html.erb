@@ -17,8 +17,8 @@
 	<% (0..9).each do |i| %>
 	<tr>
 		<td><%= "#{(30 + 30 * i).day.ago.strftime("%Y/%m/%d")} 〜 #{(0 + 30 * i).day.ago.strftime("%Y/%m/%d")}" %></td>
-		<td><%= Studysession.where(created_at: ((180 + 30 * i).days.ago)..(0 + 30 + i).days.ago).group(:user).count.count %></td>
-		<td><%= Studysession.where(created_at: ((30 + 30 * i).days.ago)..(0 + 30 * i).day.ago).group(:user).count.count %></td>
+		<td><%= Studysession.where(created_at: ((180 + 30 * i).days.ago)..((0 + 30 + i).days.ago)).group(:user).count.count %></td>
+		<td><%= Studysession.where(created_at: ((30 + 30 * i).days.ago)..((0 + 30 * i).day.ago)).group(:user).count.count %></td>
 
 	</tr>
 	<% end %>
