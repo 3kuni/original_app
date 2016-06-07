@@ -505,10 +505,11 @@ class Twbot
         t_user=stardy_user.total_time.to_i + time_minutes
         times = stardy_user.times.to_i + 1
         
-        # User,Studysessionの更新
+        # STARポイントの計算
         current_points = (time_minutes / 10.to_f).ceil * 13
         session_before_point = stardy_active_session.starpoint
         user_before_point = stardy_user.starpoint
+        # User,Studysessionの更新
         stardy_user.update_attributes(total_time:t_user,times: times, starpoint: user_before_point + current_points + session_before_point)
         stardy_active_session.update_attributes(active:false,time:time_minutes, 
                                                 starpoint:  current_points + session_before_point)

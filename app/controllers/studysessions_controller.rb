@@ -41,6 +41,7 @@ class StudysessionsController < ApplicationController
 
   def create
     @studysession=Studysession.new(studysession_params)
+    @studysession.update_attributes(starpoint: 27)
     @active_now=Studysession.find_by(user:current_user.id,active:true)
     unless Textbook.find_by(asin:params[:studysession][:textbook])
       res = Amazon::Ecs.item_lookup(params[:studysession][:textbook], :response_group => 'Small, ItemAttributes, Images', :country => 'jp')
@@ -70,8 +71,17 @@ class StudysessionsController < ApplicationController
     time_minutes=(Time.now.to_i-params[:time].to_i)/60
     t_user=@total.total_time.to_i + time_minutes
     times = @total.times.to_i+1
-    @total.update_attributes(total_time:t_user,times:times)
-    @update.update_attributes(active:false,time:time_minutes)
+    
+
+    # STARポイントの計算
+    current_points = (time_minutes / 10.to_f).ceil * 13
+    session_before_point = @update.starpoint
+    user_before_point = @total.starpoint
+    # 更新
+    @total.update_attributes(total_time:t_user,times:times,
+      starpoint: user_before_point + current_points + session_before_point)
+    @update.update_attributes(active:false,time:time_minutes,
+      starpoint:  current_points + session_before_point)
     @room=Room.find(params[:room])
     t_room=@room.minutes_total.to_i + time_minutes
     @room.update_attributes(minutes_total:t_room)
