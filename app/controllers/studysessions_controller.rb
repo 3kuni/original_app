@@ -105,7 +105,19 @@ class StudysessionsController < ApplicationController
   def update
     @studysession=Studysession.find(params[:id])
     # まだ動かない
-    # @studysession.update_attributes(starpoint: params[:id][:time].to_i)
+    # STARポイントの計算
+    stardy_user = User.find_by(id: current_user.id)
+    current_points = (params[:studysession][:time].to_i / 10.to_f).ceil * 13
+    adjust_points = (@studysession.time / 10.to_f).ceil * 13
+    if @studysession.starpoint
+      session_before_point = @studysession.starpoint - adjust_points
+    else 
+      session_before_point = 0
+    end
+    user_before_point = stardy_user.starpoint - adjust_points
+    # 更新
+    @studysession.update_attributes(starpoint: session_before_point + current_points)
+    stardy_user.update_attributes(starpoint: user_before_point + current_points)
     @studysession.update_attributes(studysession_params)
     redirect_to root_path
   end
