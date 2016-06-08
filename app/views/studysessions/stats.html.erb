@@ -24,6 +24,13 @@
 	<% end %>
 </table>
 
+<h4>回数別</h4>
+<% user_times = User.group(:times).count %>
+<% user_times.each do |user| %>
+	<%= "#{user[0]}回 : #{user[1]}人" %>
+	<br>
+<% end %>
+
 <h4>デイリー</h4>
   <% @count_daily= Studysession.where.not(user:[2,14]).group("date(created_at)").reorder("created_at desc").count %>
   <% @total_minutes_daily= Studysession.where.not(user:[2,14]).group("date(created_at)").reorder("created_at desc").sum(:time) %>
