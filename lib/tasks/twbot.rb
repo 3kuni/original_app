@@ -532,7 +532,7 @@ class Twbot
         puts "@#{tw.user.screen_name} #{praise_word}おつ〜(๑´ω`ﾉﾉﾞ✧ #{time_minutes}"
       else
         # 登録はしているが、「勉強しよ」なしで「勉強おわ」から始まった場合
-        client.update("@#{tw.user.screen_name} 「勉強しよ」とリプを送ってみてくださいね！", in_reply_to_status_id: tw.id) if Rails.env == 'production'
+        client.update("@#{tw.user.screen_name} 記録が開始していないか、すでに自動終了しています！", in_reply_to_status_id: tw.id) if Rails.env == 'production'
         puts "登録済みユーザ、「勉強しよ」なし"
       end
     else
