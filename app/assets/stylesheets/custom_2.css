@@ -285,4 +285,7 @@
     line-height: .7rem;
     margin-top: -3rem;
 }
-
+.statsTable td {
+	border: 1px #000 solid;
+	text-align: center;
+}
