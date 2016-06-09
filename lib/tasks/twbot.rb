@@ -433,18 +433,18 @@ class Twbot
     )
 
     # ツイートからテキスト・つぶやきを取得
-    #optional = tw.text.match(/@benkyo_stardy[[:blank:]]{0,1}(\n+|[[:blank:]]+)勉強しよ(\n*|[[:blank:]]*)(?<text>\S+)(\n+|[[:blank:]]+|\S*)(?<tweet>\S+|.*)/)
+    optional = tw.text.match(/@benkyo_stardy[[:blank:]]{0,1}(\n+|[[:blank:]]+)勉強しよ(\n*|[[:blank:]]*)(?<text>\S+)(\n+|[[:blank:]]+|\S*)(?<tweet>\S+|.*)/)
     #option1 = tw.text.match(/@benkyo_stardy(\n+|[[:blank:]]+)勉強しよ(\n|[[:blank:]]+)(?<text>\S+)(\n|[[:blank:]]*)/)
     #option2 = tw.text.match(/@benkyo_stardy(\n+|[[:blank:]]+)勉強しよ(\n|[[:blank:]]+)\S+(\n|[[:blank:]]+)(?<tweet>\S+)/)
     
     textbook = nil
     tweet = nil
-    #if optional.present?
-    #  textbook = optional[:text]
+    if optional.present?
+      textbook = optional[:text].gsub(/[^\u{0}-\u{FFFF}]/, "") 
     #  tweet = optional[:tweet] if optional[:tweet].present?
-    #else
+    else
       textbook = "勉強"
-    #end
+    end
     puts "Text: #{textbook} Tweet: #{tweet}"
 
     # デフォルトの励ましコメント
@@ -590,12 +590,6 @@ class Twbot
     # FF外からのツイートの処理
     query_start = "勉強しよ OR 勉強おわ"
     result_tweets_non_follower = client.search(query_start, count: 200, result_type: "recent",  exclude: "retweets", since_id: since_start_id, to: "benkyo_stardy")
-
   end
-  def self.printhello
-    puts "hello"
-  end
-
-
 
 end
