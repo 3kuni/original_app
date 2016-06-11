@@ -443,6 +443,7 @@ class Twbot
       textbook = optional[:text].gsub(/[^\u{0}-\u{FFFF}]/, "") 
       textbook = "勉強" if textbook == ""
       tweet = optional[:tweet].gsub(/[^\u{0}-\u{FFFF}]/, "")  if optional[:tweet].present?
+      tweet = "つぶやき" if tweet == ""
     else
       textbook = "勉強"
     end
