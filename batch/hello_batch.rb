@@ -3,9 +3,10 @@ class HelloBatch
 
 	def self.execute
 		#puts "this is runner app from batch/ "
-		input = "あ ~ お腹空いた 🌀"
+		input = "🌀"
 		puts input
 		input = self.utf8mb4_encode_numericentity(input)
+		input = nil if input == ""
 		puts input
 	end
 	def self.utf8mb4_encode_numericentity(str)

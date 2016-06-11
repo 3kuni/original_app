@@ -441,6 +441,7 @@ class Twbot
     tweet = nil
     if optional.present?
       textbook = optional[:text].gsub(/[^\u{0}-\u{FFFF}]/, "") 
+      textbook = nil if textbook == ""
       tweet = optional[:tweet].gsub(/[^\u{0}-\u{FFFF}]/, "")  if optional[:tweet].present?
     else
       textbook = "勉強"
