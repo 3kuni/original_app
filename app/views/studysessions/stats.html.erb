@@ -45,6 +45,21 @@
 
 </table>
 
+<h4>新規登録ユーザ</h4>
+<% new_user = User.group("date(created_at)").reorder("created_at desc").limit(14).count %>
+<table class="statsTable">
+	<tr>
+		<td>日付</td>
+		<td>人数</td>
+	</tr>
+<% new_user.each do |user| %>
+	<tr>
+		<td><%= user[0] %></td>
+		<td><%= user[1] %></td>
+	</tr>
+<% end %>
+</table>
+
 <h4>デイリー</h4>
   <% @count_daily= Studysession.where.not(user:[2,14]).group("date(created_at)").reorder("created_at desc").count %>
   <% @total_minutes_daily= Studysession.where.not(user:[2,14]).group("date(created_at)").reorder("created_at desc").sum(:time) %>
