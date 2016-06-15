@@ -53,6 +53,24 @@
 
 <!-- カード -->  
 <% if signed_in? %>
+  <h4>タスク</h4>
+  <ul class="collection">
+    <li class="taskCollection">
+      <div class="taskCheckBox">
+        <i class="fa fa-square-o taskFa" aria-hidden="true"></i>
+      </div>
+      <div class="taskName">
+      青チャート
+      </div>
+
+      <span class="taskRepetation">
+        <i class="fa fa-repeat" aria-hidden="true"></i>
+      </span>
+      <span class="startTask">
+        <i class="fa fa-pencil" aria-hidden="true"></i>スタート
+      </span>
+    </li>
+  </ul>
   <h4>タイムライン</h4>
   <ul class="collection">
     <% @feeditems.first(20).each do |studysession| %>
