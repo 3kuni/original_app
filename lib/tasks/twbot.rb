@@ -564,7 +564,7 @@ class Twbot
     elsif new_total_time >= (60*10) && last_total_time < (60*10)
       "記録が10時間を超えました！すごい！"
     elsif times == 10
-      "10回目の記録です！習慣になってきましたね！！"
+      "10回目の記録です！もはや習慣になりましたね！！"
     elsif new_total_time >= (60*30) && last_total_time < (60*30)
       "祝！30時間以上勉強しました！"
     elsif times > 10 && (times % 5 == 0)
