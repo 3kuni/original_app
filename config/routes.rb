@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get 'textbooks/new'
   get 'users/show'
 
-  root 'static_pages#home'
+  root 'static_pages#home',via:[:get,:post]
   devise_for :users, :controllers => {
     :sessions      => "users/sessions",
     :registrations => "users/registrations",
@@ -21,7 +21,7 @@ Rails.application.routes.draw do
     end
   end  
   match '/studysessions/amazon' ,to:'studysessions#amazon_index',via: [:post]
-  match 'studysessions/stop/:id/:user/:time/:room' , to: 'studysessions#stop' ,via: [:patch,:get]
+  match 'studysessions/stop/:id/:user/:time' , to: 'studysessions#stop' ,via: [:patch,:get]
   match 'studysessions/studying/:id/:room' ,to:'studysessions#index',via: [:get]
   match '/ssession' , to:'studysessions#first_step', via: [:get]
   match '/studysessions/new/:id/:room' , to:'studysessions#new', via: [:get,:post]

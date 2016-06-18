@@ -1,7 +1,9 @@
-<div class="chip blue lighten-5"><%= Room.find(session[:room]).name %></div><br>
+<div class="chip blue lighten-5">
+</div><br>
 
 使用する教材・アクティビティを選んで「開始」をクリック！<br>
 
+<!-- 教材検索 -->
 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
   <div class="panel panel-default">
     <div class="panel-heading" role="tab" id="headingOne">
@@ -23,13 +25,10 @@
           <% end %>
           </p>
         </div>
-
-
         <div>
           <%= form_for(@studysession) do |f| %>
             <%= f.hidden_field :active, :value => true %>
             <%= f.hidden_field :user, :value => params[:id] %>
-            <%= f.hidden_field :room, :value => session[:room] %>
             <%= f.text_field :textbook , :placeholder=>"オリジナルで登録" %>
             
             <div class="collapse" id="collapseExample">
@@ -37,7 +36,6 @@
                  <%= f.text_field :tweet , :placeholder=>"つぶやき" %>
               </div>
             </div>
-
 
             <%= button_tag sanitize('<i class="fa fa-pencil" ></i>  開始'), :type => "submit",
             :class =>"btn custombutton" ,data: { disable_with: '送信中...' }%>
@@ -51,22 +49,7 @@
   </div>
 </div>
 <br>
-<!--
-<div>
-  <p>
-  <%= form_tag "/studysessions/new/#{current_user.id}/#{session[:room]}"  do %>
-    <%= text_field_tag 'keyword', @keyword ,:placeholder=>"Amazonから検索"%>
-    <%= button_tag sanitize('<i class="fa fa-search"></i>  検索'), :type => "submit",
-    :class =>"btn custombutton" %>
-  <% end %>
-  </p>
-</div>-->
-
-<!--自分で作成した教材  -->
-
-
-
-
+<!-- END 教材検索 -->
 
 <!-- 検索結果カード  -->
 <% if @res.present? %>
@@ -77,12 +60,9 @@
           <% image_tag studysession.get('SmallImage/URL'), {:style => 'border: none;',class:"circle"}  %>
           <span class="contain" style="background-image: url('<%=studysession.get('SmallImage/URL') %>')" >
         <% end %>
-        
-
         <%= form_for(@studysession) do |f| %>
           <span class="title">          
             <%= cut_off(studysession.get('ItemAttributes/Title'),28).html_safe %>
-
           </span>
           <p>
              <div class="collapse" id="collapseExampleAmazon<%= studysession.get('ASIN') %>">
@@ -91,28 +71,23 @@
                 </div>
              </div>
           </p>
-          
-          <span class="secondary-content">         
+          <span class="secondary-content">
               <%= f.hidden_field :active, :value => true %>
               <%= f.hidden_field :textbook, :value => studysession.get('ASIN') %>
               <%= f.hidden_field :user, :value => params[:id] %>
-              <%= f.hidden_field :room, :value => session[:room] %>
               <%= button_tag sanitize('<i class="fa fa-pencil" ></i>  開始'), :type => "submit",
                :class =>"btn custombutton",data: { disable_with: '送信中...' } %>
                <a role="button" data-toggle="collapse" href="#collapseExampleAmazon<%=studysession.get('ASIN') %>" aria-expanded="false" 
               aria-controls="collapseExample" class="tweet">
                 <%= fa_icon 'commenting' %>
               </a>
-
-              
-              
           </span>
         <% end %>
       </li>
     <% end %>
   </ul>
 <% end %>
-<!-- ここまで -->  
+<!-- END 検索結果カード -->  
 
 
 
@@ -147,7 +122,7 @@
             <%= f.hidden_field :active, :value => true %>
             <%= f.hidden_field :textbook, :value => studysession %>
             <%= f.hidden_field :user, :value => params[:id] %>
-            <%= f.hidden_field :room, :value => session[:room] %>
+            
             <%= button_tag sanitize('<i class="fa fa-pencil" ></i>  開始'), :type => "submit",
             :class =>"btn custombutton" ,data: { disable_with: '送信中...' } %>
             <a role="button" data-toggle="collapse" href="#collapseExampleAmazon<%= studysession %>" aria-expanded="false" 

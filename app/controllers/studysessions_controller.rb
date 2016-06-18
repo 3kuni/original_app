@@ -25,9 +25,11 @@ class StudysessionsController < ApplicationController
     @studysession=Studysession.new
     session[:room]=params[:room]
     @active_now=Studysession.find_by(user:current_user.id,active:true)
-    @keyword = params[:keyword]
     @history = Studysession.where(user:current_user.id).uniq.limit(10).pluck(:textbook)
     @activities = PublicActivity::Activity.all
+    # keywordを受け取って、amazonで検索する。結果は@resに格納して返し、viewでresの存在をチェックし、
+    # 検索結果があるかどうかで表示を切り分け。
+    @keyword = params[:keyword]
     if @keyword.present?
       Amazon::Ecs.debug = true
       @res = Amazon::Ecs.item_search(params[:keyword], 
@@ -44,6 +46,7 @@ class StudysessionsController < ApplicationController
     @studysession.update_attributes(starpoint: 27)
     @active_now=Studysession.find_by(user:current_user.id,active:true)
     unless Textbook.find_by(asin:params[:studysession][:textbook])
+      # TODO: resがamazonの反応によってエラーを吐くことがあるので、例外の処理が必要
       res = Amazon::Ecs.item_lookup(params[:studysession][:textbook], :response_group => 'Small, ItemAttributes, Images', :country => 'jp')
       if res.items.first.present?
         Textbook.create(title:res.items.first.get('ItemAttributes/Title'),asin:params[:studysession][:textbook])
@@ -51,14 +54,10 @@ class StudysessionsController < ApplicationController
         Textbook.create(title:params[:studysession][:textbook])
       end
     end
-    @room=Room.find(params[:studysession][:room])
-    #update_current_user=@room.current_user
-    #Room.find(params[:studysession][:room]).increment(:minutes_total,1)
     @activities = PublicActivity::Activity.all
     if @studysession.save
       @studysession.create_activity :create, owner: current_user
-      @room.update_attributes(current_students:@room.current_students.to_i+1)
-      redirect_to "/studysessions/studying/#{current_user.id}/#{session[:room]}"
+      redirect_to root_path
       SessionMailer.session_email(current_user, @studysession).deliver
     else
       render 'new'
@@ -81,12 +80,12 @@ class StudysessionsController < ApplicationController
       starpoint: user_before_point + current_points + session_before_point)
     @update.update_attributes(active:false,time:time_minutes,
       starpoint:  current_points + session_before_point)
-    @room=Room.find(params[:room])
-    t_room=@room.minutes_total.to_i + time_minutes
-    @room.update_attributes(minutes_total:t_room)
-    unless @room.current_students==0 
-      @room.update_attributes(current_students:@room.current_students-1)
-    end
+    #@room=Room.find(params[:room])
+    #t_room=@room.minutes_total.to_i + time_minutes
+    #@room.update_attributes(minutes_total:t_room)
+    #unless @room.current_students==0 
+    #  @room.update_attributes(current_students:@room.current_students-1)
+    #end
     redirect_to root_path
   end
 
