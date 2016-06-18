@@ -5,11 +5,6 @@
     <div class="alert alert-danger" role="alert">
       <%= link_to "こちらから",edit_user_registration_path%>ニックネーム、学年、地域、ひとことを設定してください</div>
   <% end %>
-  <% if current_user.email.include?("@example.com")%>
-    <div class="alert alert-danger" role="alert">
-      メールアドレスを設定して通知を受け取りましょう！<%= link_to "こちらから",edit_user_registration_path%>
-    </div>
-  <% end %>
 <% end %>
 <!--
 <%= image_tag 'STARDY-title.png' ,style:"width:100%;"%>
@@ -73,11 +68,12 @@
       </span>
     </li>
   </ul>
+  <br>
   <!-- END タスク -->
 
   <!-- 履歴 -->
   <% if !@res.present? and @history.present? %>
-  <h5>履歴から選ぶ</h5>
+  <h5>履歴</h5>
   <!-- 履歴カード  -->
   <ul class="collection">
     <% @history.each do |studysession| %>
@@ -121,6 +117,7 @@
     <% end %>
   </ul>
   <% end %>
+  <br>
   <!-- ここまで --> 
   <!-- END 履歴 --> 
 
@@ -208,6 +205,7 @@
       <% end %>
     </ul>
   <% end %>
+  <br>
   <!-- END 検索結果カード -->  
 
   <h5>タイムライン</h5>
