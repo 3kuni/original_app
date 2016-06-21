@@ -4,7 +4,11 @@
   </div>
   <div class="taskName">
     <span>
-      <%= task.textbook %>
+      <% if Textbook.find_by(asin:task.textbook).present? %>
+        <%= cut_off(Textbook.find_by(asin:task.textbook).title,28).html_safe %>
+      <% else %>
+        <%= task.textbook %>
+      <% end %>
     </span>
     <% if task.repeat.present? %>
       <span class="taskRepetation">

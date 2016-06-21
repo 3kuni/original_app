@@ -50,13 +50,30 @@
 <!-- カード -->  
 <% if signed_in? %>
   <!-- タスク -->
-  <% task = Studysession.find(188) %>
   <h5>タスク</h5>
   <ul class="collection">
     <% @task.each do |taskloop| %>
       <%= render 'taskfeed',task: taskloop %>
     <% end %>
   </ul>
+  <%= form_for(@studysession) do |f| %>
+    <p>
+      <div>
+        <div >
+          <%= f.text_field :textbook , :placeholder=>"新しいタスク" , :class => "taskInputTextField", 
+                           :size => 40 %>
+          <span class="secondary-content">
+            <%= f.hidden_field :active, :value => false %>
+            <%= f.hidden_field :task, :value => "todo" %>
+            <%= f.hidden_field :user, :value => current_user.id %>
+            
+            <%= button_tag sanitize('<i class="fa fa-pencil" ></i>  追加'), :type => "submit",
+            :class =>"btn custombutton" ,data: { disable_with: '送信中...' } %>
+        </span>
+        </div>
+      </div>
+    </p>
+  <% end %>
   <br>
   <!-- END タスク -->
 
@@ -88,12 +105,11 @@
             </div>
           </p>
           <span class="secondary-content">
-            
-              <%= f.hidden_field :active, :value => true %>
               <%= f.hidden_field :textbook, :value => studysession %>
               <%= f.hidden_field :user, :value => current_user.id %>
+              <%= f.hidden_field :task, :value => "todo" %>
               
-              <%= button_tag sanitize('<i class="fa fa-pencil" ></i>  開始'), :type => "submit",
+              <%= button_tag sanitize('<i class="fa fa-pencil" ></i>  追加'), :type => "submit",
               :class =>"btn custombutton" ,data: { disable_with: '送信中...' } %>
               <a role="button" data-toggle="collapse" href="#collapseExampleAmazon<%= studysession %>" aria-expanded="false" 
                 aria-controls="collapseExample" class="tweet">
@@ -117,7 +133,7 @@
       <div class="panel-heading" role="tab" id="headingOne">
         <h5 class="panel-title">
           <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-            Amazon検索・オリジナル教材から選ぶ
+            Amazon検索
           </a>
         </h5>
       </div>
@@ -134,24 +150,7 @@
             </p>
           </div>
           <div>
-            <%= form_for(@studysession) do |f| %>
-              <%= f.hidden_field :active, :value => true %>
-              <%= f.hidden_field :user, :value => params[:id] %>
-              <%= f.text_field :textbook , :placeholder=>"オリジナルで登録" %>
-              
-              <div class="collapse" id="collapseExample">
-                <div >
-                   <%= f.text_field :tweet , :placeholder=>"つぶやき" %>
-                </div>
-              </div>
 
-              <%= button_tag sanitize('<i class="fa fa-pencil" ></i>  開始'), :type => "submit",
-              :class =>"btn custombutton" ,data: { disable_with: '送信中...' }%>
-              <a role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample" class="tweet">
-                <%= fa_icon 'commenting' %>
-              </a>
-            <% end %>
-          </div>
         </div>
       </div>
     </div>
@@ -179,10 +178,10 @@
                </div>
             </p>
             <span class="secondary-content">
-                <%= f.hidden_field :active, :value => true %>
+                <%= f.hidden_field :task, :value => "todo" %>
                 <%= f.hidden_field :textbook, :value => studysession.get('ASIN') %>
                 <%= f.hidden_field :user, :value => current_user.id %>
-                <%= button_tag sanitize('<i class="fa fa-pencil" ></i>  開始'), :type => "submit",
+                <%= button_tag sanitize('<i class="fa fa-pencil" ></i>  追加'), :type => "submit",
                  :class =>"btn custombutton",data: { disable_with: '送信中...' } %>
                  <a role="button" data-toggle="collapse" href="#collapseExampleAmazon<%=studysession.get('ASIN') %>" aria-expanded="false" 
                 aria-controls="collapseExample" class="tweet">

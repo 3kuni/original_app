@@ -58,7 +58,7 @@ class StudysessionsController < ApplicationController
     if @studysession.save
       @studysession.create_activity :create, owner: current_user
       redirect_to root_path
-      SessionMailer.session_email(current_user, @studysession).deliver
+      #SessionMailer.session_email(current_user, @studysession).deliver
     else
       render 'new'
     end
@@ -162,7 +162,7 @@ class StudysessionsController < ApplicationController
 
   private
     def studysession_params
-      params.require(:studysession).permit(:user,:textbook,:room,:active,:tweet,:time)
+      params.require(:studysession).permit(:user,:textbook,:room,:active,:tweet,:time,:due,:task,:repeat,:pomo)
     end
     
     def correct_user

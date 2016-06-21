@@ -8557,3 +8557,7 @@ a:hover.unstarred{
   position:relative;
   top:-9px;
 }
+
+.taskInputTextField {
+  width:25rem;
+}
