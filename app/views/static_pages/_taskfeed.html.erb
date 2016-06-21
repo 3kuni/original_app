@@ -1,0 +1,20 @@
+<li class="taskCollection">
+  <div class="taskCheckBox">
+    <%= link_to (fa_icon 'square-o'), "studysessions/done/#{task.id}" , :method => :post ,:class => "CheckBoxIcon taskFa" %>
+  </div>
+  <div class="taskName">
+    <span>
+      <%= task.textbook %>
+    </span>
+    <% if task.repeat.present? %>
+      <span class="taskRepetation">
+        <i class="fa fa-repeat" aria-hidden="true"></i>
+      </span>
+    <% end %>
+  </div>
+
+
+  <span class="startTask">
+    <%= link_to '開始' ,  "/studysessions/start/#{task.id}", :method => :post, :class=>"btn-large custombutton waves-effect waves-light" %>
+  </span>
+</li>

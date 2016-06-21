@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160531052453) do
+ActiveRecord::Schema.define(version: 20160621031958) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id"
@@ -106,6 +106,10 @@ ActiveRecord::Schema.define(version: 20160531052453) do
     t.integer  "room"
     t.string   "tweet"
     t.integer  "starpoint",  default: 0
+    t.datetime "due"
+    t.string   "repeat"
+    t.string   "task"
+    t.string   "pomo"
   end
 
   create_table "textbooks", force: :cascade do |t|

@@ -80,12 +80,6 @@ class StudysessionsController < ApplicationController
       starpoint: user_before_point + current_points + session_before_point)
     @update.update_attributes(active:false,time:time_minutes,
       starpoint:  current_points + session_before_point)
-    #@room=Room.find(params[:room])
-    #t_room=@room.minutes_total.to_i + time_minutes
-    #@room.update_attributes(minutes_total:t_room)
-    #unless @room.current_students==0 
-    #  @room.update_attributes(current_students:@room.current_students-1)
-    #end
     redirect_to root_path
   end
 
@@ -102,7 +96,6 @@ class StudysessionsController < ApplicationController
 
   def update
     @studysession=Studysession.find(params[:id])
-    # まだ動かない
     # STARポイントの計算
     stardy_user = User.find_by(id: current_user.id)
     current_points = (params[:studysession][:time].to_i / 10.to_f).ceil * 13
@@ -117,6 +110,18 @@ class StudysessionsController < ApplicationController
     @studysession.update_attributes(starpoint: session_before_point + current_points)
     stardy_user.update_attributes(starpoint: user_before_point + current_points)
     @studysession.update_attributes(studysession_params)
+    redirect_to root_path
+  end
+
+  def start
+    studysession = Studysession.find(params[:id])
+    studysession.update_attributes(active:true)
+    redirect_to root_path
+  end
+
+  def done
+    studysession = Studysession.find(params[:id])
+    studysession.update_attributes(task:"done")
     redirect_to root_path
   end
 

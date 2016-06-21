@@ -8516,3 +8516,44 @@ a:hover.unstarred{
 .alert-danger .alert-link {
   color: #843534;
 }
+
+.startTask{
+  position: absolute;
+    right: 16px;
+}
+.taskCollection {
+  padding:0;
+  height:5rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+.taskCheckBox{
+  font-size: 1.8rem;
+  color:gray;
+  float: left;
+  margin-top: 2rem;
+  margin-left: 1rem;
+}
+.CheckBoxIcon{
+  color:gray;
+}
+/* FontAwesomeはa:hoverではリンク色を変えられないのでi:hoverで指定 */
+.CheckBoxIcon i:hover{ 
+  color:#ffb300;
+}
+.taskName{
+  font-size:1rem;
+  height:2rem;
+  vertical-align: center;
+  float: left;
+  margin-left: 1rem;
+  margin-top: 2rem;
+}
+.taskRepetation{
+  color:lightgray;
+  /*float: left;*/
+  margin-left: .4rem;
+}
+.taskFa{
+  position:relative;
+  top:-9px;
+}

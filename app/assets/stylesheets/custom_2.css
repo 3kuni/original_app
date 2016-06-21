@@ -289,31 +289,3 @@
 	border: 1px #000 solid;
 	text-align: center;
 }
-.startTask{
-	position: absolute;
-    right: 16px;
-}
-.taskCollection {
-	padding:20px;
-}
-.taskCheckBox{
-	font-size: 1.8rem;
-	color:gray;
-	float: left;
-}
-.taskName{
-	font-size:1rem;
-	height:2rem;
-	vertical-align: center;
-	float: left;
-	margin-left: 1rem;
-}
-.taskRepetation{
-	color:lightgray;
-	float: left;
-	margin-left: .4rem;
-}
-.taskFa{
-	position:relative;
-	top:-9px;
-}

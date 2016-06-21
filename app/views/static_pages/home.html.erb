@@ -50,23 +50,12 @@
 <!-- カード -->  
 <% if signed_in? %>
   <!-- タスク -->
+  <% task = Studysession.find(188) %>
   <h5>タスク</h5>
   <ul class="collection">
-    <li class="taskCollection">
-      <div class="taskCheckBox">
-        <i class="fa fa-square-o taskFa" aria-hidden="true"></i>
-      </div>
-      <div class="taskName">
-      青チャート
-      </div>
-
-      <span class="taskRepetation">
-        <i class="fa fa-repeat" aria-hidden="true"></i>
-      </span>
-      <span class="startTask">
-        <i class="fa fa-pencil" aria-hidden="true"></i>スタート
-      </span>
-    </li>
+    <% @task.each do |taskloop| %>
+      <%= render 'taskfeed',task: taskloop %>
+    <% end %>
   </ul>
   <br>
   <!-- END タスク -->
