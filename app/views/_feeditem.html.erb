@@ -28,6 +28,8 @@
           <p>
             <% if feed_item.active %>
               セッションを開始しました！
+            <% elsif feed_item.task == "todo" %>
+              タスクを追加しました！
             <% else %>
               <% date = feed_item.created_at %>
               <% min =  date.strftime("%M") %>

@@ -1,9 +1,9 @@
 class StaticPagesController < ApplicationController
   def home
-    @feeditems = Studysession.all.limit(30)
+    @feeditems = Studysession.all.limit(20)
     @studysession=Studysession.new
     @task = Studysession.where(user:current_user.id,task:"todo")
-    @history = Studysession.where(user:current_user.id).uniq.limit(10).pluck(:textbook)
+    @history = Studysession.where(user:current_user.id).uniq.limit(5).pluck(:textbook)
     if user_signed_in?
       @active_now=Studysession.find_by(user:current_user.id,active:true)
       @user=User.find(current_user.id)

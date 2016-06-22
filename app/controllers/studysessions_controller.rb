@@ -70,7 +70,11 @@ class StudysessionsController < ApplicationController
     time_minutes=(Time.now.to_i-params[:time].to_i)/60
     t_user=@total.total_time.to_i + time_minutes
     times = @total.times.to_i+1
-    
+    # repeatがあるなら新しいタスクとしてコピー
+    if @update.repeat.present?
+      Studysession.create(user: current_user.id, textbook: @update.textbook, task: "todo",repeat: "copy")
+    end
+
     # STARポイントの計算
     current_points = (time_minutes / 10.to_f).ceil * 13
     session_before_point = @update.starpoint
@@ -79,7 +83,7 @@ class StudysessionsController < ApplicationController
     @total.update_attributes(total_time:t_user,times:times,
       starpoint: user_before_point + current_points + session_before_point)
     @update.update_attributes(active:false,time:time_minutes,
-      starpoint:  current_points + session_before_point)
+      starpoint:  current_points + session_before_point, task:"done",repeat:"done")
     redirect_to root_path
   end
 
@@ -115,13 +119,16 @@ class StudysessionsController < ApplicationController
 
   def start
     studysession = Studysession.find(params[:id])
-    studysession.update_attributes(active:true)
+    studysession.update_attributes(active:true,created_at: Time.now)
     redirect_to root_path
   end
 
   def done
     studysession = Studysession.find(params[:id])
     studysession.update_attributes(task:"done")
+    if studysession.repeat.present?
+      Studysession.create(user: current_user.id, textbook: studysession.textbook, task: "todo",repeat: true)
+    end
     redirect_to root_path
   end
 

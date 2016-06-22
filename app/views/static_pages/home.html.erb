@@ -109,7 +109,7 @@
               <%= f.hidden_field :user, :value => current_user.id %>
               <%= f.hidden_field :task, :value => "todo" %>
               
-              <%= button_tag sanitize('<i class="fa fa-pencil" ></i>  追加'), :type => "submit",
+              <%= button_tag 'タスクに追加', :type => "submit",
               :class =>"btn custombutton" ,data: { disable_with: '送信中...' } %>
               <a role="button" data-toggle="collapse" href="#collapseExampleAmazon<%= studysession %>" aria-expanded="false" 
                 aria-controls="collapseExample" class="tweet">
@@ -198,8 +198,11 @@
 
   <h5>タイムライン</h5>
   <ul class="collection">
-    <% @feeditems.first(20).each do |studysession| %>
-      <%= render '/feeditem' ,feed_item: studysession %>
+    <% @feeditems.each do |studysession| %>
+      <% unless studysession.repeat.to_s.match(/copy/) %>
+      <%# copyにマッチしないもののみ表示 %>
+        <%= render '/feeditem' ,feed_item: studysession %>
+      <% end %>
     <% end %>
   </ul>
 <% end %>

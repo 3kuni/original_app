@@ -19,6 +19,9 @@
 
 
   <span class="startTask">
-    <%= link_to '開始' ,  "/studysessions/start/#{task.id}", :method => :post, :class=>"btn-large custombutton waves-effect waves-light" %>
+    <%= link_to '開始' ,  "/studysessions/start/#{task.id}", :method => :post, :class=>"btn-large custombutton waves-effect waves-light start" %>
+    <% if user_signed_in? && task.user==current_user.id  %>
+      <%= link_to "編集" ,"/studysessions/edit/#{task.id}" ,"class"=>"secondary-small"%>
+    <% end %>
   </span>
 </li>
