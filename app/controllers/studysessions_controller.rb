@@ -127,7 +127,8 @@ class StudysessionsController < ApplicationController
     studysession = Studysession.find(params[:id])
     studysession.update_attributes(task:"done")
     if studysession.repeat.present?
-      Studysession.create(user: current_user.id, textbook: studysession.textbook, task: "todo",repeat: true)
+      # TODO: 次の日の日付がうまくいかない
+      Studysession.create(user: current_user.id, textbook: studysession.textbook, task: "todo",repeat: true,due: (Date.today + 1).to_time)
     end
     redirect_to root_path
   end
