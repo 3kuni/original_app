@@ -352,8 +352,12 @@ class Twbot
   end
 
 
-
+  @@picLst = ['pic.twitter.com/cbnPHlpV21','pic.twitter.com/5ljXxqAYjl','pic.twitter.com/CesBERof3j',
+             'pic.twitter.com/rKj4uz4xmd', 'pic.twitter.com/HPkDkqUdGL', 'pic.twitter.com/Wqh1aeXBXz',
+             'pic.twitter.com/I6zKhQIeU6', 'pic.twitter.com/miscylXnQV']
   def self.morning
+    # ランダムに写真を選ぶ。@@picLstはインスタンス変数
+    pic = @@picLst[rand(@@picLst.size)]
     # ツイッター設定
     client = Twitter::REST::Client.new(
       consumer_key:        ENV['tw_consumer_key'] ,
@@ -361,10 +365,12 @@ class Twbot
       access_token:        "#{ENV['tw_access_token']}",
       access_token_secret: ENV['tw_access_token_secret'],
     )
-    client.update("おはよーございます٩(•̤̀ᵕ•̤́๑)朝から勉強しませんか？？ここに「勉強しよ」とリプすると勉強時間を記録します! #勉強垢さんと繋がりたい")
+    client.update("おはよーございます٩(•̤̀ᵕ•̤́๑)朝から勉強しませんか？？ここに「勉強しよ」とリプすると勉強時間を記録します! #勉強垢さんと繋がりたい #{pic}")
   end
 
   def self.afternoon
+    # ランダムに写真を選ぶ。@picLstはインスタンス変数
+    pic = @@picLst[rand(@@picLst.size)]
     # ツイッター設定
     client = Twitter::REST::Client.new(
       consumer_key:        ENV['tw_consumer_key'] ,
@@ -372,10 +378,12 @@ class Twbot
       access_token:        "#{ENV['tw_access_token']}",
       access_token_secret: ENV['tw_access_token_secret'],
     )
-    client.update("ここに「勉強しよ」とリプすると勉強時間を記録します! #勉強垢さんと繋がりたい")
+    client.update("ここに「勉強しよ」とリプすると勉強時間を記録します! #勉強垢さんと繋がりたい #{pic}")
   end
 
   def self.evening
+    # ランダムに写真を選ぶ。@@picLstはインスタンス変数
+    pic = @@picLst[rand(@@picLst.size)]
     # ツイッター設定
     client = Twitter::REST::Client.new(
       consumer_key:        ENV['tw_consumer_key'] ,
@@ -383,7 +391,7 @@ class Twbot
       access_token:        "#{ENV['tw_access_token']}",
       access_token_secret: ENV['tw_access_token_secret'],
     )
-    client.update("こんばんは( ･ㅂ･ )ここに「勉強しよ」とリプすると勉強時間を記録します! #勉強垢")
+    client.update("こんばんは( ･ㅂ･ )ここに「勉強しよ」とリプすると勉強時間を記録します! #勉強垢 #{pic}")
   end
 
   def self.streaming
