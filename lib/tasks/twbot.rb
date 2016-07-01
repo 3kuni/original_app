@@ -355,8 +355,9 @@ class Twbot
   @@picLst = ['pic.twitter.com/cbnPHlpV21','pic.twitter.com/5ljXxqAYjl','pic.twitter.com/CesBERof3j',
              'pic.twitter.com/rKj4uz4xmd', 'pic.twitter.com/HPkDkqUdGL', 'pic.twitter.com/Wqh1aeXBXz',
              'pic.twitter.com/I6zKhQIeU6', 'pic.twitter.com/miscylXnQV']
+
   def self.morning
-    # ランダムに写真を選ぶ。@@picLstはインスタンス変数
+    # ランダムに写真を選ぶ。@@picLstはクラス変数
     pic = @@picLst[rand(@@picLst.size)]
     # ツイッター設定
     client = Twitter::REST::Client.new(
@@ -369,7 +370,7 @@ class Twbot
   end
 
   def self.afternoon
-    # ランダムに写真を選ぶ。@picLstはインスタンス変数
+    # ランダムに写真を選ぶ。@@picLstはクラス変数
     pic = @@picLst[rand(@@picLst.size)]
     # ツイッター設定
     client = Twitter::REST::Client.new(
@@ -382,7 +383,7 @@ class Twbot
   end
 
   def self.evening
-    # ランダムに写真を選ぶ。@@picLstはインスタンス変数
+    # ランダムに写真を選ぶ。@@picLstはクラス変数
     pic = @@picLst[rand(@@picLst.size)]
     # ツイッター設定
     client = Twitter::REST::Client.new(
