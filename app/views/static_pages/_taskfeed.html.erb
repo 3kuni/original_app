@@ -1,0 +1,29 @@
+<li class="taskCollection">
+  <div class="taskCheckBox">
+    <%= link_to (fa_icon 'square-o'), "studysessions/done/#{task.id}" , :method => :post ,:class => "CheckBoxIcon taskFa", data: { disable_with: "<i class=\"fa fa-check-square-o\"></i>" } %>
+  </div>
+  <div class="taskName">
+    <span>
+      <% if Textbook.find_by(asin:task.textbook).present? %>
+        <%= cut_off(Textbook.find_by(asin:task.textbook).title,28).html_safe %>
+      <% else %>
+        <%= task.textbook %>
+      <% end %>
+    </span>
+    <% if task.repeat.present? %>
+      <span class="taskRepetation">
+        <i class="fa fa-repeat" aria-hidden="true"></i>
+      </span>
+    <% end %>
+  </div>
+
+
+  <span class="startTask">
+    <% unless @active_now.present? %>
+      <%= link_to '開始' ,  "/studysessions/start/#{task.id}", :method => :post, :class=>"btn-large custombutton waves-effect waves-light start" %>
+    <% end %>
+    <% if user_signed_in? && task.user==current_user.id  %>
+      <%= link_to "編集" ,"/studysessions/edit/#{task.id}" ,"class"=>"secondary-small"%>
+    <% end %>
+  </span>
+</li>
