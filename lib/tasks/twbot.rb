@@ -361,14 +361,15 @@ class Twbot
              'pic.twitter.com/I6zKhQIeU6', 'pic.twitter.com/miscylXnQV' ,'pic.twitter.com/CF8r2vLueP',
              'pic.twitter.com/9ENZJnMJQY', 'pic.twitter.com/qgJKxsOPYT','pic.twitter.com/EjHH2L0lh9',
              'pic.twitter.com/TjqJuuE4Ve', 'pic.twitter.com/EfqtuyOcyO', 'pic.twitter.com/GfCdViULD4',
-             'pic.twitter.com/RYXTjsNoAY', 'pic.twitter.com/ewvpZXLpIz', 'pic.twitter.com/253ugrBtzu']
+             'pic.twitter.com/RYXTjsNoAY', 'pic.twitter.com/ewvpZXLpIz', 'pic.twitter.com/253ugrBtzu',
+             'pic.twitter.com/rKtTokIqHS']
   @@afternoonPicLst = ['pic.twitter.com/cbnPHlpV21','pic.twitter.com/5ljXxqAYjl','pic.twitter.com/CesBERof3j',
              'pic.twitter.com/rKj4uz4xmd', 'pic.twitter.com/HPkDkqUdGL', 'pic.twitter.com/Wqh1aeXBXz',
              'pic.twitter.com/I6zKhQIeU6', 'pic.twitter.com/miscylXnQV','pic.twitter.com/CF8r2vLueP',
              'pic.twitter.com/bILBCCT4hE', 'pic.twitter.com/9ENZJnMJQY', 'pic.twitter.com/qgJKxsOPYT',
              'pic.twitter.com/EjHH2L0lh9', 'pic.twitter.com/TjqJuuE4Ve', 'pic.twitter.com/EfqtuyOcyO',
              'pic.twitter.com/f5vKaeMnog', 'pic.twitter.com/GfCdViULD4', 'pic.twitter.com/RYXTjsNoAY',
-             'pic.twitter.com/ewvpZXLpIz', 'pic.twitter.com/253ugrBtzu'  ]
+             'pic.twitter.com/ewvpZXLpIz', 'pic.twitter.com/253ugrBtzu','pic.twitter.com/rKtTokIqHS'  ]
   @@eveningPicLst = ['pic.twitter.com/cbnPHlpV21','pic.twitter.com/5ljXxqAYjl','pic.twitter.com/CesBERof3j',
              'pic.twitter.com/HPkDkqUdGL', 'pic.twitter.com/Wqh1aeXBXz',
              'pic.twitter.com/I6zKhQIeU6', 'pic.twitter.com/miscylXnQV','pic.twitter.com/CF8r2vLueP',
