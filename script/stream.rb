@@ -27,9 +27,7 @@ daemon.userstream do |status|
   if status.text.match(/^@benkyo_stardy.*[\r\n]*.*勉強(しよ|する).*/).present?
     puts "now streaming"
     Twbot.start(status)
-  end
-
-  if status.text.match(/^@benkyo_stardy.*[\r\n]*.*勉強(おわ|終わ).*/).present?
+  elsif status.text.match(/^@benkyo_stardy.*[\r\n]*.*勉強(おわ|終わ).*/).present?
     puts "stop!!"
     Twbot.stop(status)
   end
