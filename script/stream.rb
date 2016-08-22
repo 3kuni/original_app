@@ -24,7 +24,7 @@ daemon.userstream do |status|
   Rails.logger.debug status.text
   puts "id: #{status.id} #{status.text}"
 
-  if status.text.match(/^@benkyo_stardy.*[\r\n]*.*勉強(しよ|する).*/).present?
+  if status.text.match(/^@benkyo_stardy.*[\r\n]*.*勉強(しよ|する|やる|やろ).*/).present?
     puts "now streaming"
     Twbot.start(status)
   elsif status.text.match(/^@benkyo_stardy.*[\r\n]*.*勉強(おわ|終わ).*/).present?
