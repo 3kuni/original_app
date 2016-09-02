@@ -8,4 +8,13 @@ class StaticPagesController < ApplicationController
       @activities = PublicActivity::Activity.order(created_at: :desc).all
     end
   end
+
+  def api
+  	@personal = {'name' => 'Yamada', 'old' => 28}
+
+  	respond_to do |format|
+	    format.html
+	    format.json {render :json => @personal}
+		end
+  end
 end

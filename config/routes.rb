@@ -30,7 +30,7 @@ Rails.application.routes.draw do
   match '/studysessions/like/:studysession_id/' , to:'studysessions#like', via: [:get]
   match '/studysessions/edit/:studysession_id/' , to:'studysessions#edit',via:[:get]
   #match '/studysessions/stats' , to:'studysessions#stats', via: [:get]
-  
+  match '/static_pages/res' ,to:'static_pages#api', via: [:post,:get]
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
