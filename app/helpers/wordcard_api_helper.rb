@@ -1,0 +1,2 @@
+module WordcardApiHelper
+end
