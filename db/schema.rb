@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161001023924) do
+ActiveRecord::Schema.define(version: 20161001024101) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id"
@@ -170,6 +170,15 @@ ActiveRecord::Schema.define(version: 20161001023924) do
   create_table "wcusers", force: :cascade do |t|
     t.string   "token"
     t.boolean  "premium"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "words", force: :cascade do |t|
+    t.string   "jaword"
+    t.string   "enword"
+    t.float    "jepercent"
+    t.float    "ejpercent"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
