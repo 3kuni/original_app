@@ -1,0 +1,25 @@
+<div class="page-header">
+  <h1>Words#index</h1>
+</div>
+<p>Find me in app/views/words/index.html.erb</p>
+<% if current_user.premium  %>
+	You are allowed to see this page.
+	<p>
+
+	</p>
+	<table class="statsTable">
+		<% for word in Word.all %>
+		<tr>
+			<td>
+				<%= word.id %>
+			</td>
+			<td>
+				<%= word.jaword %>
+			</td>
+			<td>
+				<%= word.enword %>
+			</td>
+		</tr>
+		<% end %>
+	</table>
+<% end %>

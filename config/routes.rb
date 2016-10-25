@@ -1,4 +1,18 @@
 Rails.application.routes.draw do
+  # TODO: wordとwordsのルーティングが自動で生成されているので、必要なものとそうでないものを振り分けて削除。
+  get 'words/show'
+  get 'words/new'
+  get 'words/create'
+  get 'words/update'
+  get 'words/index'
+
+  get 'word/index'
+  get 'word/create'
+  get 'word/edit'
+  get 'word/update'
+  get 'word/update'
+  get 'word/show'
+
   get 'studysessions/stats'
 
   get 'textbooks/new'
@@ -30,9 +44,18 @@ Rails.application.routes.draw do
   match '/studysessions/like/:studysession_id/' , to:'studysessions#like', via: [:get]
   match '/studysessions/edit/:studysession_id/' , to:'studysessions#edit',via:[:get]
   #match '/studysessions/stats' , to:'studysessions#stats', via: [:get]
-  match '/wc/api/v0' , to:'wordcard_api#test', via: [:get,:post]
-  
-  
+
+  resources :words
+  match '/word/batch', to:'words#batch', via: [:get]
+  match '/word/tsv', to: 'words#tsv', via: [:post]
+  # アプリから呼び出すapiはwordcard_apiコントローラ、単語一括登録などはwordコントローラ
+  match '/wc/api/v0/regi', to: 'wordcard_api#register', via: [:post]
+  match '/wc/api/v0/signin', to: 'wordcard_api#signin', via: [:post]
+  match '/wc/api/v0/load', to: 'wordcard_api#load', via:[:post]
+  match '/wc/api/v0/log', to: 'wordcard_api#remotelog', via:[:post]
+
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
