@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161003034836) do
+ActiveRecord::Schema.define(version: 20161026023057) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id"
@@ -48,7 +48,7 @@ ActiveRecord::Schema.define(version: 20161003034836) do
     t.float    "time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer  "userid"
+    t.string   "userid"
   end
 
   create_table "rooms", force: :cascade do |t|

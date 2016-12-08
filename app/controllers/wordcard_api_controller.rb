@@ -2,7 +2,6 @@ require 'json'
 class WordcardApiController < ApplicationController
 	def register
 		json_request = JSON.parse(request.body.read)
-		jsonReceived = json_request["aiu"]
 		uuid = json_request["uuid"]
 		apptitle = json_request["apptitle"]
 		json =  Wcuser.register(uuid:uuid,apptitle:apptitle)
@@ -25,7 +24,8 @@ class WordcardApiController < ApplicationController
 		wordid = json_request["wordid"]
 		fromto = json_request["fromto"]
 		correct = json_request["correct"]
-		json = Remotelog.log(wordid, fromto, correct)
+		userid = json_request["userid"]
+		json = Remotelog.log(wordid, fromto, correct,userid)
 		render :json => json
 	end
 
