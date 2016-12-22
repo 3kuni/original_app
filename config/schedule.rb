@@ -28,15 +28,15 @@ every 10.minute do
 end
 
 every 1.day , :at => '7:00 am' do
-	runner "Twbot.morning"
+	#runner "Twbot.morning"
 end
 
 every 1.day , :at => '4:30 pm' do
-	runner "Twbot.afternoon"
+	#runner "Twbot.afternoon"
 end
 
 every 1.day , :at => '9:00 pm' do
-	runner "Twbot.evening"
+	#runner "Twbot.evening"
 end
 
 every 1.minute do
