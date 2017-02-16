@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160531052453) do
+ActiveRecord::Schema.define(version: 20161026023057) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id"
@@ -40,6 +40,16 @@ ActiveRecord::Schema.define(version: 20160531052453) do
   add_index "relationships", ["followed_id"], name: "index_relationships_on_followed_id"
   add_index "relationships", ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true
   add_index "relationships", ["follower_id"], name: "index_relationships_on_follower_id"
+
+  create_table "remotelogs", force: :cascade do |t|
+    t.integer  "wordid"
+    t.string   "fromto"
+    t.boolean  "correct"
+    t.float    "time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "userid"
+  end
 
   create_table "rooms", force: :cascade do |t|
     t.string   "name"
@@ -106,6 +116,10 @@ ActiveRecord::Schema.define(version: 20160531052453) do
     t.integer  "room"
     t.string   "tweet"
     t.integer  "starpoint",  default: 0
+    t.datetime "due"
+    t.string   "repeat"
+    t.string   "task",       default: "todo"
+    t.string   "pomo"
   end
 
   create_table "textbooks", force: :cascade do |t|
@@ -152,5 +166,22 @@ ActiveRecord::Schema.define(version: 20160531052453) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   add_index "users", ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
+
+  create_table "wcusers", force: :cascade do |t|
+    t.string   "token"
+    t.boolean  "premium"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "apptitle"
+  end
+
+  create_table "words", force: :cascade do |t|
+    t.string   "jaword"
+    t.string   "enword"
+    t.float    "jepercent"
+    t.float    "ejpercent"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
 end

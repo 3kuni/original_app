@@ -1,0 +1,13 @@
+<div class="page-header">
+  <h1>Words#batch</h1>
+</div>
+<p>Find me in app/views/words/batch.html.erb</p>
+<% if current_user.premium  %>
+	<p>tsvで登録できます。日本語,英語,日英(je)の正答率,英日(ej)の正答率の順。</p>
+	<%= form_tag("/word/tsv", method: "post") do %>
+	  <% label_tag(:q, "Search for:") %>
+	  <%= text_area_tag(:q) %>
+	  <%= submit_tag("一括登録") %>
+	<% end %>
+
+<% end %>

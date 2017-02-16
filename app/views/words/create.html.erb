@@ -1,0 +1,11 @@
+<div class="page-header">
+  <h1>Words#create</h1>
+</div>
+<p>Find me in app/views/words/create.html.erb</p>
+<% @word = Word.new %>
+<%= form_for @word do |f| %>
+  <%= f.text_area :jaword, :placeholder => "日本語" %>
+  <%= f.text_area :enword ,:placeholder => "English" %>
+  <%= f.submit "登録する" %>
+
+<% end %>
