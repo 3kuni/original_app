@@ -23,7 +23,7 @@ Rails.application.routes.draw do
     :sessions      => "users/sessions",
     :registrations => "users/registrations",
     :passwords     => "users/passwords",
-    :omniauth_callbacks => "users/omniauth_callbacks" 
+    :omniauth_callbacks => "users/omniauth_callbacks"
   }
   resources:studysessions
   resources:posts
@@ -33,7 +33,7 @@ Rails.application.routes.draw do
     member do
       get :following, :followers
     end
-  end  
+  end
   match '/studysessions/amazon' ,to:'studysessions#amazon_index',via: [:post]
   match 'studysessions/stop/:id/:user/:time/:room' , to: 'studysessions#stop' ,via: [:patch,:get]
   match 'studysessions/studying/:id/:room' ,to:'studysessions#index',via: [:get]
@@ -53,7 +53,7 @@ Rails.application.routes.draw do
   match '/wc/api/v0/signin', to: 'wordcard_api#signin', via: [:post]
   match '/wc/api/v0/load', to: 'wordcard_api#load', via:[:post]
   match '/wc/api/v0/log', to: 'wordcard_api#remotelog', via:[:post]
-
+  match '/kakomon/api/v0/showYear', to: 'kakomon_api#showYear', via:[:post]
 
 
   # The priority is based upon order of creation: first created -> highest priority.
