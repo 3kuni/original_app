@@ -7,7 +7,9 @@ class KakomonApiController < ApplicationController
     render :json =>  json
   end
   def getCorrectAnswer
-
+    json_request = JSON.parse(request.body.read)
+    json = CorrectAnswer.loadAnswers(year:json_request["year"],subject:json_request["subject"])
+    render :json => json
   end
   def batch
   end

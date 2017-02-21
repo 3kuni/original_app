@@ -10,7 +10,7 @@ class WordcardApiController < ApplicationController
 	def signin
 		json_request = JSON.parse(request.body.read)
 		uuid = json_request["uuid"]
-		json = Wcuser.signin(uuid:uuid) 
+		json = Wcuser.signin(uuid:uuid)
 		render :json => json
 	end
 	def load
