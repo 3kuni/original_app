@@ -54,7 +54,7 @@ Rails.application.routes.draw do
   match '/wc/api/v0/load', to: 'wordcard_api#load', via:[:post]
   match '/wc/api/v0/log', to: 'wordcard_api#remotelog', via:[:post]
 
-  match '/kakomon/api/v0/showYear', to: 'kakomon_api#showYear', via:[:post]
+  match '/kakomon/api/v0/showYear', to: 'kakomon_api#showYear', via:[:get]
   match '/kakomon/api/v0/getCorrectAnswer', to: 'kakomon_api#getCorrectAnswer', via:[:post]
   match '/kakomon/batch', to: 'kakomon_api#batch', via:[:get]
   match '/kakomon/tsv', to: 'kakomon_api#tsv', via: [:post]
