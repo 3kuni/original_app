@@ -1,0 +1,63 @@
+<div class="page-header">
+  <h1>kakomon_api#index</h1>
+</div>
+<p>Find me in app/views/words/index.html.erb</p>
+<% if current_user.premium  %>
+	You are allowed to see this page.
+	<p>
+
+	</p>
+	<table class="statsTable">
+    <tr>
+      <td>id</td>
+      <td>年度</td>
+      <td>科目</td>
+      <td>問題番号</td>
+      <td>分類1</td>
+      <td>分類2</td>
+      <td>分類3</td>
+      <td>分類4</td>
+      <td>解答</td>
+      <td>画像</td>
+      <td>配点</td>
+
+    </tr>
+    <% for answer in CorrectAnswer.all %>
+		<tr>
+			<td>
+				<%= answer.id %>
+			</td>
+			<td>
+				<%= answer.year %>
+			</td>
+			<td>
+				<%= answer.subject %>
+			</td>
+      <td>
+        <%= answer.number %>
+      </td>
+      <td>
+        <%= answer.category1 %>
+      </td>
+      <td>
+        <%= answer.category2 %>
+      </td>
+      <td>
+        <%= answer.category3 %>
+      </td>
+      <td>
+        <%= answer.category4 %>
+      </td>
+      <td>
+        <%= answer.correctAnswer %>
+      </td>
+      <td>
+        <%= answer.image %>
+      </td>
+      <td>
+        <%= answer.point %>
+      </td>
+		</tr>
+		<% end %>
+	</table>
+<% end %>

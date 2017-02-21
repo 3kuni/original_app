@@ -1,0 +1,28 @@
+<div class="page-header">
+  <h1>kakomon#batch</h1>
+</div>
+<p></p>
+<% if current_user.premium  %>
+	<p>tsvで登録できます。</p>
+  <table class="statsTable">
+    <tr>
+      <td>年度</td>
+      <td>科目</td>
+      <td>問題番号</td>
+      <td>分類1</td>
+      <td>分類2</td>
+      <td>分類3</td>
+      <td>分類4</td>
+      <td>解答</td>
+      <td>画像</td>
+      <td>配点</td>
+    </tr>
+  </table>
+</br>
+	<%= form_tag("/kakomon/tsv", method: "post") do %>
+	  <% label_tag(:q, "Search for:") %>
+	  <%= text_area_tag(:q) %>
+	  <%= submit_tag("一括登録") %>
+	<% end %>
+
+<% end %>
