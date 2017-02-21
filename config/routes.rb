@@ -41,7 +41,7 @@ Rails.application.routes.draw do
   match '/studysessions/new/:id/:room' , to:'studysessions#new', via: [:get,:post]
   get  "/studysessions/new/:id" => redirect("/ssession")
   resources :relationships, only: [:create, :destroy]
-  match '/studysessions/like/:studysession_id/' , to:'studysessions#like', via: [:get]
+  match '/studysessions/like/:studysession_id/' , to:'studysessions#like', via:[:get]
   match '/studysessions/edit/:studysession_id/' , to:'studysessions#edit',via:[:get]
   #match '/studysessions/stats' , to:'studysessions#stats', via: [:get]
 
@@ -53,7 +53,13 @@ Rails.application.routes.draw do
   match '/wc/api/v0/signin', to: 'wordcard_api#signin', via: [:post]
   match '/wc/api/v0/load', to: 'wordcard_api#load', via:[:post]
   match '/wc/api/v0/log', to: 'wordcard_api#remotelog', via:[:post]
+
   match '/kakomon/api/v0/showYear', to: 'kakomon_api#showYear', via:[:post]
+  match '/kakomon/api/v0/getCorrectAnswer', to: 'kakomon_api#getCorrectAnswer', via:[:post]
+  match '/kakomon/batch', to: 'kakomon_api#batch', via:[:get]
+  match '/kakomon/tsv', to: 'kakomon_api#tsv', via: [:post]
+  match '/kakomon/index', to: 'kakomon_api#index', via:[:get]
+
 
 
   # The priority is based upon order of creation: first created -> highest priority.
