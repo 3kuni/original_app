@@ -59,7 +59,7 @@ Rails.application.routes.draw do
   match '/kakomon/batch', to: 'kakomon_api#batch', via:[:get]
   match '/kakomon/tsv', to: 'kakomon_api#tsv', via: [:post]
   match '/kakomon/index', to: 'kakomon_api#index', via:[:get]
-  match '/kakomon/api/v0/sendUserAnswer', to: 'kakomon_api#addUserAnswer', via:[:post]
+  match '/kakomon/api/v0/sendUserAnswer', to: 'kakomon_api#userAnswer', via:[:post]
 
 
 

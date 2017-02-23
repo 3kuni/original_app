@@ -20,7 +20,9 @@ class KakomonApiController < ApplicationController
   end
   def index
   end
-  def addUserAnswer
-
+  def userAnswer
+    json_request = JSON.parse(request.body.read)
+    json = UserAnswer.addUserAnswer(json_request["data"])
+    render :json => json
   end
 end
