@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170221012632) do
+ActiveRecord::Schema.define(version: 20170223035331) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id"
@@ -144,6 +144,22 @@ ActiveRecord::Schema.define(version: 20170221012632) do
     t.integer  "students_total"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+  end
+
+  create_table "user_answers", force: :cascade do |t|
+    t.string   "uuid",        null: false
+    t.string   "year",        null: false
+    t.string   "subject",     null: false
+    t.integer  "number",      null: false
+    t.string   "category1"
+    t.string   "category2"
+    t.string   "category3"
+    t.string   "category4"
+    t.string   "user_answer"
+    t.integer  "point"
+    t.integer  "total_point"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "users", force: :cascade do |t|
