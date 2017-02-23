@@ -20,4 +20,7 @@ class KakomonApiController < ApplicationController
   end
   def index
   end
+  def addUserAnswer
+
+  end
 end
