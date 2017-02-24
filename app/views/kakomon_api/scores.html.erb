@@ -1,0 +1,60 @@
+<div class="page-header">
+  <h1>kakomon#scores</h1>
+</div>
+<p></p>
+<% if current_user.premium  %>
+	<p>得点</p>
+  <table class="statsTable">
+    <tr>
+      <td>id</td>
+      <td>uuid</td>
+      <td>年度</td>
+      <td>国語</td>
+      <td>英語</td>
+      <td>数学</td>
+      <td>社会</td>
+      <td>理科</td>
+      <td>合計</td>
+      <td>志望校</td>
+      <td>志望校id</td>
+    </tr>
+    <% for answer in UserScore.all %>
+		<tr>
+			<td>
+				<%= answer.id %>
+			</td>
+      <td>
+        <%= answer.uuid %>
+      </td>
+			<td>
+				<%= answer.year %>
+			</td>
+			<td>
+				<%= answer.japanese %>
+			</td>
+      <td>
+        <%= answer.english %>
+      </td>
+      <td>
+        <%= answer.math %>
+      </td>
+      <td>
+        <%= answer.social %>
+      </td>
+      <td>
+        <%= answer.science %>
+      </td>
+      <td>
+        <%= answer.total %>
+      </td>
+      <td>
+        <%= answer.school %>
+      </td>
+      <td>
+        <%= answer.school_id %>
+      </td>
+		</tr>
+		<% end %>
+	</table>
+
+<% end %>

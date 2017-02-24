@@ -65,6 +65,7 @@ Rails.application.routes.draw do
   match '/kakomon/batch', to: 'kakomon_api#batch', via:[:get]
   match '/kakomon/index', to: 'kakomon_api#index', via:[:get]
   match '/kakomon/answers', to: 'kakomon_api#answers', via:[:get]
+  match '/kakomon/scores', to: 'kakomon_api#scores', via:[:get]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

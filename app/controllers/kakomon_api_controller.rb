@@ -32,4 +32,6 @@ class KakomonApiController < ApplicationController
     json = UserScore.addUserScore(json_request)
     render :json => json
   end
+  def scores
+  end
 end
