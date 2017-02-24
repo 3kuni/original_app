@@ -54,14 +54,17 @@ Rails.application.routes.draw do
   match '/wc/api/v0/load', to: 'wordcard_api#load', via:[:post]
   match '/wc/api/v0/log', to: 'wordcard_api#remotelog', via:[:post]
 
+  # Rails側で操作するAPI系
   match '/kakomon/api/v0/showYear', to: 'kakomon_api#showYear', via:[:get]
   match '/kakomon/api/v0/getCorrectAnswer', to: 'kakomon_api#getCorrectAnswer', via:[:post]
-  match '/kakomon/batch', to: 'kakomon_api#batch', via:[:get]
-  match '/kakomon/tsv', to: 'kakomon_api#tsv', via: [:post]
-  match '/kakomon/index', to: 'kakomon_api#index', via:[:get]
   match '/kakomon/api/v0/sendUserAnswer', to: 'kakomon_api#userAnswer', via:[:post]
+  match '/kakomon/api/v0/sendUserScore', to: 'kakomon_api#userScore', via:[:post]
+  match '/kakomon/tsv', to: 'kakomon_api#tsv', via: [:post]
 
-
+  # 表示するページ
+  match '/kakomon/batch', to: 'kakomon_api#batch', via:[:get]
+  match '/kakomon/index', to: 'kakomon_api#index', via:[:get]
+  match '/kakomon/answers', to: 'kakomon_api#answers', via:[:get]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
