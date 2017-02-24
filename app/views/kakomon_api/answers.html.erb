@@ -1,0 +1,65 @@
+<div class="page-header">
+  <h1>kakomon#answer</h1>
+</div>
+<p></p>
+<% if current_user.premium  %>
+	<p>tsvで登録できます。</p>
+  <table class="statsTable">
+    <tr>
+      <td>id</td>
+      <td>uuid</td>
+      <td>年度</td>
+      <td>科目</td>
+      <td>問題番号</td>
+      <td>分類1</td>
+      <td>分類2</td>
+      <td>分類3</td>
+      <td>分類4</td>
+      <td>ユーザ解答</td>
+      <td>配点</td>
+      <td>総得点</td>
+    </tr>
+    <% for answer in UserAnswer.all %>
+		<tr>
+			<td>
+				<%= answer.id %>
+			</td>
+      <td>
+        <%= answer.uuid %>
+      </td>
+			<td>
+				<%= answer.year %>
+			</td>
+			<td>
+				<%= answer.subject %>
+			</td>
+      <td>
+        <%= answer.number %>
+      </td>
+      <td>
+        <%= answer.category1 %>
+      </td>
+      <td>
+        <%= answer.category2 %>
+      </td>
+      <td>
+        <%= answer.category3 %>
+      </td>
+      <td>
+        <%= answer.category4 %>
+      </td>
+      <td>
+        <%= answer.user_answer %>
+      </td>
+      <td>
+        <%= answer.point %>
+      </td>
+      <td>
+        <%= answer.total_point %>
+      </td>
+
+		</tr>
+		<% end %>
+	</table>
+
+<% end %>
