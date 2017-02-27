@@ -1,0 +1,38 @@
+<div class="page-header">
+  <h1>kakomon_api#schoolindex</h1>
+</div>
+<p>Find me in app/views/words/index.html.erb</p>
+<% if current_user.premium  %>
+	You are allowed to see this page.
+	<p>
+
+	</p>
+	<table class="statsTable">
+    <tr>
+      <td>id</td>
+      <td>学校名</td>
+      <td>募集人員</td>
+      <td>割合</td>
+      <td>基準</td>
+    </tr>
+    <% for school in School.all %>
+		<tr>
+			<td>
+				<%= school.id %>
+			</td>
+			<td>
+				<%= school.name %>
+			</td>
+			<td>
+				<%= school.recruit %>
+			</td>
+      <td>
+        <%= school.percent %>
+      </td>
+      <td>
+        <%= school.distinction %>
+      </td>
+		</tr>
+		<% end %>
+	</table>
+<% end %>

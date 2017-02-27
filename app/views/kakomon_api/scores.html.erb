@@ -3,7 +3,9 @@
 </div>
 <p></p>
 <% if current_user.premium  %>
-	<p>得点</p>
+  <% @score = UserScore.group(:uuid).pluck(:uuid,:total) %>
+  <%= @score %>
+  <p>得点</p>
   <table class="statsTable">
     <tr>
       <td>id</td>

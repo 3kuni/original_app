@@ -1,0 +1,22 @@
+<div class="page-header">
+  <h1>kakomon#regi_school</h1>
+</div>
+<p></p>
+<% if current_user.premium  %>
+	<p>tsvで登録できます。</p>
+  <table class="statsTable">
+    <tr>
+      <td>学校名</td>
+      <td>募集人数</td>
+      <td>割合</td>
+      <td>判定データ[A基準,B基準,C基準,D基準]</td>
+    </tr>
+  </table>
+</br>
+	<%= form_tag("/kakomon/regischool_tsv", method: "post") do %>
+	  <% label_tag(:q, "Search for:") %>
+	  <%= text_area_tag(:q) %>
+	  <%= submit_tag("一括登録") %>
+	<% end %>
+
+<% end %>

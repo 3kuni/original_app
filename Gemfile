@@ -50,9 +50,9 @@ gem 'whenever', :require => false
 gem 'carrierwave', :github => 'satoruk/carrierwave' , :ref => '43179f94d6a4e62f69e812f5082d6447c9138480'
 gem 'rmagick', require: false
 gem 'cloudinary'
-gem 'twitter' 
+gem 'twitter'
 gem 'dotenv-rails'
-#gem 'open-uri' 
+#gem 'open-uri'
 #gem 'todoist-ruby', require: 'todoist'
 gem 'tweetstream'
 gem 'god'
@@ -64,4 +64,3 @@ end
 group :production do
   gem 'mysql2' ,'~> 0.3.18'
 end
-

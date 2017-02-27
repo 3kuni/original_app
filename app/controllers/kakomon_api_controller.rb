@@ -34,4 +34,13 @@ class KakomonApiController < ApplicationController
   end
   def scores
   end
+  def regi_school
+  end
+  def regischool_tsv
+    tsv = params[:q]
+    School.createFromTsv(tsv)
+    render 'schoolindex'
+  end
+  def schoolindex
+  end
 end
