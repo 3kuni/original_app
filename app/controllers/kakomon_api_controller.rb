@@ -41,6 +41,8 @@ class KakomonApiController < ApplicationController
     School.createFromTsv(tsv)
     render 'schoolindex'
   end
-  def schoolindex
+  def school_list
+    json = School.getSchoolList
+    render :json => json
   end
 end

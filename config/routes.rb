@@ -61,6 +61,7 @@ Rails.application.routes.draw do
   match '/kakomon/api/v0/sendUserScore', to: 'kakomon_api#userScore', via:[:post]
   match '/kakomon/tsv', to: 'kakomon_api#tsv', via: [:post]
   match '/kakomon/regischool_tsv', to: 'kakomon_api#regischool_tsv', via: [:post]
+  match '/kakomon/api/v0/school_list', to: 'kakomon_api#school_list', via: [:get]
 
   # 表示するページ
   match '/kakomon/batch', to: 'kakomon_api#batch', via:[:get]
