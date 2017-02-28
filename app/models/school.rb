@@ -7,6 +7,6 @@ class School < ActiveRecord::Base
     return a
   end
   def self.getSchoolList()
-    return School.all
+    return {"data" => School.all}
   end
 end
