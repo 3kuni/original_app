@@ -57,6 +57,7 @@ gem 'dotenv-rails'
 #gem 'todoist-ruby', require: 'todoist'
 gem 'tweetstream'
 gem 'god'
+gem 'pg'
 
 group :doc do
   gem 'sdoc', '0.3.20', require: false
