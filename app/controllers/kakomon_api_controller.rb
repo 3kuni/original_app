@@ -3,7 +3,7 @@ class KakomonApiController < ApplicationController
   def showYear
     # 表示する年度を返す。
     json = {"status" => "success", "message" => "success get year",
-            "data" => [{"year"=>"平成29","visible" => false},{"year"=>"2016","visible" => false},{"year"=>"平成27","visible" => true}]}
+            "data" => [{"year"=>"平成29","visible" => false},{"year"=>"平成28","visible" => false},{"year"=>"平成27","visible" => true}]}
     render :json =>  json
   end
   def getCorrectAnswer
