@@ -3,6 +3,10 @@
 </div>
 <p></p>
 <% if current_user.premium  %>
+  <%#
+  uuidごとに、志望校が登録されているデータを取り出す
+  日付が古い順に並べて、先頭の１つのレコードを取り出す
+  %>
   <% @score = UserScore.group(:uuid).pluck(:uuid,:total) %>
   <%= @score %>
   <p>得点</p>

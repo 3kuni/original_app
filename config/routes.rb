@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  get 'correct_answers/show'
+
+  get 'correct_answers/index'
+
+  get 'correct_answers/edit'
+
   # TODO: wordとwordsのルーティングが自動で生成されているので、必要なものとそうでないものを振り分けて削除。
   get 'words/show'
   get 'words/new'
@@ -71,6 +77,8 @@ Rails.application.routes.draw do
   match '/kakomon/register_school', to: 'kakomon_api#regi_school', via:[:get]
   match '/kakomon/schoolindex', to: 'kakomon_api#schoolindex', via:[:get]
 
+  resources :correct_answers
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
