@@ -76,9 +76,10 @@ Rails.application.routes.draw do
   match '/kakomon/scores', to: 'kakomon_api#scores', via:[:get]
   match '/kakomon/register_school', to: 'kakomon_api#regi_school', via:[:get]
   match '/kakomon/schoolindex', to: 'kakomon_api#schoolindex', via:[:get]
+  match '/kakomon/average', to: 'kakomon_api#show_average', via:[:get]
 
   resources :correct_answers
-  
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -6,4 +6,7 @@ class UserScore < ActiveRecord::Base
                     school:data["school"],school_id:data["school_id"])
     return {"status" => "success", "message" => "success create user_score"}
   end
+  def self.average()
+    
+  end
 end
