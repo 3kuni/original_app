@@ -1,12 +1,26 @@
 <div class="page-header">
   <h1>CorrectAnswers#edit</h1>
+  <h2>
+    <%= "#{@answer.year}年度 #{@answer.subject} "%>
+  <h2>
+  <h3>
+    <%= "#{@answer.category1}-#{@answer.category2}-#{@answer.category3}-#{@answer.category4}" %>
+  </h3>
 </div>
 <p>Find me in app/views/correct_answers/edit.html.erb</p>
 
 <%= form_for(@answer) do |f| %>
 
-  <%= f.label :correctAnswer %>
-  <%= f.text_field :correctAnswer %>
+  <%= f.label :correctAnswer %></br>
+  <%= f.text_field :correctAnswer %></br>
+
+  <%= f.label :image %></br>
+  <%= f.text_field :image %></br>
+
+
+  <%= f.label :point %></br>
+  <%= f.text_field :point %></br>
+
 
   <%= f.submit "Save changes" %>
 <% end %>

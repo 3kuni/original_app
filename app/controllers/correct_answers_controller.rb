@@ -18,6 +18,12 @@ class CorrectAnswersController < ApplicationController
     end
 
   end
+  def destroy
+    @answer = CorrectAnswer.find(params[:id])
+    if @answer.destroy
+      render 'index'
+    end
+  end
 
   private
     def answer_params

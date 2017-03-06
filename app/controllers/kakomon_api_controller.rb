@@ -16,7 +16,7 @@ class KakomonApiController < ApplicationController
   def tsv
     tsv = params[:q]
     data = CorrectAnswer.createFromTsv(tsv)
-    render 'index'
+    render template: "correct_answers/index"
   end
   def index
   end

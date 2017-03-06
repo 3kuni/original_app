@@ -1,8 +1,7 @@
 <div class="page-header">
-  <h1>correct_answers#index</h1>
+  <h1>kakomon_api#index</h1>
 </div>
 <p>Find me in app/views/words/index.html.erb</p>
-<p>これはcorrect_answersの方のindex</p>
 <% if current_user.premium  %>
 	You are allowed to see this page.
 	<p>
@@ -22,7 +21,7 @@
       <td>画像</td>
       <td>配点</td>
     </tr>
-    <% for answer in CorrectAnswer.order(created_at: :desc)  %>
+    <% for answer in CorrectAnswer.all %>
 		<tr>
 			<td>
 				<%= answer.id %>
@@ -56,12 +55,6 @@
       </td>
       <td>
         <%= answer.point %>
-      </td>
-      <td>
-        <%= link_to 'Edit',edit_correct_answer_path(answer.id) %>
-      </td>
-      <td>
-        <%= link_to 'Delete',correct_answer_path(answer.id), :method => :delete %>
       </td>
 		</tr>
 		<% end %>

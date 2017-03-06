@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 #ruby-gemset=railstutorial_rails_4_0
 
 gem 'rails', '4.2.1'
+gem 'rake', '< 11.0'
 #gem 'ruby', '2.1.9'
 gem 'bootstrap-sass', '2.3.2.0'
 #gem 'bootstrap-sass', '~> 3.3.1'
@@ -49,7 +50,7 @@ gem 'jbuilder', '1.0.2'
 gem 'public_activity'
 gem 'whenever', :require => false
 gem 'carrierwave', :github => 'satoruk/carrierwave' , :ref => '43179f94d6a4e62f69e812f5082d6447c9138480'
-# 
+#
 gem 'rmagick', require: false
 #gem 'rmagick', '~> 2.16.0' , require: false
 gem 'cloudinary'
