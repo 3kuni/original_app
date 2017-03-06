@@ -27,6 +27,6 @@ class CorrectAnswersController < ApplicationController
 
   private
     def answer_params
-      params.require(:correct_answer).permit(:correctAnswer)
+      params.require(:correct_answer).permit(:correctAnswer, :image, :point)
     end
 end

@@ -47,5 +47,6 @@ class KakomonApiController < ApplicationController
   end
   def show_average
     UserScore.average()
+    render 'show_average'
   end
 end
