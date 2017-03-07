@@ -109,15 +109,11 @@
       <td>妥当データ</td>
       <td>カバレッジ</td>
       <td>平均点</td>
-      <td>割合</td>
-      <td>分配点</td>
     </tr>
     <tr>
       <td><%= "#{validScore.count}件" %></td>
       <td><%= "#{coverage.round(1)}%"%></td>
       <td><%= "#{average.round(1)}点"%></td>
-      <td></td>
-      <td></td>
     </tr>
   </table>
 
@@ -128,44 +124,19 @@
       <td>妥当データ</td>
       <td>カバレッジ</td>
       <td>平均点</td>
-      <td>割合</td>
-      <td>分配点</td>
     </tr>
     <tr>
       <td><%= "#{dataList[0]}件" %></td>
       <td><%= "#{dataList[1].round(1)}%"%></td>
       <td><%= "#{dataList[2].round(1)}点"%></td>
-      <td></td>
-      <td></td>
     </tr>
   </table>
 
-  <h4>仮平均点</h4>
-  <%= "仮平均#{pro_average}" %>
-  <table class="statsTable">
-    <tr>
-      <td>id</td>
-      <td>学校</td>
-      <td>平均</td>
-      <td>割合</td>
-      <td>分配点</td>
-    </tr>
-  <% school_average.each {|key,value| %>
-    <tr>
-      <td><%= key %></td>
-      <td><%= value["name"] %></td>
-      <td><%= value["pro_ave"] %></td>
-      <td><%= value["percent"] %></td>
-      <td><%= (value["pro_ave"].to_f * value["percent"].to_f) / 100 %></td>
-    </tr>
-  <% } %>
-  </table>
+
 
 
 
   <h4>学校別平均点</h4>
-
-
     <%# 学校別に表示 %>
     <table class="statsTable">
       <tr>
@@ -202,8 +173,8 @@
       <% end %>
         <td><%= key %></td>
         <td><%= value["name"] %></td>
-        <td><%= processed_average %></td>
-        <td><%= value["percent"]  %></td>
+        <td><%= processed_average.to_f.round(1) %></td>
+        <td><%= value["percent"].round(2)  %></td>
         <td><%= (processed_average.to_f * value["percent"].to_f) / 100 %></td>
       </tr>
     <% } %>
@@ -211,6 +182,26 @@
     <%= "カバレッジ #{coverage}%" %><br>
     <%= "予想平均 #{average}" %>
 
+  <h4>仮平均点</h4>
+    <%= "仮平均#{pro_average}" %>
+    <table class="statsTable">
+      <tr>
+        <td>id</td>
+        <td>学校</td>
+        <td>平均</td>
+        <td>割合</td>
+        <td>分配点</td>
+      </tr>
+    <% school_average.each {|key,value| %>
+      <tr>
+        <td><%= key %></td>
+        <td><%= value["name"] %></td>
+        <td><%= value["pro_ave"] %></td>
+        <td><%= value["percent"] %></td>
+        <td><%= (value["pro_ave"].to_f * value["percent"].to_f) / 100 %></td>
+      </tr>
+    <% } %>
+    </table>
 
   <h4>DB抽出データ</h4>
     <%= "#{params[:year]}年度" %>
