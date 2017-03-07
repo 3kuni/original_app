@@ -263,6 +263,7 @@ GEM
       rubyzip (< 1.0.0)
       websocket (~> 1.0.4)
     simple_oauth (0.3.1)
+    slack-incoming-webhooks (0.2.0)
     spork (1.0.0rc4)
     spork-rails (4.0.0)
       rails (>= 3.0.0, < 5)
@@ -351,6 +352,7 @@ DEPENDENCIES
   sass-rails (= 4.0.5)
   sdoc (= 0.3.20)
   selenium-webdriver (= 2.35.1)
+  slack-incoming-webhooks
   spork-rails (= 4.0.0)
   sqlite3 (= 1.3.9)
   turbolinks (~> 2.3.0)

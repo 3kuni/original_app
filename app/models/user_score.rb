@@ -1,10 +1,18 @@
+require 'slack/incoming/webhooks'
 class UserScore < ActiveRecord::Base
   def self.addUserScore(data)
     puts data
     UserScore.create(uuid:data["uuid"],year:data["year"],japanese:data["japanese"],english:data["english"],
                     math:data["math"],social:data["social"],science:data["science"],total:data["totalpoint"],
                     school:data["school"],school_id:data["school_id"])
-
+    if data["school"]
+      @score = UserScore.where("school is not ? and year = ?", nil,data["year"])
+      if (@score.count % 10) == 0
+        slack = Slack::Incoming::Webhooks.new "https://hooks.slack.com/services/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"
+        dataList = UserScore.calcAverage(data["year"])
+        slack.post "#{@score.count}番目のデータが登録されました。\n #{dataList[0]},#{dataList[1].round(1)},#{dataList[2].round(1)}"
+      end
+    end
     return {"status" => "success", "message" => "success create user_score"}
   end
   def self.average()
