@@ -49,4 +49,11 @@ class KakomonApiController < ApplicationController
     UserScore.average()
     render 'show_average'
   end
+  def newdummy
+  end
+  def create_dummy_tsv
+    tsv = params[:q]
+    UserScore.createFromTsv(tsv)
+    render 'show_average'
+  end
 end

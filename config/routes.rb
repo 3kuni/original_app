@@ -76,7 +76,9 @@ Rails.application.routes.draw do
   match '/kakomon/scores', to: 'kakomon_api#scores', via:[:get]
   match '/kakomon/register_school', to: 'kakomon_api#regi_school', via:[:get]
   match '/kakomon/schoolindex', to: 'kakomon_api#schoolindex', via:[:get]
-  match '/kakomon/average', to: 'kakomon_api#show_average', via:[:get]
+  match '/kakomon/average/:year', to: 'kakomon_api#show_average', via:[:get]
+  match '/kakomon/newdummy', to: 'kakomon_api#newdummy', via:[:get]
+  match '/kakomon/dummytsv', to: 'kakomon_api#create_dummy_tsv', via:[:post]
 
   resources :correct_answers
 

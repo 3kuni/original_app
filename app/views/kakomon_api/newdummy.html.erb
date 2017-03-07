@@ -1,0 +1,27 @@
+<div class="page-header">
+  <h1>kakomon#newdummy</h1>
+</div>
+<p></p>
+<% if current_user.premium  %>
+	<p>tsvでダミーのユーザ得点を登録できます。</p>
+  <table class="statsTable">
+    <tr>
+      <td>年度</td>
+      <td>国語</td>
+      <td>英語</td>
+      <td>数学</td>
+      <td>社会</td>
+      <td>理科</td>
+      <td>合計</td>
+      <td>志望校</td>
+      <td>学校id</td>
+    </tr>
+  </table>
+</br>
+	<%= form_tag("/kakomon/dummytsv", method: "post") do %>
+	  <% label_tag(:q, "Search for:") %>
+	  <%= text_area_tag(:q) %>
+	  <%= submit_tag("一括登録") %>
+	<% end %>
+
+<% end %>
