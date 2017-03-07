@@ -121,6 +121,24 @@
     </tr>
   </table>
 
+  modelで処理
+  <% dataList = UserScore.calcAverage(params[:year]) %>
+  <table class="statsTable">
+    <tr>
+      <td>妥当データ</td>
+      <td>カバレッジ</td>
+      <td>平均点</td>
+      <td>割合</td>
+      <td>分配点</td>
+    </tr>
+    <tr>
+      <td><%= "#{dataList[0]}件" %></td>
+      <td><%= "#{dataList[1].round(1)}%"%></td>
+      <td><%= "#{dataList[2].round(1)}点"%></td>
+      <td></td>
+      <td></td>
+    </tr>
+  </table>
 
   <h4>仮平均点</h4>
   <%= "仮平均#{pro_average}" %>
