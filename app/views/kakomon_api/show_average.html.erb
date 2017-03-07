@@ -3,7 +3,7 @@
 <% if current_user.premium  %>
 <%# 処理 %>
 <%# DBから抽出したデータ %>
-<% @score = UserScore.where("school not ? and year = ?", nil,params[:year]) %>
+<% @score = UserScore.where("school is not ? and year = ?", nil,params[:year]) %>
 
 <%# 妥当データ %>
 <% validScore = {} %>
