@@ -23,8 +23,9 @@
       <td>合計</td>
       <td>志望校</td>
       <td>志望校id</td>
+      <td></td>
     </tr>
-    <% for answer in UserScore.all %>
+    <% for answer in UserScore.order("created_at desc") %>
 		<tr>
 			<td>
 				<%= answer.id %>
@@ -58,6 +59,9 @@
       </td>
       <td>
         <%= answer.school_id %>
+      </td>
+      <td>
+        <%= answer.created_at.strftime("%m/%d %H:%M") %>
       </td>
 		</tr>
 		<% end %>

@@ -3,7 +3,7 @@ class KakomonApiController < ApplicationController
   def showYear
     # 表示する年度を返す。
     json = {"status" => "success", "message" => "success get year",
-            "data" => [{"year"=>"平成29","visible" => false},{"year"=>"平成28","visible" => true},{"year"=>"平成27","visible" => true}]}
+            "data" => [{"year"=>"平成29","visible" => true},{"year"=>"平成28","visible" => true},{"year"=>"平成27","visible" => true}]}
     render :json =>  json
   end
   def getCorrectAnswer
@@ -55,5 +55,9 @@ class KakomonApiController < ApplicationController
     tsv = params[:q]
     UserScore.createFromTsv(tsv)
     render 'show_average'
+  end
+  def delete_score
+    UserScore.find(params[:id]).destroy
+    render :nothing => true
   end
 end

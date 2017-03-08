@@ -25,7 +25,8 @@
                                       "total" => answer.total,
                                       "school" => answer.school,
                                       "school_id" => answer.school_id,
-                                      "created_at" => answer.created_at}
+                                      "created_at" => answer.created_at,
+                                      "id" => answer.id}
       end
     else
       validScore[answer.uuid] = {"japanese" => answer.japanese,
@@ -36,7 +37,8 @@
                                     "total" => answer.total,
                                     "school" => answer.school,
                                     "school_id" => answer.school_id,
-                                    "created_at" => answer.created_at}
+                                    "created_at" => answer.created_at,
+                                    "id" => answer.id}
     end
   %>
 <% end %>
@@ -182,6 +184,67 @@
     <%= "カバレッジ #{coverage}%" %><br>
     <%= "予想平均 #{average}" %>
 
+    <%# 妥当データの表示 %>
+          <h4>妥当データ</h4>
+          <table class="statsTable">
+            <tr>
+              <td>uuid</td>
+              <td>国語</td>
+              <td>英語</td>
+              <td>数学</td>
+              <td>社会</td>
+              <td>理科</td>
+              <td>合計</td>
+              <td>志望校</td>
+              <td>志望校id</td>
+              <td>登録日時</td>
+              <td></td>
+            </tr>
+          <%
+            validScore.each {|key, value|
+              #puts("total is #{value["total"]}")
+          %>
+          <%# ここから妥当データの表 %>
+            <tr>
+              <td>
+                <%= key[0,7] %>
+              </td>
+              <td>
+                <%= value["japanese"] %>
+              </td>
+              <td>
+                <%= value["english"] %>
+              </td>
+              <td>
+                <%= value["math"] %>
+              </td>
+              <td>
+                <%= value["social"] %>
+              </td>
+              <td>
+                <%= value["science"] %>
+              </td>
+              <td>
+                <%= value["total"] %>
+              </td>
+              <td>
+                <%= value["school"] %>
+              </td>
+              <td>
+                <%= value["school_id"] %>
+              </td>
+              <td>
+                <%= value["created_at"].strftime("%m/%d %H:%M:%S") %>
+              </td>
+              <td>
+                <%= link_to "削除", "/kakomon/scores/#{value["id"]}", :method => :delete  %>
+              </td>
+            </tr>
+          <%
+            }
+          %>
+          </table>
+
   <h4>仮平均点</h4>
     <%= "仮平均#{pro_average}" %>
     <table class="statsTable">
@@ -202,6 +265,10 @@
       </tr>
     <% } %>
     </table>
+
+
+
+
 
   <h4>DB抽出データ</h4>
     <%= "#{params[:year]}年度" %>
@@ -295,61 +362,5 @@
   		</tr>
 		<% end %>
 	</table>
-
-  <h4>妥当データ</h4>
-  <table class="statsTable">
-    <tr>
-      <td>uuid</td>
-      <td>国語</td>
-      <td>英語</td>
-      <td>数学</td>
-      <td>社会</td>
-      <td>理科</td>
-      <td>合計</td>
-      <td>志望校</td>
-      <td>志望校id</td>
-      <td>登録日時</td>
-    </tr>
-  <%
-    validScore.each {|key, value|
-      #puts("total is #{value["total"]}")
-  %>
-  <%# ここから妥当データの表 %>
-    <tr>
-      <td>
-        <%= key[0,7] %>
-      </td>
-      <td>
-        <%= value["japanese"] %>
-      </td>
-      <td>
-        <%= value["english"] %>
-      </td>
-      <td>
-        <%= value["math"] %>
-      </td>
-      <td>
-        <%= value["social"] %>
-      </td>
-      <td>
-        <%= value["science"] %>
-      </td>
-      <td>
-        <%= value["total"] %>
-      </td>
-      <td>
-        <%= value["school"] %>
-      </td>
-      <td>
-        <%= value["school_id"] %>
-      </td>
-      <td>
-        <%= value["created_at"].strftime("%m/%d %H:%M:%S") %>
-      </td>
-    </tr>
-  <%
-    }
-  %>
-  </table>
 
 <% end %>
